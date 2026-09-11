@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SneakersCol | Zapatillas Urbanas</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #fff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            height: 55px;
+            width: auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #111;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #6c2bd9;
+        }
+
+        /* BARRA ENVIO */
+
+        .barra-envio {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .barra-envio span {
+            color: #39ff14;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ffffff, #eeeeee);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            color: #6c2bd9;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .boton-hero {
+            display: inline-block;
+            background: #39ff14;
+            color: #111;
+            padding: 14px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* CATALOGO */
+
+        .catalogo {
+            padding: 50px 5%;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 35px;
+        }
+
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* PRODUCTO */
+
+        .producto {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+
+        .galeria {
+            background: #f4f4f4;
+            padding: 15px;
+        }
+
+        .imagen-principal {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            display: block;
+            border-radius: 10px;
+            background: white;
+        }
+
+        /* MINIATURAS */
+
+        .miniaturas {
+            display: flex;
+            gap: 8px;
+            padding-top: 10px;
+            overflow-x: auto;
+        }
+
+        .miniaturas img {
+            width: 65px;
+            height: 65px;
+            min-width: 65px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            background: white;
+        }
+
+        .miniaturas img:hover {
+            border-color: #39ff14;
+        }
+
+        /* INFO PRODUCTO */
+
+        .info {
+            padding: 20px;
+        }
+
+        .info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .precio-anterior {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 16px;
+        }
+
+        .precio {
+            font-size: 27px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .envio {
+            color: #159600;
+            font-weight: bold;
+            margin: 8px 0 15px;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        /* COLORES */
+
+        .colores {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-btn {
+            border: 2px solid #ddd;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .color-btn:hover {
+            border-color: #6c2bd9;
+        }
+
+        .color-btn.seleccionado {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+
+        /* TALLAS */
+
+        .tallas {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .talla {
+            border: 2px solid #ddd;
+            padding: 8px 11px;
+            border-radius: 7px;
+            background: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .talla:hover {
+            border-color: #39ff14;
+        }
+
+        .talla.seleccionada {
+            background: #39ff14;
+            border-color: #39ff14;
+            color: #111;
+        }
+
+        /* MENSAJE TALLA */
+
+        .talla-seleccionada {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #6c2bd9;
+            min-height: 18px;
+        }
+
+        /* BOTON WHATSAPP */
+
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            background: #39ff14;
+            color: #111;
+            text-align: center;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            background: #24d900;
+        }
+
+        /* GUIA DE TALLAS */
+
+        .guia {
+            margin-top: 15px;
+        }
+
+        .guia summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        .guia img {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: #39ff14;
+        }
+
+        /* WHATSAPP FLOTANTE */
+
+        .whatsapp-flotante {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: #39ff14;
+            color: #111;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            z-index: 999;
+        }
+
+        /* MOVIL */
+
+        @media (max-width: 850px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero h2 {
+                font-size: 22px;
+            }
+
+            .productos {
+                grid-template-columns: 1fr;
+            }
+
+            .catalogo {
+                padding: 35px 15px;
+            }
+
+            .imagen-principal {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <img src="logo.jpg" alt="SneakersCol Logo" class="logo">
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#zapatillas">Zapatillas</a>
+            <a href="#ofertas">Ofertas</a>
+        </nav>
+
+    </header>
+
+
+    <!-- BARRA ENVIO -->
+
+    <div class="barra-envio">
+        🚚 <span>ENVÍO GRATIS</span> a todo Colombia 🇨🇴
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="inicio">
+
+        <div>
+
+            <h2>🔥 OFERTA ESPECIAL 🔥</h2>
+
+            <h1>SneakersCol</h1>
+
+            <p>
+                Zapatillas urbanas con estilo y envío GRATIS a todo Colombia 🇨🇴
+            </p>
+
+            <a href="#zapatillas" class="boton-hero">
+                👟 VER ZAPATILLAS
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATALOGO -->
+
+    <section class="catalogo" id="zapatillas">
+
+        <h2 class="titulo-seccion">
+            🔥 Nuestras Zapatillas
+        </h2>
+
+
+        <div class="productos">
+
+
+            <!-- ========================= -->
+            <!-- NEW BALANCE -->
+            <!-- ========================= -->
+
+            <div class="producto">
+
+                <div class="galeria">
+
+                    <img
+                        src="imagenes/newbalance-1.webp"
+                        alt="New Balance"
+                        class="imagen-principal"
+                        id="newbalance-img"
+                    >
+
+                    <div class="miniaturas">
+
+                        <img
+                            src="imagenes/newbalance-1.webp"
+                            alt="New Balance foto 1"
+                            onclick="cambiarNewBalance('newbalance-1.webp')"
+                        >
+
+                        <img
+                            src="imagenes/newbalance-2.webp"
+                            alt="New Balance foto 2"
+                            onclick="cambiarNewBalance('newbalance-2.webp')"
+                        >
+
+                        <img
+                            src="imagenes/newbalance-3.webp"
+                            alt="New Balance foto 3"
+                            onclick="cambiarNewBalance('newbalance-3.webp')"
+                        >
+
+                        <img
+                            src="imagenes/newbalance-4.webp"
+                            alt="New Balance foto 4"
+                            onclick="cambiarNewBalance('newbalance-4.webp')"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="info">
+
+                    <h3>New Balance</h3>
+
+                    <div class="precio-anterior">
+                        $150.000
+                    </div>
+
+                    <div class="precio">
+                        $130.000
+                    </div>
+
+                    <div class="envio">
+                        🚚 Envío GRATIS a todo Colombia 🇨🇴
+                    </div>
+
+
+                    <div class="label">
+                        Color:
+                    </div>
+
+                    <p>
+                        Clásico
+                    </p>
+
+
+                    <div class="label">
+                        Selecciona tu talla:
+                    </div>
+
+                    <div class="tallas">
+
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '35', this)">35</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '36', this)">36</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '37', this)">37</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '38', this)">38</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '39', this)">39</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '40', this)">40</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '41', this)">41</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '42', this)">42</button>
+                        <button class="talla" onclick="seleccionarTalla('newbalance', '43', this)">43</button>
+
+                    </div>
+
+                    <div
+                        class="talla-seleccionada"
+                        id="talla-newbalance">
+                    </div>
+
+
+                    <button
+                        class="whatsapp-btn"
+                        onclick="comprarWhatsApp('New Balance', 'Clásico', tallaNewBalance)"
+                    >
+                        🟢 COMPRAR AHORA POR WHATSAPP
+                    </button>
+
+
+                    <details class="guia">
+
+                        <summary>
+                            📏 Ver guía de tallas
+                        </summary>
+
+                        <img
+                            src="imagenes/guia-tallas.jpg"
+                            alt="Guía de tallas"
+                        >
+
+                    </details>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ========================= -->
+            <!-- ADIDAS SAMBA -->
+            <!-- ========================= -->
+
+            <div class="producto">
+
+                <div class="galeria">
+
+                    <img
+                        src="imagenes/samba-blanco.webp"
+                        alt="Adidas Samba OG"
+                        class="imagen-principal"
+                        id="samba-img"
+                    >
+
+                </div>
+
+
+                <div class="info">
+
+                    <h3>Adidas Samba OG</h3>
+
+                    <div class="precio-anterior">
+                        $150.000
+                    </div>
+
+                    <div class="precio">
+                        $129.000
+                    </div>
+
+                    <div class="envio">
+                        🚚 Envío GRATIS a todo Colombia 🇨🇴
+                    </div>
+
+
+                    <div class="label">
+                        Color:
+                    </div>
+
+                    <div class="colores">
+
+                        <button
+                            class="color-btn seleccionado"
+                            onclick="cambiarSamba('samba-blanco.webp', 'Blanco', this)"
+                        >
+                            Blanco
+                        </button>
+
+                        <button
+                            class="color-btn"
+                            onclick="cambiarSamba('samba-negro.webp', 'Negro', this)"
+                        >
+                            Negro
+                        </button>
+
+                        <button
+                            class="color-btn"
+                            onclick="cambiarSamba('samba-beige.webp', 'Beige', this)"
+                        >
+                            Beige
+                        </button>
+
+                    </div>
+
+
+                    <div class="label">
+                        Selecciona tu talla:
+                    </div>
+
+                    <div class="tallas">
+
+                        <button class="talla" onclick="seleccionarTalla('samba', '35', this)">35</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '36', this)">36</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '37', this)">37</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '38', this)">38</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '39', this)">39</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '40', this)">40</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '41', this)">41</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '42', this)">42</button>
+                        <button class="talla" onclick="seleccionarTalla('samba', '43', this)">43</button>
+
+                    </div>
+
+                    <div
+                        class="talla-seleccionada"
+                        id="talla-samba">
+                    </div>
+
+
+                    <button
+                        class="whatsapp-btn"
+                        onclick="comprarWhatsApp('Adidas Samba OG', sambaColor, tallaSamba)"
+                    >
+                        🟢 COMPRAR AHORA POR WHATSAPP
+                    </button>
+
+
+                    <details class="guia">
+
+                        <summary>
+                            📏 Ver guía de tallas
+                        </summary>
+
+                        <img
+                            src="imagenes/guia-tallas.jpg"
+                            alt="Guía de tallas"
+                        >
+
+                    </details>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ========================= -->
+            <!-- NIKE VOMERO -->
+            <!-- ========================= -->
+
+            <div class="producto">
+
+                <div class="galeria">
+
+                    <img
+                        src="imagenes/vomero-beigerosa.webp"
+                        alt="Nike Vomero 18"
+                        class="imagen-principal"
+                        id="vomero-img"
+                    >
+
+                </div>
+
+
+                <div class="info">
+
+                    <h3>Nike Vomero 18 – Dama</h3>
+
+                    <div class="precio-anterior">
+                        $150.000
+                    </div>
+
+                    <div class="precio">
+                        $129.000
+                    </div>
+
+                    <div class="envio">
+                        🚚 Envío GRATIS a todo Colombia 🇨🇴
+                    </div>
+
+
+                    <div class="label">
+                        Color:
+                    </div>
+
+                    <div class="colores">
+
+                        <button
+                            class="color-btn seleccionado"
+                            onclick="cambiarVomero('vomero-beigerosa.webp', 'Beige/Rosa', this)"
+                        >
+                            Beige/Rosa
+                        </button>
+
+                        <button
+                            class="color-btn"
+                            onclick="cambiarVomero('vomero-fucsia.webp', 'Fucsia', this)"
+                        >
+                            Fucsia
+                        </button>
+
+                        <button
+                            class="color-btn"
+                            onclick="cambiarVomero('vomero-naranja.webp', 'Naranja', this)"
+                        >
+                            Naranja
+                        </button>
+
+                    </div>
+
+
+                    <div class="label">
+                        Selecciona tu talla:
+                    </div>
+
+                    <div class="tallas">
+
+                        <button class="talla" onclick="seleccionarTalla('vomero', '35', this)">35</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '36', this)">36</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '37', this)">37</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '38', this)">38</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '39', this)">39</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '40', this)">40</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '41', this)">41</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '42', this)">42</button>
+                        <button class="talla" onclick="seleccionarTalla('vomero', '43', this)">43</button>
+
+                    </div>
+
+                    <div
+                        class="talla-seleccionada"
+                        id="talla-vomero">
+                    </div>
+
+
+                    <button
+                        class="whatsapp-btn"
+                        onclick="comprarWhatsApp('Nike Vomero 18 – Dama', vomeroColor, tallaVomero)"
+                    >
+                        🟢 COMPRAR AHORA POR WHATSAPP
+                    </button>
+
+
+                    <details class="guia">
+
+                        <summary>
+                            📏 Ver guía de tallas
+                        </summary>
+
+                        <img
+                            src="imagenes/guia-tallas.jpg"
+                            alt="Guía de tallas"
+                        >
+
+                    </details>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 <strong>SneakersCol</strong>
+        </p>
+
+        <p>
+            Zapatillas urbanas 👟 | Envíos a toda Colombia 🇨🇴
+        </p>
+
+    </footer>
+
+
+    <!-- WHATSAPP FLOTANTE -->
+
+    <a
+        href="#"
+        class="whatsapp-flotante"
+        onclick="comprarWhatsApp('SneakersCol', '', '')"
+    >
+        💬
+    </a>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        let sambaColor = "Blanco";
+        let vomeroColor = "Beige/Rosa";
+
+        let tallaNewBalance = "";
+        let tallaSamba = "";
+        let tallaVomero = "";
+
+
+        /* =========================
+           NEW BALANCE FOTOS
+        ========================= */
+
+        function cambiarNewBalance(imagen) {
+
+            document.getElementById("newbalance-img").src =
+                "imagenes/" + imagen;
+
+        }
+
+
+        /* =========================
+           SAMBA
+        ========================= */
+
+        function cambiarSamba(imagen, color, boton) {
+
+            document.getElementById("samba-img").src =
+                "imagenes/" + imagen;
+
+            sambaColor = color;
+
+            const botones =
+                document.querySelectorAll(".producto:nth-child(2) .color-btn");
+
+            botones.forEach(function(b) {
+                b.classList.remove("seleccionado");
+            });
+
+            boton.classList.add("seleccionado");
+
+        }
+
+
+        /* =========================
+           VOMERO
+        ========================= */
+
+        function cambiarVomero(imagen, color, boton) {
+
+            document.getElementById("vomero-img").src =
+                "imagenes/" + imagen;
+
+            vomeroColor = color;
+
+            const botones =
+                document.querySelectorAll(".producto:nth-child(3) .color-btn");
+
+            botones.forEach(function(b) {
+                b.classList.remove("seleccionado");
+            });
+
+            boton.classList.add("seleccionado");
+
+        }
+
+
+        /* =========================
+           SELECCIONAR TALLA
+        ========================= */
+
+        function seleccionarTalla(producto, talla, boton) {
+
+            const contenedor =
+                boton.parentElement;
+
+            const botones =
+                contenedor.querySelectorAll(".talla");
+
+            botones.forEach(function(b) {
+                b.classList.remove("seleccionada");
+            });
+
+            boton.classList.add("seleccionada");
+
+
+            if (producto === "newbalance") {
+
+                tallaNewBalance = talla;
+
+                document.getElementById("talla-newbalance").innerText =
+                    "✓ Talla seleccionada: " + talla;
+
+            }
+
+
+            if (producto === "samba") {
+
+                tallaSamba = talla;
+
+                document.getElementById("talla-samba").innerText =
+                    "✓ Talla seleccionada: " + talla;
+
+            }
+
+
+            if (producto === "vomero") {
+
+                tallaVomero = talla;
+
+                document.getElementById("talla-vomero").innerText =
+                    "✓ Talla seleccionada: " + talla;
+
+            }
+
+        }
+
+
+        /* =========================
+           WHATSAPP
+        ========================= */
+
+        function comprarWhatsApp(producto, color, talla) {
+
+            const numero =
+                "573209925066";
+
+
+            if (
+                producto !== "SneakersCol" &&
+                (!talla || talla === "")
+            ) {
+
+                alert(
+                    "👟 ¡Selecciona una talla antes de continuar!"
+                );
+
+                return;
+
+            }
+
+
+            let mensaje =
+                "Hola 👋 Estoy interesado en comprar en SneakersCol.%0A%0A" +
+                "👟 Producto: " + producto;
+
+
+            if (color && color !== "") {
+
+                mensaje +=
+                    "%0A🎨 Color: " + color;
+
+            }
+
+
+            if (talla && talla !== "") {
+
+                mensaje +=
+                    "%0A📏 Talla: " + talla;
+
+            }
+
+
+            mensaje +=
+                "%0A💰 Precio: consultar" +
+                "%0A🚚 Envío GRATIS a todo Colombia 🇨🇴" +
+                "%0A%0A¿Me pueden ayudar con la compra?";
+
+
+            const url =
+                "https://wa.me/" +
+                numero +
+                "?text=" +
+                mensaje;
+
+
+            window.open(url, "_blank");
+
+        }
+
+    </script>
+
+</body>
+</html>
