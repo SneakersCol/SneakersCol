@@ -1667,10 +1667,36 @@ footer{
 
 
 <div class="toast" id="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
+const SUPABASE_URL = "https://mqkghtubwpsjvoivynhr.supabase.co";
+const SUPABASE_KEY = "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
 
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function probarConexionSupabase() {
+  const { data, error } = await supabaseClient
+    .from("productos")
+    .select("nombre")
+    .limit(1);
+
+  if (error) {
+    alert("Error conectando con Supabase");
+    console.error(error);
+    return;
+  }
+
+  if (data && data.length > 0) {
+    alert("Supabase conectado: " + data[0].nombre);
+  }
+}
+
+probarConexionSupabase();
 const WHATSAPP = "573209925066";
 
 let carrito = JSON.parse(localStorage.getItem("sneakerscol_carrito")) || [];
