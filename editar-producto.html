@@ -95,11 +95,16 @@
       border-color: #7CFF00;
     }
 
+    input[type="file"] {
+      cursor: pointer;
+    }
+
     .ayuda {
       display: block;
       color: #999;
       margin-top: 6px;
       font-size: 12px;
+      line-height: 1.5;
     }
 
     .disponibilidad {
@@ -114,6 +119,39 @@
     .disponibilidad input {
       width: auto;
       transform: scale(1.3);
+    }
+
+    .imagenes-actuales,
+    .preview-imagenes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .imagen-item {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .imagen-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      border-radius: 7px;
+      background: white;
+    }
+
+    .titulo-imagenes {
+      margin-top: 15px;
+      margin-bottom: 5px;
+      color: #7CFF00;
+      font-size: 13px;
+      font-weight: bold;
     }
 
     .acciones {
@@ -131,6 +169,11 @@
       font-weight: bold;
     }
 
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
     .guardar {
       background: #7CFF00;
       color: #111;
@@ -146,6 +189,7 @@
       margin-top: 20px;
       min-height: 20px;
       font-weight: bold;
+      line-height: 1.5;
     }
 
     .correcto {
@@ -203,6 +247,7 @@
     <form id="formProducto">
 
       <div class="campo">
+
         <label for="nombre">
           Nombre del producto
         </label>
@@ -213,10 +258,12 @@
           required
           placeholder="Ejemplo: New Balance 530"
         >
+
       </div>
 
 
       <div class="campo">
+
         <label for="precio">
           Precio
         </label>
@@ -233,10 +280,12 @@
         <span class="ayuda">
           Escribe solamente números, por ejemplo: 130000
         </span>
+
       </div>
 
 
       <div class="campo">
+
         <label for="categoria">
           Categoría
         </label>
@@ -246,10 +295,12 @@
           type="text"
           placeholder="Sneakers"
         >
+
       </div>
 
 
       <div class="campo">
+
         <label for="tallas">
           Tallas disponibles
         </label>
@@ -263,6 +314,62 @@
         <span class="ayuda">
           Separa las tallas con comas.
         </span>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="imagenes">
+          Fotos del producto
+        </label>
+
+        <input
+          id="imagenes"
+          type="file"
+          accept="image/*"
+          multiple
+        >
+
+        <span class="ayuda">
+          Puedes seleccionar varias fotos al mismo tiempo.
+          Si estás editando un producto y no seleccionas fotos nuevas,
+          se conservarán las que ya tiene.
+        </span>
+
+        <div
+          id="contenedorImagenesActuales"
+          style="display:none;"
+        >
+
+          <div class="titulo-imagenes">
+            FOTOS ACTUALES
+          </div>
+
+          <div
+            id="imagenesActuales"
+            class="imagenes-actuales"
+          ></div>
+
+        </div>
+
+
+        <div
+          id="contenedorPreview"
+          style="display:none;"
+        >
+
+          <div class="titulo-imagenes">
+            FOTOS NUEVAS SELECCIONADAS
+          </div>
+
+          <div
+            id="previewImagenes"
+            class="preview-imagenes"
+          ></div>
+
+        </div>
+
       </div>
 
 
@@ -355,8 +462,27 @@ const inputCategoria =
 const inputTallas =
   document.getElementById("tallas");
 
+const inputImagenes =
+  document.getElementById("imagenes");
+
 const inputDisponible =
   document.getElementById("disponible");
+
+const imagenesActuales =
+  document.getElementById("imagenesActuales");
+
+const previewImagenes =
+  document.getElementById("previewImagenes");
+
+const contenedorImagenesActuales =
+  document.getElementById(
+    "contenedorImagenesActuales"
+  );
+
+const contenedorPreview =
+  document.getElementById(
+    "contenedorPreview"
+  );
 
 const mensaje =
   document.getElementById("mensaje");
@@ -369,6 +495,13 @@ const subtituloPagina =
 
 const btnGuardar =
   document.getElementById("btnGuardar");
+
+
+/* =====================================
+   VARIABLES
+===================================== */
+
+let imagenesGuardadas = [];
 
 
 /* =====================================
@@ -398,6 +531,157 @@ function mostrarMensaje(texto, tipo) {
 
 
 /* =====================================
+   CONVERTIR TEXTO DE IMÁGENES
+   EN LISTA
+===================================== */
+
+function convertirImagenesEnLista(valor) {
+
+  if (!valor) {
+    return [];
+  }
+
+  if (Array.isArray(valor)) {
+
+    return valor
+      .map(function(url) {
+        return String(url).trim();
+      })
+      .filter(Boolean);
+
+  }
+
+  return String(valor)
+    .split(",")
+    .map(function(url) {
+      return url.trim();
+    })
+    .filter(Boolean);
+}
+
+
+/* =====================================
+   MOSTRAR IMÁGENES ACTUALES
+===================================== */
+
+function mostrarImagenesActuales(lista) {
+
+  imagenesActuales.innerHTML = "";
+
+  if (!lista || lista.length === 0) {
+
+    contenedorImagenesActuales.style.display =
+      "none";
+
+    return;
+  }
+
+
+  contenedorImagenesActuales.style.display =
+    "block";
+
+
+  lista.forEach(function(url) {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "imagen-item";
+
+
+    const img =
+      document.createElement("img");
+
+    img.src = url;
+
+    img.alt =
+      "Foto del producto";
+
+    img.loading =
+      "lazy";
+
+
+    item.appendChild(img);
+
+    imagenesActuales.appendChild(item);
+
+  });
+}
+
+
+/* =====================================
+   VISTA PREVIA DE FOTOS NUEVAS
+===================================== */
+
+inputImagenes.addEventListener(
+  "change",
+  function() {
+
+    previewImagenes.innerHTML = "";
+
+    const archivos =
+      Array.from(inputImagenes.files || []);
+
+
+    if (archivos.length === 0) {
+
+      contenedorPreview.style.display =
+        "none";
+
+      return;
+    }
+
+
+    contenedorPreview.style.display =
+      "block";
+
+
+    archivos.forEach(function(archivo) {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "imagen-item";
+
+
+      const img =
+        document.createElement("img");
+
+
+      const urlTemporal =
+        URL.createObjectURL(archivo);
+
+
+      img.src =
+        urlTemporal;
+
+      img.alt =
+        archivo.name;
+
+
+      img.onload =
+        function() {
+
+          URL.revokeObjectURL(
+            urlTemporal
+          );
+
+        };
+
+
+      item.appendChild(img);
+
+      previewImagenes.appendChild(item);
+
+    });
+
+  }
+);
+
+
+/* =====================================
    VERIFICAR SESIÓN
 ===================================== */
 
@@ -405,6 +689,7 @@ async function verificarSesion() {
 
   const { data, error } =
     await supabaseClient.auth.getSession();
+
 
   if (error) {
 
@@ -416,13 +701,18 @@ async function verificarSesion() {
     return false;
   }
 
-  if (!data || !data.session) {
+
+  if (
+    !data ||
+    !data.session
+  ) {
 
     window.location.href =
       "admin.html";
 
     return false;
   }
+
 
   return true;
 }
@@ -437,14 +727,14 @@ async function cargarProducto() {
   const sesionCorrecta =
     await verificarSesion();
 
+
   if (!sesionCorrecta) {
     return;
   }
 
 
   /*
-    Si NO hay ID estamos creando
-    un producto nuevo.
+    PRODUCTO NUEVO
   */
 
   if (!productoId) {
@@ -463,7 +753,7 @@ async function cargarProducto() {
 
 
   /*
-    Si hay ID estamos editando.
+    EDITAR PRODUCTO
   */
 
   tituloPagina.textContent =
@@ -477,7 +767,7 @@ async function cargarProducto() {
     await supabaseClient
       .from("productos")
       .select(
-        "id,nombre,precio,categoria,tallas,disponible"
+        "id,nombre,precio,categoria,tallas,disponible,imagenes"
       )
       .eq("id", productoId)
       .maybeSingle();
@@ -526,13 +816,161 @@ async function cargarProducto() {
     data.disponible !== false;
 
 
+  imagenesGuardadas =
+    convertirImagenesEnLista(
+      data.imagenes
+    );
+
+
+  mostrarImagenesActuales(
+    imagenesGuardadas
+  );
+
+
   subtituloPagina.textContent =
     "Modifica la información y guarda los cambios.";
 }
 
 
 /* =====================================
-   GUARDAR
+   LIMPIAR NOMBRE DE ARCHIVO
+===================================== */
+
+function limpiarNombreArchivo(nombre) {
+
+  return nombre
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /[^a-zA-Z0-9._-]/g,
+      "-"
+    )
+    .toLowerCase();
+}
+
+
+/* =====================================
+   SUBIR IMÁGENES A SUPABASE STORAGE
+===================================== */
+
+async function subirImagenes() {
+
+  const archivos =
+    Array.from(
+      inputImagenes.files || []
+    );
+
+
+  if (archivos.length === 0) {
+
+    return [];
+  }
+
+
+  const urlsNuevas = [];
+
+
+  for (
+    let i = 0;
+    i < archivos.length;
+    i++
+  ) {
+
+    const archivo =
+      archivos[i];
+
+
+    mostrarMensaje(
+      "Subiendo foto " +
+      (i + 1) +
+      " de " +
+      archivos.length +
+      "...",
+      "correcto"
+    );
+
+
+    const nombreSeguro =
+      limpiarNombreArchivo(
+        archivo.name
+      );
+
+
+    const nombreArchivo =
+      Date.now() +
+      "-" +
+      Math.random()
+        .toString(36)
+        .substring(2, 9) +
+      "-" +
+      nombreSeguro;
+
+
+    const ruta =
+      "catalogo/" +
+      nombreArchivo;
+
+
+    const {
+      error: errorSubida
+    } =
+      await supabaseClient.storage
+        .from("productos")
+        .upload(
+          ruta,
+          archivo,
+          {
+            cacheControl: "3600",
+            upsert: false
+          }
+        );
+
+
+    if (errorSubida) {
+
+      console.error(
+        "Error subiendo imagen:",
+        errorSubida
+      );
+
+      throw new Error(
+        "No fue posible subir la imagen " +
+        archivo.name
+      );
+    }
+
+
+    const {
+      data: datosPublicos
+    } =
+      supabaseClient.storage
+        .from("productos")
+        .getPublicUrl(ruta);
+
+
+    if (
+      datosPublicos &&
+      datosPublicos.publicUrl
+    ) {
+
+      urlsNuevas.push(
+        datosPublicos.publicUrl
+      );
+
+    }
+
+  }
+
+
+  return urlsNuevas;
+}
+
+
+/* =====================================
+   GUARDAR PRODUCTO
 ===================================== */
 
 formulario.addEventListener(
@@ -583,95 +1021,147 @@ formulario.addEventListener(
     }
 
 
-    const datosProducto = {
-      nombre: nombre,
-      precio: precio,
-      categoria: categoria,
-      tallas: tallas,
-      disponible: disponible
-    };
-
-
-    btnGuardar.disabled = true;
+    btnGuardar.disabled =
+      true;
 
     btnGuardar.textContent =
       "GUARDANDO...";
 
-    mostrarMensaje(
-      "Guardando información...",
-      "correcto"
-    );
+
+    try {
+
+      /*
+        SUBIR FOTOS NUEVAS
+      */
+
+      const imagenesNuevas =
+        await subirImagenes();
 
 
-    let resultado;
+      /*
+        CONSERVAR LAS ANTERIORES
+        Y AGREGAR LAS NUEVAS
+      */
+
+      const todasLasImagenes = [
+        ...imagenesGuardadas,
+        ...imagenesNuevas
+      ];
 
 
-    /*
-      EDITAR PRODUCTO EXISTENTE
-    */
+      /*
+        La columna "imagenes" de Supabase
+        actualmente es TEXT.
 
-    if (productoId) {
+        Guardamos todas las URL separadas
+        por comas para mantener compatibilidad
+        con la estructura existente.
+      */
 
-      resultado =
-        await supabaseClient
-          .from("productos")
-          .update(datosProducto)
-          .eq("id", productoId)
-          .select();
+      const textoImagenes =
+        todasLasImagenes.join(",");
+
+
+      const datosProducto = {
+
+        nombre: nombre,
+
+        precio: precio,
+
+        categoria: categoria,
+
+        tallas: tallas,
+
+        disponible: disponible,
+
+        imagenes:
+          textoImagenes || null
+
+      };
+
+
+      let resultado;
+
+
+      /*
+        EDITAR PRODUCTO EXISTENTE
+      */
+
+      if (productoId) {
+
+        resultado =
+          await supabaseClient
+            .from("productos")
+            .update(datosProducto)
+            .eq("id", productoId)
+            .select();
+
+      }
+
+
+      /*
+        CREAR PRODUCTO NUEVO
+      */
+
+      else {
+
+        resultado =
+          await supabaseClient
+            .from("productos")
+            .insert(datosProducto)
+            .select();
+
+      }
+
+
+      if (resultado.error) {
+
+        throw resultado.error;
+      }
+
+
+      mostrarMensaje(
+        productoId
+          ? "Producto actualizado correctamente."
+          : "Producto agregado correctamente.",
+        "correcto"
+      );
+
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "productos.html";
+
+        },
+        1000
+      );
 
     }
 
 
-    /*
-      CREAR PRODUCTO NUEVO
-    */
-
-    else {
-
-      resultado =
-        await supabaseClient
-          .from("productos")
-          .insert(datosProducto)
-          .select();
-
-    }
-
-
-    if (resultado.error) {
+    catch (error) {
 
       console.error(
         "Error guardando producto:",
-        resultado.error
+        error
       );
 
+
       mostrarMensaje(
-        "No fue posible guardar. Revisa la configuración de Supabase.",
+        "No fue posible guardar el producto o subir las fotografías.",
         "error"
       );
 
-      btnGuardar.disabled = false;
+
+      btnGuardar.disabled =
+        false;
 
       btnGuardar.textContent =
         "GUARDAR PRODUCTO";
 
-      return;
     }
-
-
-    mostrarMensaje(
-      productoId
-        ? "Producto actualizado correctamente."
-        : "Producto agregado correctamente.",
-      "correcto"
-    );
-
-
-    setTimeout(function() {
-
-      window.location.href =
-        "productos.html";
-
-    }, 900);
 
   }
 );
