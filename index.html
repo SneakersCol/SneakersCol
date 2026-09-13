@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SneakersCol - Sneakers con estilo. Compra y paga al recibir en toda Colombia.">
-<title>SneakersCol | Sneakers que hablan por ti</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="description"
+  content="SneakersCol - Sneakers con estilo. Compra y paga al recibir en toda Colombia."
+>
+
+<title>
+  SneakersCol | Sneakers que hablan por ti
+</title>
+
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+>
+
 
 <style>
+
 :root{
   --black:#080808;
   --black2:#111111;
@@ -23,15 +51,18 @@
   --border:#292929;
 }
 
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
+
 html{
   scroll-behavior:smooth;
 }
+
 
 body{
   font-family:'Montserrat',Arial,sans-serif;
@@ -40,14 +71,17 @@ body{
   overflow-x:hidden;
 }
 
+
 a{
   text-decoration:none;
   color:inherit;
 }
 
+
 button{
   font-family:inherit;
 }
+
 
 /* ================= HEADER ================= */
 
@@ -61,6 +95,7 @@ button{
   letter-spacing:.4px;
 }
 
+
 header{
   position:sticky;
   top:0;
@@ -69,6 +104,7 @@ header{
   backdrop-filter:blur(12px);
   border-bottom:1px solid #222;
 }
+
 
 .nav{
   max-width:1250px;
@@ -81,6 +117,7 @@ header{
   gap:25px;
 }
 
+
 .logo{
   display:flex;
   align-items:center;
@@ -91,9 +128,11 @@ header{
   letter-spacing:2px;
 }
 
+
 .logo span{
   color:var(--green);
 }
+
 
 .logo-mark{
   width:39px;
@@ -108,6 +147,7 @@ header{
   font-size:23px;
 }
 
+
 .nav-links{
   display:flex;
   gap:25px;
@@ -117,13 +157,16 @@ header{
   text-transform:uppercase;
 }
 
+
 .nav-links a{
   transition:.25s;
 }
 
+
 .nav-links a:hover{
   color:var(--green);
 }
+
 
 .cart-button{
   border:1px solid var(--green);
@@ -137,10 +180,12 @@ header{
   white-space:nowrap;
 }
 
+
 .cart-button:hover{
   background:var(--green);
   color:#000;
 }
+
 
 .cart-count{
   background:var(--green);
@@ -154,428 +199,712 @@ header{
   margin-left:5px;
 }
 
+
 /* ================= HERO ================= */
 
 .hero{
   min-height:590px;
+
   background:
-    radial-gradient(circle at 50% 40%,rgba(57,255,20,.14),transparent 30%),
-    linear-gradient(135deg,#050505,#141414 55%,#050505);
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(57,255,20,.14),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #050505,
+      #141414 55%,
+      #050505
+    );
+
   color:white;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   text-align:center;
+
   position:relative;
+
   overflow:hidden;
+
   padding:70px 20px;
 }
 
+
 .hero:before{
   content:"";
+
   position:absolute;
   inset:0;
-  background:repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 45px,
-    rgba(255,255,255,.015) 46px,
-    rgba(255,255,255,.015) 47px
-  );
+
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 45px,
+      rgba(255,255,255,.015) 46px,
+      rgba(255,255,255,.015) 47px
+    );
 }
+
 
 .hero-content{
   position:relative;
   z-index:2;
+
   max-width:900px;
+
   animation:heroIn .9s ease;
 }
 
+
 .hero-tag{
   display:inline-block;
+
   color:#000;
   background:var(--green);
+
   padding:8px 15px;
+
   font-size:12px;
   font-weight:900;
+
   letter-spacing:2px;
+
   margin-bottom:20px;
+
   transform:skew(-8deg);
 }
 
+
 .hero-logo{
   font-family:'Bebas Neue',sans-serif;
+
   font-size:clamp(70px,13vw,150px);
+
   line-height:.8;
+
   letter-spacing:4px;
-  text-shadow:4px 4px 0 rgba(57,255,20,.2);
+
+  text-shadow:
+    4px 4px 0 rgba(57,255,20,.2);
 }
+
 
 .hero-logo span{
   color:var(--green);
 }
 
+
 .hero h1{
   font-family:'Bebas Neue',sans-serif;
+
   font-size:clamp(38px,6vw,72px);
+
   letter-spacing:2px;
+
   margin:28px 0 10px;
 }
 
+
 .hero p{
   color:#ccc;
+
   max-width:650px;
+
   margin:auto;
+
   line-height:1.7;
+
   font-size:15px;
 }
 
+
 .hero-buttons{
   margin-top:32px;
+
   display:flex;
+
   justify-content:center;
+
   gap:12px;
+
   flex-wrap:wrap;
 }
 
+
 .btn{
   border:0;
+
   padding:15px 25px;
+
   border-radius:5px;
+
   font-weight:900;
+
   cursor:pointer;
+
   transition:.25s;
+
   text-transform:uppercase;
+
   letter-spacing:.5px;
 }
+
 
 .btn-green{
   background:var(--green);
   color:#000;
 }
 
+
 .btn-green:hover{
   transform:translateY(-3px);
-  box-shadow:0 10px 30px rgba(57,255,20,.25);
+
+  box-shadow:
+    0 10px 30px rgba(57,255,20,.25);
 }
+
 
 .btn-outline{
   background:transparent;
+
   border:1px solid white;
+
   color:white;
 }
+
 
 .btn-outline:hover{
   background:white;
   color:#000;
 }
 
+
 @keyframes heroIn{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
+
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
 }
+
 
 /* ================= TRUST ================= */
 
 .trust{
   background:#000;
   color:white;
+
   padding:30px 20px;
 }
 
+
 .trust-grid{
   max-width:1150px;
+
   margin:auto;
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:15px;
 }
 
+
 .trust-item{
   border:1px solid #292929;
+
   padding:20px;
+
   text-align:center;
+
   border-radius:7px;
+
   transition:.25s;
 }
 
+
 .trust-item:hover{
   border-color:var(--green);
+
   transform:translateY(-3px);
 }
 
+
 .trust-icon{
   font-size:26px;
+
   margin-bottom:9px;
 }
 
+
 .trust-item strong{
   display:block;
+
   font-size:13px;
 }
 
+
 .trust-item span{
   display:block;
+
   color:#999;
+
   font-size:11px;
+
   margin-top:5px;
 }
+
 
 /* ================= PRODUCTS ================= */
 
 .section{
   max-width:1250px;
+
   margin:auto;
+
   padding:80px 20px;
 }
 
+
 .section-header{
   text-align:center;
+
   margin-bottom:45px;
 }
 
+
 .section-kicker{
   color:var(--green-dark);
+
   font-size:12px;
+
   font-weight:900;
+
   letter-spacing:2px;
+
   text-transform:uppercase;
 }
 
+
 .section-title{
   font-family:'Bebas Neue',sans-serif;
+
   font-size:58px;
+
   letter-spacing:2px;
+
   margin-top:5px;
 }
+
 
 .section-subtitle{
   color:#777;
+
   font-size:14px;
+
   margin-top:5px;
 }
 
-.category-filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:-18px 0 32px}.category-filter{border:1px solid #181818;background:#fff;color:#181818;padding:11px 24px;border-radius:999px;font-weight:900;cursor:pointer;transition:.2s}.category-filter:hover,.category-filter.active{background:#181818;color:#fff}.product-card.category-hidden{display:none}
+
+.category-filters{
+  display:flex;
+
+  justify-content:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  margin:-18px 0 32px;
+}
+
+
+.category-filter{
+  border:1px solid #181818;
+
+  background:#fff;
+
+  color:#181818;
+
+  padding:11px 24px;
+
+  border-radius:999px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+
+.category-filter:hover,
+.category-filter.active{
+  background:#181818;
+
+  color:#fff;
+}
+
+
+.product-card.category-hidden{
+  display:none;
+}
+
 
 .products{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:25px;
 }
 
+
 .product-card{
   background:white;
+
   border:1px solid #e3e3e3;
+
   border-radius:10px;
+
   overflow:hidden;
+
   position:relative;
+
   transition:.3s;
 }
 
+
 .product-card:hover{
   transform:translateY(-7px);
-  box-shadow:0 18px 45px rgba(0,0,0,.12);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.12);
+
   border-color:#ccc;
 }
 
+
 .discount{
   position:absolute;
+
   top:14px;
   left:14px;
+
   z-index:3;
+
   background:var(--green);
+
   color:#000;
+
   font-size:11px;
+
   font-weight:900;
+
   padding:7px 10px;
+
   border-radius:3px;
 }
 
+
 .product-image{
   height:310px;
+
   background:#f3f3f3;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   overflow:hidden;
 }
+
 
 .product-image img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   transition:.5s;
 }
 
-.product-card:hover .product-image img{
+
+.product-card:hover
+.product-image img{
   transform:scale(1.05);
 }
 
+
 .product-gallery{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:8px;
+
   padding:10px 0 0;
 }
 
+
 .gallery-thumb{
   border:2px solid transparent;
+
   background:#f3f3f3;
+
   padding:0;
+
   border-radius:6px;
+
   overflow:hidden;
+
   cursor:pointer;
+
   aspect-ratio:1/1;
 }
+
 
 .gallery-thumb img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:block;
 }
+
 
 .gallery-thumb.active{
   border-color:var(--green);
 }
 
+
 .product-info{
   padding:20px;
 }
 
+
 .product-name{
   font-size:18px;
+
   font-weight:900;
 }
+
 
 .product-old{
   text-decoration:line-through;
+
   color:#999;
+
   font-size:13px;
+
   margin-top:10px;
 }
 
+
 .product-price{
   font-size:26px;
+
   font-weight:900;
+
   margin-top:2px;
 }
 
+
 .product-delivery{
   display:inline-block;
+
   margin-top:9px;
+
   font-size:10px;
+
   font-weight:900;
+
   color:#168900;
+
   background:#eaffea;
+
   padding:5px 7px;
+
   border-radius:3px;
 }
 
+
 .option-title{
   font-size:11px;
+
   font-weight:900;
+
   margin-top:18px;
+
   margin-bottom:7px;
+
   text-transform:uppercase;
 }
 
+
 .options{
   display:flex;
+
   flex-wrap:wrap;
+
   gap:6px;
 }
 
+
 .option{
   border:1px solid #ccc;
+
   background:white;
+
   padding:7px 9px;
+
   border-radius:4px;
+
   font-size:11px;
+
   cursor:pointer;
+
   transition:.2s;
 }
+
 
 .option:hover,
 .option.active{
   border-color:#000;
+
   background:#000;
+
   color:white;
 }
+
 
 .product-actions{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:8px;
+
   margin-top:20px;
 }
 
+
 .action{
   border:0;
+
   padding:12px 7px;
+
   border-radius:5px;
+
   font-size:10px;
+
   font-weight:900;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
+
 .action-cart{
   background:#000;
+
   color:white;
 }
 
+
 .action-cart:hover{
   background:var(--green);
+
   color:#000;
 }
 
+
 .action-whatsapp{
   background:var(--green);
+
   color:#000;
 }
+
 
 .action-whatsapp:hover{
   transform:translateY(-2px);
 }
 
+
 /* ================= SIZE GUIDE ================= */
 
 .size-section{
   background:#080808;
+
   color:white;
 }
 
+
 .size-box{
   max-width:900px;
+
   margin:auto;
 }
 
+
 .size-table{
   width:100%;
+
   border-collapse:collapse;
+
   margin-top:25px;
+
   overflow:hidden;
+
   border-radius:8px;
 }
+
 
 .size-table th,
 .size-table td{
   padding:13px;
+
   border:1px solid #292929;
+
   text-align:center;
+
   font-size:13px;
 }
 
+
 .size-table th{
   background:var(--green);
+
   color:#000;
+
   font-weight:900;
 }
+
 
 .size-table td{
   color:#ccc;
 }
+
 
 /* ================= REVIEWS ================= */
 
@@ -583,327 +912,512 @@ header{
   background:white;
 }
 
+
 .review-form{
   max-width:700px;
+
   margin:0 auto 45px;
+
   background:#f7f7f7;
+
   padding:25px;
+
   border-radius:8px;
+
   border:1px solid #ddd;
 }
 
+
 .form-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:12px;
 }
+
 
 .input,
 .textarea,
 .select{
   width:100%;
+
   padding:13px;
+
   border:1px solid #ccc;
+
   border-radius:5px;
+
   font-family:inherit;
+
   font-size:13px;
+
   background:white;
 }
 
+
 .textarea{
   min-height:100px;
+
   resize:vertical;
+
   margin-top:12px;
 }
+
 
 .stars{
   display:flex;
+
   gap:5px;
+
   margin-top:12px;
 }
 
+
 .star{
   border:0;
+
   background:none;
+
   font-size:28px;
+
   color:#ccc;
+
   cursor:pointer;
 }
+
 
 .star.selected{
   color:#f5b400;
 }
 
+
 .review-list{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:15px;
 }
 
+
 .review{
   border:1px solid #e2e2e2;
+
   padding:20px;
+
   border-radius:8px;
 }
 
+
 .review-stars{
   color:#f5b400;
+
   letter-spacing:2px;
 }
 
+
 .review-name{
   font-weight:900;
+
   margin-top:9px;
+
   font-size:13px;
 }
+
 
 .review-product{
   color:#777;
+
   font-size:10px;
+
   margin-top:3px;
 }
 
+
 .review-text{
   margin-top:12px;
+
   color:#555;
+
   font-size:13px;
+
   line-height:1.6;
 }
+
 
 /* ================= SOCIAL ================= */
 
 .social{
   background:#000;
+
   color:white;
+
   text-align:center;
 }
 
+
 .social-grid{
   display:flex;
+
   justify-content:center;
+
   gap:12px;
+
   flex-wrap:wrap;
+
   margin-top:30px;
 }
 
+
 .social-btn{
   border:1px solid #333;
+
   padding:14px 25px;
+
   border-radius:5px;
+
   font-size:12px;
+
   font-weight:900;
+
   transition:.25s;
 }
 
+
 .social-btn:hover{
   border-color:var(--green);
+
   color:var(--green);
+
   transform:translateY(-3px);
 }
+
 
 /* ================= FOOTER ================= */
 
 footer{
   background:#050505;
+
   color:#777;
+
   border-top:1px solid #222;
+
   padding:30px 20px;
+
   text-align:center;
+
   font-size:11px;
 }
 
+
 .footer-logo{
   font-family:'Bebas Neue',sans-serif;
+
   color:white;
+
   font-size:30px;
+
   letter-spacing:2px;
+
   margin-bottom:8px;
 }
+
 
 .footer-logo span{
   color:var(--green);
 }
 
+
 /* ================= FLOAT WHATSAPP ================= */
 
 .whatsapp-float{
   position:fixed;
+
   right:20px;
   bottom:20px;
+
   z-index:1100;
+
   width:58px;
   height:58px;
+
   background:#25d366;
+
   color:white;
+
   border-radius:50%;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   font-size:27px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.3);
+
   transition:.25s;
 }
+
 
 .whatsapp-float:hover{
   transform:scale(1.1);
 }
 
+
 /* ================= CART ================= */
 
 .overlay{
   display:none;
+
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.65);
+
   z-index:2000;
 }
+
 
 .overlay.show{
   display:block;
 }
 
+
 .cart{
   position:fixed;
+
   right:-450px;
   top:0;
+
   height:100%;
+
   width:min(430px,100%);
+
   background:white;
+
   z-index:2100;
-  box-shadow:-10px 0 40px rgba(0,0,0,.25);
+
+  box-shadow:
+    -10px 0 40px rgba(0,0,0,.25);
+
   transition:.35s;
+
   display:flex;
+
   flex-direction:column;
 }
+
 
 .cart.show{
   right:0;
 }
 
+
 .cart-header{
   background:#000;
+
   color:white;
+
   padding:20px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 }
 
+
 .cart-header h2{
   font-family:'Bebas Neue',sans-serif;
+
   font-size:30px;
+
   letter-spacing:1px;
 }
 
+
 .close-cart{
   background:none;
+
   border:0;
+
   color:white;
+
   font-size:28px;
+
   cursor:pointer;
 }
 
+
 .cart-items{
   flex:1;
+
   overflow:auto;
+
   padding:18px;
 }
 
+
 .empty-cart{
   text-align:center;
+
   color:#777;
+
   padding:50px 20px;
 }
 
+
 .cart-item{
   display:flex;
+
   gap:12px;
+
   border-bottom:1px solid #ddd;
+
   padding:15px 0;
 }
+
 
 .cart-item img{
   width:75px;
   height:75px;
+
   object-fit:cover;
+
   border-radius:5px;
+
   background:#f3f3f3;
 }
+
 
 .cart-item-info{
   flex:1;
 }
 
+
 .cart-item-name{
   font-size:13px;
+
   font-weight:900;
 }
+
 
 .cart-item-detail{
   font-size:10px;
+
   color:#777;
+
   margin-top:4px;
 }
 
+
 .cart-item-price{
   font-weight:900;
+
   margin-top:7px;
+
   font-size:14px;
 }
 
+
 .remove-item{
   border:0;
+
   background:none;
+
   color:#999;
+
   cursor:pointer;
+
   font-size:12px;
 }
 
+
 .cart-footer{
   border-top:1px solid #ddd;
+
   padding:20px;
 }
 
+
 .cart-total{
   display:flex;
+
   justify-content:space-between;
+
   font-weight:900;
+
   font-size:20px;
+
   margin-bottom:15px;
 }
 
+
 .full-btn{
   width:100%;
+
   padding:15px;
+
   border:0;
+
   border-radius:5px;
+
   background:var(--green);
+
   color:#000;
+
   font-weight:900;
+
   cursor:pointer;
 }
+
 
 /* ================= TOAST ================= */
 
 .toast{
   position:fixed;
+
   left:50%;
+
   bottom:25px;
-  transform:translate(-50%,120px);
+
+  transform:
+    translate(-50%,120px);
+
   background:#000;
+
   color:white;
+
   padding:13px 20px;
-  border-left:4px solid var(--green);
+
+  border-left:
+    4px solid var(--green);
+
   border-radius:4px;
+
   z-index:3000;
+
   font-size:12px;
+
   font-weight:800;
+
   transition:.3s;
 }
 
+
 .toast.show{
-  transform:translate(-50%,0);
+  transform:
+    translate(-50%,0);
 }
+
 
 /* ================= MOBILE ================= */
 
@@ -913,39 +1427,52 @@ footer{
     min-height:68px;
   }
 
+
   .nav-links{
     display:none;
   }
 
+
   .logo{
     font-size:27px;
   }
+
 
   .logo-mark{
     width:34px;
     height:34px;
   }
 
+
   .hero{
     min-height:540px;
   }
+
 
   .hero-logo{
     font-size:75px;
   }
 
+
   .trust-grid{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
+
 
   .products{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
 
+
   .review-list{
-    grid-template-columns:1fr;
+    grid-template-columns:
+      1fr;
   }
+
 }
+
 
 @media(max-width:600px){
 
@@ -953,668 +1480,1875 @@ footer{
     font-size:10px;
   }
 
+
   .nav{
     padding:9px 12px;
   }
 
+
   .cart-button{
     padding:8px 10px;
+
     font-size:10px;
   }
+
 
   .hero{
     padding:60px 15px;
   }
 
+
   .hero-logo{
     font-size:64px;
   }
+
 
   .hero h1{
     font-size:42px;
   }
 
+
   .hero p{
     font-size:13px;
   }
 
+
   .trust-grid{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
+
     gap:8px;
   }
+
 
   .trust-item{
     padding:14px 8px;
   }
 
+
   .section{
     padding:60px 12px;
   }
+
 
   .section-title{
     font-size:47px;
   }
 
+
   .products{
-    grid-template-columns:1fr;
+    grid-template-columns:
+      1fr;
+
     gap:18px;
   }
+
 
   .product-image{
     height:330px;
   }
 
+
   .form-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:
+      1fr;
   }
+
 
   .review-form{
     padding:18px;
   }
 
+
   .social-grid{
     flex-direction:column;
+
     align-items:stretch;
   }
+
 
   .social-btn{
     width:100%;
   }
+
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <div class="topbar">
   🇨🇴 ENVÍOS CONTRAENTREGA A TODO COLOMBIA · COMPRA Y PAGA AL RECIBIR
 </div>
 
+
 <header>
-  <nav class="nav">
 
-    <a href="#inicio" class="logo">
-      <div class="logo-mark">S</div>
-      SNEAKERS<span>COL</span>
-    </a>
+<nav class="nav">
 
-    <div class="nav-links">
-      <a href="#coleccion">Colección</a>
-      <a href="#tallas">Tallas</a>
-      <a href="#reviews">Reseñas</a>
-      <a href="#contacto">Contacto</a>
+  <a href="#inicio" class="logo">
+
+    <div class="logo-mark">
+      S
     </div>
 
-    <button class="cart-button" onclick="abrirCarrito()">
-      🛒 Carrito
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+    SNEAKERS<span>COL</span>
 
-  </nav>
+  </a>
+
+
+  <div class="nav-links">
+
+    <a href="#coleccion">
+      Colección
+    </a>
+
+    <a href="#tallas">
+      Tallas
+    </a>
+
+    <a href="#reviews">
+      Reseñas
+    </a>
+
+    <a href="#contacto">
+      Contacto
+    </a>
+
+  </div>
+
+
+  <button
+    class="cart-button"
+    onclick="abrirCarrito()"
+  >
+
+    🛒 Carrito
+
+    <span
+      class="cart-count"
+      id="cartCount"
+    >
+      0
+    </span>
+
+  </button>
+
+</nav>
+
 </header>
+
 
 <!-- HERO -->
 
-<section class="hero" id="inicio">
-  <div class="hero-content">
+<section
+  class="hero"
+  id="inicio"
+>
 
-    <div class="hero-tag">OFERTA ESPECIAL</div>
+<div class="hero-content">
 
-    <div class="hero-logo">
-      SNEAKERS<span>COL</span>
-    </div>
 
-    <h1>SNEAKERS QUE HABLAN POR TI.</h1>
+  <div class="hero-tag">
+    OFERTA ESPECIAL
+  </div>
 
-    <p>
-      Modelos seleccionados para darle estilo a cada paso.
-      Compra fácil, atención personalizada y paga al recibir.
-    </p>
 
-    <div class="hero-buttons">
-      <a href="#coleccion" class="btn btn-green">VER COLECCIÓN</a>
-      <a href="#reviews" class="btn btn-outline">VER RESEÑAS</a>
-    </div>
+  <div class="hero-logo">
+    SNEAKERS<span>COL</span>
+  </div>
+
+
+  <h1>
+    SNEAKERS QUE HABLAN POR TI.
+  </h1>
+
+
+  <p>
+
+    Modelos seleccionados para darle estilo a cada paso.
+
+    Compra fácil, atención personalizada y paga al recibir.
+
+  </p>
+
+
+  <div class="hero-buttons">
+
+    <a
+      href="#coleccion"
+      class="btn btn-green"
+    >
+      VER COLECCIÓN
+    </a>
+
+
+    <a
+      href="#reviews"
+      class="btn btn-outline"
+    >
+      VER RESEÑAS
+    </a>
 
   </div>
+
+
+</div>
+
 </section>
+
 
 <!-- TRUST -->
 
 <section class="trust">
-  <div class="trust-grid">
 
-    <div class="trust-item">
-      <div class="trust-icon">🇨🇴</div>
-      <strong>TODO COLOMBIA</strong>
-      <span>Enviamos a nivel nacional</span>
+<div class="trust-grid">
+
+
+  <div class="trust-item">
+
+    <div class="trust-icon">
+      🇨🇴
     </div>
 
-    <div class="trust-item">
-      <div class="trust-icon">💵</div>
-      <strong>CONTRAENTREGA</strong>
-      <span>Compra y paga al recibir</span>
-    </div>
+    <strong>
+      TODO COLOMBIA
+    </strong>
 
-    <div class="trust-item">
-      <div class="trust-icon">💬</div>
-      <strong>ATENCIÓN PERSONALIZADA</strong>
-      <span>Te ayudamos con tu compra</span>
-    </div>
-
-    <div class="trust-item">
-      <div class="trust-icon">👟</div>
-      <strong>MODELOS SELECCIONADOS</strong>
-      <span>Estilo para cada ocasión</span>
-    </div>
+    <span>
+      Enviamos a nivel nacional
+    </span>
 
   </div>
+
+
+  <div class="trust-item">
+
+    <div class="trust-icon">
+      💵
+    </div>
+
+    <strong>
+      CONTRAENTREGA
+    </strong>
+
+    <span>
+      Compra y paga al recibir
+    </span>
+
+  </div>
+
+
+  <div class="trust-item">
+
+    <div class="trust-icon">
+      💬
+    </div>
+
+    <strong>
+      ATENCIÓN PERSONALIZADA
+    </strong>
+
+    <span>
+      Te ayudamos con tu compra
+    </span>
+
+  </div>
+
+
+  <div class="trust-item">
+
+    <div class="trust-icon">
+      👟
+    </div>
+
+    <strong>
+      MODELOS SELECCIONADOS
+    </strong>
+
+    <span>
+      Estilo para cada ocasión
+    </span>
+
+  </div>
+
+
+</div>
+
 </section>
+
 
 <!-- COLLECTION -->
 
-<section class="section" id="coleccion">
+<section
+  class="section"
+  id="coleccion"
+>
 
-  <div class="section-header">
-    <div class="section-kicker">Nuestros favoritos</div>
-    <h2 class="section-title">COLECCIÓN</h2>
-    <p class="section-subtitle">
-      Elige tu modelo, selecciona tu talla y agrégalo al carrito.
-    </p>
+
+<div class="section-header">
+
+  <div class="section-kicker">
+    Nuestros favoritos
   </div>
 
-  <div class="category-filters" aria-label="Filtrar colección">
-    <button class="category-filter active" type="button" onclick="filtrarCategoria('todos',this)">Todos</button>
-    <button class="category-filter" type="button" onclick="filtrarCategoria('hombre',this)">Hombre</button>
-    <button class="category-filter" type="button" onclick="filtrarCategoria('mujer',this)">Mujer</button>
-    <button class="category-filter" type="button" onclick="filtrarCategoria('kids',this)">Kids</button>
-  </div>
+  <h2 class="section-title">
+    COLECCIÓN
+  </h2>
 
-  <div class="products">
+  <p class="section-subtitle">
+    Elige tu modelo, selecciona tu talla y agrégalo al carrito.
+  </p>
 
-    <!-- NEW BALANCE -->
-
-    <article class="product-card" data-category="hombre mujer">
-
-      <div class="discount">-13%</div>
-
-      <div class="product-image">
-        <img
-          id="nbImagen"
-          src="imagenes/newbalance-1.webp"
-          alt="New Balance"
-          loading="lazy"
-        >
-      </div>
-
-      <div class="product-info">
-
-        <div class="product-gallery" aria-label="Galería New Balance">
-          <button class="gallery-thumb active" type="button" onclick="cambiarImagenNB('imagenes/newbalance-1.webp',this)" aria-label="Ver foto 1 de New Balance">
-            <img src="imagenes/newbalance-1.webp" alt="New Balance foto 1">
-          </button>
-          <button class="gallery-thumb" type="button" onclick="cambiarImagenNB('imagenes/newbalance-2.webp',this)" aria-label="Ver foto 2 de New Balance">
-            <img src="imagenes/newbalance-2.webp" alt="New Balance foto 2">
-          </button>
-          <button class="gallery-thumb" type="button" onclick="cambiarImagenNB('imagenes/newbalance-3.webp',this)" aria-label="Ver foto 3 de New Balance">
-            <img src="imagenes/newbalance-3.webp" alt="New Balance foto 3">
-          </button>
-          <button class="gallery-thumb" type="button" onclick="cambiarImagenNB('imagenes/newbalance-4.webp',this)" aria-label="Ver foto 4 de New Balance">
-            <img src="imagenes/newbalance-4.webp" alt="New Balance foto 4">
-          </button>
-        </div>
-
-        <div class="product-name">New Balance</div>
-
-        <div class="product-old">$150.000</div>
-        <div class="product-price">$130.000</div>
-
-        <div class="product-delivery">
-          ✓ CONTRAENTREGA
-        </div>
-
-        <div class="option-title">Talla (opcional)</div>
-
-        <div class="options" id="tallasNB">
-          <button class="option" onclick="seleccionarTalla('nb','35',this)">35</button>
-          <button class="option" onclick="seleccionarTalla('nb','36',this)">36</button>
-          <button class="option" onclick="seleccionarTalla('nb','37',this)">37</button>
-          <button class="option" onclick="seleccionarTalla('nb','38',this)">38</button>
-          <button class="option" onclick="seleccionarTalla('nb','39',this)">39</button>
-          <button class="option" onclick="seleccionarTalla('nb','40',this)">40</button>
-          <button class="option" onclick="seleccionarTalla('nb','41',this)">41</button>
-          <button class="option" onclick="seleccionarTalla('nb','42',this)">42</button>
-          <button class="option" onclick="seleccionarTalla('nb','43',this)">43</button>
-        </div>
-
-        <div class="option-title">Color</div>
-
-        <div class="options">
-          <button class="option active">Clásico</button>
-        </div>
-
-        <div class="product-actions">
-          <button class="action action-cart"
-            onclick="agregarCarrito(
-              'New Balance',
-              130000,
-              nbImagenActual,
-              'nb'
-            )">
-            🛒 AGREGAR
-          </button>
-
-          <button class="action action-whatsapp"
-            onclick="comprarWhatsApp(
-              'New Balance',
-              130000,
-              'nb'
-            )">
-            💬 WHATSAPP
-          </button>
-        </div>
-
-      </div>
-    </article>
+</div>
 
 
-    <!-- SAMBA -->
+<div
+  class="category-filters"
+  aria-label="Filtrar colección"
+>
 
-    <article class="product-card" data-category="hombre mujer">
-
-      <div class="discount">-14%</div>
-
-      <div class="product-image">
-        <img
-          id="sambaImagen"
-          src="imagenes/samba-blanco.webp"
-          alt="Adidas Samba OG"
-          loading="lazy"
-        >
-      </div>
-
-      <div class="product-info">
-
-        <div class="product-name">Adidas Samba OG</div>
-
-        <div class="product-old">$150.000</div>
-        <div class="product-price">$129.000</div>
-
-        <div class="product-delivery">
-          ✓ CONTRAENTREGA
-        </div>
-
-        <div class="option-title">Talla (opcional)</div>
-
-        <div class="options">
-          <button class="option" onclick="seleccionarTalla('samba','35',this)">35</button>
-          <button class="option" onclick="seleccionarTalla('samba','36',this)">36</button>
-          <button class="option" onclick="seleccionarTalla('samba','37',this)">37</button>
-          <button class="option" onclick="seleccionarTalla('samba','38',this)">38</button>
-          <button class="option" onclick="seleccionarTalla('samba','39',this)">39</button>
-          <button class="option" onclick="seleccionarTalla('samba','40',this)">40</button>
-          <button class="option" onclick="seleccionarTalla('samba','41',this)">41</button>
-          <button class="option" onclick="seleccionarTalla('samba','42',this)">42</button>
-          <button class="option" onclick="seleccionarTalla('samba','43',this)">43</button>
-        </div>
-
-        <div class="option-title">Color</div>
-
-        <div class="options">
-          <button class="option active"
-            onclick="seleccionarColor('samba','Blanco','imagenes/samba-blanco.webp',this)">
-            Blanco
-          </button>
-
-          <button class="option"
-            onclick="seleccionarColor('samba','Negro','imagenes/samba-negro.webp',this)">
-            Negro
-          </button>
-
-          <button class="option"
-            onclick="seleccionarColor('samba','Beige','imagenes/samba-beige.webp',this)">
-            Beige
-          </button>
-        </div>
-
-        <div class="product-actions">
-
-          <button class="action action-cart"
-            onclick="agregarCarrito(
-              'Adidas Samba OG',
-              129000,
-              sambaImagenActual,
-              'samba'
-            )">
-            🛒 AGREGAR
-          </button>
-
-          <button class="action action-whatsapp"
-            onclick="comprarWhatsApp(
-              'Adidas Samba OG',
-              129000,
-              'samba'
-            )">
-            💬 WHATSAPP
-          </button>
-
-        </div>
-
-      </div>
-    </article>
+  <button
+    class="category-filter active"
+    type="button"
+    onclick="filtrarCategoria('todos',this)"
+  >
+    Todos
+  </button>
 
 
-    <!-- VOMERO -->
-
-    <article class="product-card" data-category="mujer">
-
-      <div class="discount">-14%</div>
-
-      <div class="product-image">
-        <img
-          id="vomeroImagen"
-          src="imagenes/vomero-beigerosa.webp"
-          alt="Nike Vomero 18 Dama"
-          loading="lazy"
-        >
-      </div>
-
-      <div class="product-info">
-
-        <div class="product-name">Nike Vomero 18 – Dama</div>
-
-        <div class="product-old">$150.000</div>
-        <div class="product-price">$129.000</div>
-
-        <div class="product-delivery">
-          ✓ CONTRAENTREGA
-        </div>
-
-        <div class="option-title">Talla (opcional)</div>
-
-        <div class="options">
-          <button class="option" onclick="seleccionarTalla('vomero','35',this)">35</button>
-          <button class="option" onclick="seleccionarTalla('vomero','36',this)">36</button>
-          <button class="option" onclick="seleccionarTalla('vomero','37',this)">37</button>
-          <button class="option" onclick="seleccionarTalla('vomero','38',this)">38</button>
-          <button class="option" onclick="seleccionarTalla('vomero','39',this)">39</button>
-          <button class="option" onclick="seleccionarTalla('vomero','40',this)">40</button>
-          <button class="option" onclick="seleccionarTalla('vomero','41',this)">41</button>
-          <button class="option" onclick="seleccionarTalla('vomero','42',this)">42</button>
-          <button class="option" onclick="seleccionarTalla('vomero','43',this)">43</button>
-        </div>
-
-        <div class="option-title">Color</div>
-
-        <div class="options">
-
-          <button class="option active"
-            onclick="seleccionarColor('vomero','Beige/Rosa','imagenes/vomero-beigerosa.webp',this)">
-            Beige/Rosa
-          </button>
-
-          <button class="option"
-            onclick="seleccionarColor('vomero','Fucsia','imagenes/vomero-fucsia.webp',this)">
-            Fucsia
-          </button>
-
-          <button class="option"
-            onclick="seleccionarColor('vomero','Naranja','imagenes/vomero-naranja.webp',this)">
-            Naranja
-          </button>
-
-        </div>
-
-        <div class="product-actions">
-
-          <button class="action action-cart"
-            onclick="agregarCarrito(
-              'Nike Vomero 18 – Dama',
-              129000,
-              vomeroImagenActual,
-              'vomero'
-            )">
-            🛒 AGREGAR
-          </button>
-
-          <button class="action action-whatsapp"
-            onclick="comprarWhatsApp(
-              'Nike Vomero 18 – Dama',
-              129000,
-              'vomero'
-            )">
-            💬 WHATSAPP
-          </button>
-
-        </div>
-
-      </div>
-    </article>
+  <button
+    class="category-filter"
+    type="button"
+    onclick="filtrarCategoria('hombre',this)"
+  >
+    Hombre
+  </button>
 
 
-    <!-- ON CLOUDRUNNER JAMAICA -->
-    <article class="product-card" data-category="hombre mujer">
-      <div class="product-image"><img id="cloudrunnerImagen" src="imagenes/on-cloudrunner-jamaica.webp" alt="On Cloudrunner JAMAICA" loading="lazy"></div>
-      <div class="product-info">
-        <div class="product-name">On Cloudrunner JAMAICA</div>
-        <div class="product-price">$180.000</div>
-        <div class="product-delivery">✓ CONTRAENTREGA</div>
-        <div class="option-title">Talla (opcional)</div>
-        <div class="options">
-          <button class="option" onclick="seleccionarTalla('cloudrunner','36',this)">36</button>
-          <button class="option" onclick="seleccionarTalla('cloudrunner','37',this)">37</button>
-          <button class="option" onclick="seleccionarTalla('cloudrunner','38',this)">38</button>
-          <button class="option" onclick="seleccionarTalla('cloudrunner','39',this)">39</button>
-        </div>
-        <div class="option-title">Color</div>
-        <div class="options"><button class="option active">Jamaica</button></div>
-        <div class="product-actions">
-          <button class="action action-cart" onclick="agregarCarrito('On Cloudrunner JAMAICA',180000,'imagenes/on-cloudrunner-jamaica.webp','cloudrunner')">🛒 AGREGAR</button>
-          <button class="action action-whatsapp" onclick="comprarWhatsApp('On Cloudrunner JAMAICA',180000,'cloudrunner')">💬 WHATSAPP</button>
-        </div>
-      </div>
-    </article>
+  <button
+    class="category-filter"
+    type="button"
+    onclick="filtrarCategoria('mujer',this)"
+  >
+    Mujer
+  </button>
 
-    <!-- NIKE V2K RUN -->
-    <article class="product-card" data-category="mujer">
-      <div class="product-image"><img id="v2kImagen" src="imagenes/nike-v2k-run-beige.webp" alt="Nike V2K Run" loading="lazy"></div>
-      <div class="product-info">
-        <div class="product-name">Nike V2K Run</div>
-        <div class="product-price">$170.000</div>
-        <div class="product-delivery">✓ CONTRAENTREGA</div>
-        <div class="option-title">Talla (opcional)</div>
-        <div class="options">
-          <button class="option" onclick="seleccionarTalla('v2k','36',this)">36</button>
-          <button class="option" onclick="seleccionarTalla('v2k','37',this)">37</button>
-          <button class="option" onclick="seleccionarTalla('v2k','38',this)">38</button>
-          <button class="option" onclick="seleccionarTalla('v2k','39',this)">39</button>
-        </div>
-        <div class="option-title">Color</div>
-        <div class="options"><button class="option active">Beige</button></div>
-        <div class="product-actions">
-          <button class="action action-cart" onclick="agregarCarrito('Nike V2K Run',170000,'imagenes/nike-v2k-run-beige.webp','v2k')">🛒 AGREGAR</button>
-          <button class="action action-whatsapp" onclick="comprarWhatsApp('Nike V2K Run',170000,'v2k')">💬 WHATSAPP</button>
-        </div>
-      </div>
-    </article>
 
-    <!-- ADIDAS BOUNCE -->
-    <article class="product-card" data-category="hombre mujer">
-      <div class="product-image"><img id="bounceImagen" src="imagenes/adidas-bounce.webp" alt="Adidas Bounce" loading="lazy"></div>
-      <div class="product-info">
-        <div class="product-name">Adidas Bounce</div>
-        <div class="product-price">$170.000</div>
-        <div class="product-delivery">✓ CONTRAENTREGA</div>
-        <div class="option-title">Talla (opcional)</div>
-        <div class="options">
-          <button class="option" onclick="seleccionarTalla('bounce','36',this)">36</button>
-          <button class="option" onclick="seleccionarTalla('bounce','37',this)">37</button>
-          <button class="option" onclick="seleccionarTalla('bounce','38',this)">38</button>
-          <button class="option" onclick="seleccionarTalla('bounce','39',this)">39</button>
-        </div>
-        <div class="option-title">Color</div>
-        <div class="options"><button class="option active">Negro/Blanco</button></div>
-        <div class="product-actions">
-          <button class="action action-cart" onclick="agregarCarrito('Adidas Bounce',170000,'imagenes/adidas-bounce.webp','bounce')">🛒 AGREGAR</button>
-          <button class="action action-whatsapp" onclick="comprarWhatsApp('Adidas Bounce',170000,'bounce')">💬 WHATSAPP</button>
-        </div>
-      </div>
-    </article>
-  </div>
+  <button
+    class="category-filter"
+    type="button"
+    onclick="filtrarCategoria('kids',this)"
+  >
+    Kids
+  </button>
+
+</div>
+
+
+<div
+  class="products"
+  id="productosTienda"
+>
+
+
+<!-- NEW BALANCE -->
+
+<article
+  class="product-card"
+  data-category="hombre mujer"
+>
+
+
+<div class="discount">
+  -13%
+</div>
+
+
+<div class="product-image">
+
+  <img
+    id="nbImagen"
+    src="imagenes/newbalance-1.webp"
+    alt="New Balance"
+    loading="lazy"
+  >
+
+</div>
+
+
+<div class="product-info">
+
+
+<div
+  class="product-gallery"
+  aria-label="Galería New Balance"
+>
+
+
+<button
+  class="gallery-thumb active"
+  type="button"
+  onclick="cambiarImagenNB('imagenes/newbalance-1.webp',this)"
+>
+
+  <img
+    src="imagenes/newbalance-1.webp"
+    alt="New Balance foto 1"
+  >
+
+</button>
+
+
+<button
+  class="gallery-thumb"
+  type="button"
+  onclick="cambiarImagenNB('imagenes/newbalance-2.webp',this)"
+>
+
+  <img
+    src="imagenes/newbalance-2.webp"
+    alt="New Balance foto 2"
+  >
+
+</button>
+
+
+<button
+  class="gallery-thumb"
+  type="button"
+  onclick="cambiarImagenNB('imagenes/newbalance-3.webp',this)"
+>
+
+  <img
+    src="imagenes/newbalance-3.webp"
+    alt="New Balance foto 3"
+  >
+
+</button>
+
+
+<button
+  class="gallery-thumb"
+  type="button"
+  onclick="cambiarImagenNB('imagenes/newbalance-4.webp',this)"
+>
+
+  <img
+    src="imagenes/newbalance-4.webp"
+    alt="New Balance foto 4"
+  >
+
+</button>
+
+
+</div>
+
+
+<div class="product-name">
+  New Balance
+</div>
+
+
+<div class="product-old">
+  $150.000
+</div>
+
+
+<div class="product-price">
+  $130.000
+</div>
+
+
+<div class="product-delivery">
+  ✓ CONTRAENTREGA
+</div>
+
+
+<div class="option-title">
+  Talla (opcional)
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','35',this)"
+>
+  35
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','36',this)"
+>
+  36
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','37',this)"
+>
+  37
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','38',this)"
+>
+  38
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','39',this)"
+>
+  39
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','40',this)"
+>
+  40
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','41',this)"
+>
+  41
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','42',this)"
+>
+  42
+</button>
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('nb','43',this)"
+>
+  43
+</button>
+
+
+</div>
+
+
+<div class="option-title">
+  Color
+</div>
+
+
+<div class="options">
+
+  <button class="option active">
+    Clásico
+  </button>
+
+</div>
+
+
+<div class="product-actions">
+
+
+<button
+  class="action action-cart"
+  onclick="
+    agregarCarrito(
+      'New Balance',
+      130000,
+      nbImagenActual,
+      'nb'
+    )
+  "
+>
+
+  🛒 AGREGAR
+
+</button>
+
+
+<button
+  class="action action-whatsapp"
+  onclick="
+    comprarWhatsApp(
+      'New Balance',
+      130000,
+      'nb'
+    )
+  "
+>
+
+  💬 WHATSAPP
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</article>
+
+
+<!-- SAMBA -->
+
+<article
+  class="product-card"
+  data-category="hombre mujer"
+>
+
+
+<div class="discount">
+  -14%
+</div>
+
+
+<div class="product-image">
+
+  <img
+    id="sambaImagen"
+    src="imagenes/samba-blanco.webp"
+    alt="Adidas Samba OG"
+    loading="lazy"
+  >
+
+</div>
+
+
+<div class="product-info">
+
+
+<div class="product-name">
+  Adidas Samba OG
+</div>
+
+
+<div class="product-old">
+  $150.000
+</div>
+
+
+<div class="product-price">
+  $129.000
+</div>
+
+
+<div class="product-delivery">
+  ✓ CONTRAENTREGA
+</div>
+
+
+<div class="option-title">
+  Talla (opcional)
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','35',this)"
+>
+  35
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','36',this)"
+>
+  36
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','37',this)"
+>
+  37
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','38',this)"
+>
+  38
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','39',this)"
+>
+  39
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','40',this)"
+>
+  40
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','41',this)"
+>
+  41
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','42',this)"
+>
+  42
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('samba','43',this)"
+>
+  43
+</button>
+
+
+</div>
+
+
+<div class="option-title">
+  Color
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option active"
+  onclick="
+    seleccionarColor(
+      'samba',
+      'Blanco',
+      'imagenes/samba-blanco.webp',
+      this
+    )
+  "
+>
+
+  Blanco
+
+</button>
+
+
+<button
+  class="option"
+  onclick="
+    seleccionarColor(
+      'samba',
+      'Negro',
+      'imagenes/samba-negro.webp',
+      this
+    )
+  "
+>
+
+  Negro
+
+</button>
+
+
+<button
+  class="option"
+  onclick="
+    seleccionarColor(
+      'samba',
+      'Beige',
+      'imagenes/samba-beige.webp',
+      this
+    )
+  "
+>
+
+  Beige
+
+</button>
+
+
+</div>
+
+
+<div class="product-actions">
+
+
+<button
+  class="action action-cart"
+  onclick="
+    agregarCarrito(
+      'Adidas Samba OG',
+      129000,
+      sambaImagenActual,
+      'samba'
+    )
+  "
+>
+
+  🛒 AGREGAR
+
+</button>
+
+
+<button
+  class="action action-whatsapp"
+  onclick="
+    comprarWhatsApp(
+      'Adidas Samba OG',
+      129000,
+      'samba'
+    )
+  "
+>
+
+  💬 WHATSAPP
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</article>
+
+
+<!-- VOMERO -->
+
+<article
+  class="product-card"
+  data-category="mujer"
+>
+
+
+<div class="discount">
+  -14%
+</div>
+
+
+<div class="product-image">
+
+  <img
+    id="vomeroImagen"
+    src="imagenes/vomero-beigerosa.webp"
+    alt="Nike Vomero 18 Dama"
+    loading="lazy"
+  >
+
+</div>
+
+
+<div class="product-info">
+
+
+<div class="product-name">
+  Nike Vomero 18 – Dama
+</div>
+
+
+<div class="product-old">
+  $150.000
+</div>
+
+
+<div class="product-price">
+  $129.000
+</div>
+
+
+<div class="product-delivery">
+  ✓ CONTRAENTREGA
+</div>
+
+
+<div class="option-title">
+  Talla (opcional)
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','35',this)"
+>
+  35
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','36',this)"
+>
+  36
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','37',this)"
+>
+  37
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','38',this)"
+>
+  38
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','39',this)"
+>
+  39
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','40',this)"
+>
+  40
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','41',this)"
+>
+  41
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','42',this)"
+>
+  42
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('vomero','43',this)"
+>
+  43
+</button>
+
+
+</div>
+
+
+<div class="option-title">
+  Color
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option active"
+  onclick="
+    seleccionarColor(
+      'vomero',
+      'Beige/Rosa',
+      'imagenes/vomero-beigerosa.webp',
+      this
+    )
+  "
+>
+
+  Beige/Rosa
+
+</button>
+
+
+<button
+  class="option"
+  onclick="
+    seleccionarColor(
+      'vomero',
+      'Fucsia',
+      'imagenes/vomero-fucsia.webp',
+      this
+    )
+  "
+>
+
+  Fucsia
+
+</button>
+
+
+<button
+  class="option"
+  onclick="
+    seleccionarColor(
+      'vomero',
+      'Naranja',
+      'imagenes/vomero-naranja.webp',
+      this
+    )
+  "
+>
+
+  Naranja
+
+</button>
+
+
+</div>
+
+
+<div class="product-actions">
+
+
+<button
+  class="action action-cart"
+  onclick="
+    agregarCarrito(
+      'Nike Vomero 18 – Dama',
+      129000,
+      vomeroImagenActual,
+      'vomero'
+    )
+  "
+>
+
+  🛒 AGREGAR
+
+</button>
+
+
+<button
+  class="action action-whatsapp"
+  onclick="
+    comprarWhatsApp(
+      'Nike Vomero 18 – Dama',
+      129000,
+      'vomero'
+    )
+  "
+>
+
+  💬 WHATSAPP
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</article>
+
+
+<!-- ON CLOUDRUNNER JAMAICA -->
+
+<article
+  class="product-card"
+  data-category="hombre mujer"
+>
+
+
+<div class="product-image">
+
+  <img
+    id="cloudrunnerImagen"
+    src="imagenes/on-cloudrunner-jamaica.webp"
+    alt="On Cloudrunner JAMAICA"
+    loading="lazy"
+  >
+
+</div>
+
+
+<div class="product-info">
+
+
+<div class="product-name">
+  On Cloudrunner JAMAICA
+</div>
+
+
+<div class="product-price">
+  $180.000
+</div>
+
+
+<div class="product-delivery">
+  ✓ CONTRAENTREGA
+</div>
+
+
+<div class="option-title">
+  Talla (opcional)
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('cloudrunner','36',this)"
+>
+  36
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('cloudrunner','37',this)"
+>
+  37
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('cloudrunner','38',this)"
+>
+  38
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('cloudrunner','39',this)"
+>
+  39
+</button>
+
+
+</div>
+
+
+<div class="option-title">
+  Color
+</div>
+
+
+<div class="options">
+
+  <button class="option active">
+    Jamaica
+  </button>
+
+</div>
+
+
+<div class="product-actions">
+
+
+<button
+  class="action action-cart"
+  onclick="
+    agregarCarrito(
+      'On Cloudrunner JAMAICA',
+      180000,
+      'imagenes/on-cloudrunner-jamaica.webp',
+      'cloudrunner'
+    )
+  "
+>
+
+  🛒 AGREGAR
+
+</button>
+
+
+<button
+  class="action action-whatsapp"
+  onclick="
+    comprarWhatsApp(
+      'On Cloudrunner JAMAICA',
+      180000,
+      'cloudrunner'
+    )
+  "
+>
+
+  💬 WHATSAPP
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</article>
+
+
+<!-- NIKE V2K RUN -->
+
+<article
+  class="product-card"
+  data-category="mujer"
+>
+
+
+<div class="product-image">
+
+  <img
+    id="v2kImagen"
+    src="imagenes/nike-v2k-run-beige.webp"
+    alt="Nike V2K Run"
+    loading="lazy"
+  >
+
+</div>
+
+
+<div class="product-info">
+
+
+<div class="product-name">
+  Nike V2K Run
+</div>
+
+
+<div class="product-price">
+  $170.000
+</div>
+
+
+<div class="product-delivery">
+  ✓ CONTRAENTREGA
+</div>
+
+
+<div class="option-title">
+  Talla (opcional)
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('v2k','36',this)"
+>
+  36
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('v2k','37',this)"
+>
+  37
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('v2k','38',this)"
+>
+  38
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('v2k','39',this)"
+>
+  39
+</button>
+
+
+</div>
+
+
+<div class="option-title">
+  Color
+</div>
+
+
+<div class="options">
+
+  <button class="option active">
+    Beige
+  </button>
+
+</div>
+
+
+<div class="product-actions">
+
+
+<button
+  class="action action-cart"
+  onclick="
+    agregarCarrito(
+      'Nike V2K Run',
+      170000,
+      'imagenes/nike-v2k-run-beige.webp',
+      'v2k'
+    )
+  "
+>
+
+  🛒 AGREGAR
+
+</button>
+
+
+<button
+  class="action action-whatsapp"
+  onclick="
+    comprarWhatsApp(
+      'Nike V2K Run',
+      170000,
+      'v2k'
+    )
+  "
+>
+
+  💬 WHATSAPP
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</article>
+
+
+<!-- ADIDAS BOUNCE -->
+
+<article
+  class="product-card"
+  data-category="hombre mujer"
+>
+
+
+<div class="product-image">
+
+  <img
+    id="bounceImagen"
+    src="imagenes/adidas-bounce.webp"
+    alt="Adidas Bounce"
+    loading="lazy"
+  >
+
+</div>
+
+
+<div class="product-info">
+
+
+<div class="product-name">
+  Adidas Bounce
+</div>
+
+
+<div class="product-price">
+  $170.000
+</div>
+
+
+<div class="product-delivery">
+  ✓ CONTRAENTREGA
+</div>
+
+
+<div class="option-title">
+  Talla (opcional)
+</div>
+
+
+<div class="options">
+
+
+<button
+  class="option"
+  onclick="seleccionarTalla('bounce','36',this)"
+>
+  36
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('bounce','37',this)"
+>
+  37
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('bounce','38',this)"
+>
+  38
+</button>
+
+<button
+  class="option"
+  onclick="seleccionarTalla('bounce','39',this)"
+>
+  39
+</button>
+
+
+</div>
+
+
+<div class="option-title">
+  Color
+</div>
+
+
+<div class="options">
+
+  <button class="option active">
+    Negro/Blanco
+  </button>
+
+</div>
+
+
+<div class="product-actions">
+
+
+<button
+  class="action action-cart"
+  onclick="
+    agregarCarrito(
+      'Adidas Bounce',
+      170000,
+      'imagenes/adidas-bounce.webp',
+      'bounce'
+    )
+  "
+>
+
+  🛒 AGREGAR
+
+</button>
+
+
+<button
+  class="action action-whatsapp"
+  onclick="
+    comprarWhatsApp(
+      'Adidas Bounce',
+      170000,
+      'bounce'
+    )
+  "
+>
+
+  💬 WHATSAPP
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</article>
+
+
+</div>
+
 </section>
 
 
 <!-- SIZE GUIDE -->
 
-<section class="section size-section" id="tallas">
+<section
+  class="section size-section"
+  id="tallas"
+>
 
-  <div class="size-box">
 
-    <div class="section-header">
-      <div class="section-kicker">Encuentra tu talla</div>
-      <h2 class="section-title">GUÍA DE TALLAS</h2>
-      <p class="section-subtitle" style="color:#999">
-        Si tienes dudas, escríbenos por WhatsApp.
-      </p>
-    </div>
+<div class="size-box">
 
-    <table class="size-table">
-      <thead>
-        <tr>
-          <th>Talla</th>
-          <th>CM aproximados</th>
-        </tr>
-      </thead>
 
-      <tbody>
-        <tr><td>35</td><td>22.5 cm</td></tr>
-        <tr><td>36</td><td>23 cm</td></tr>
-        <tr><td>37</td><td>24 cm</td></tr>
-        <tr><td>38</td><td>24.5 cm</td></tr>
-        <tr><td>39</td><td>25.5 cm</td></tr>
-        <tr><td>40</td><td>26 cm</td></tr>
-        <tr><td>41</td><td>27 cm</td></tr>
-        <tr><td>42</td><td>27.5 cm</td></tr>
-        <tr><td>43</td><td>28 cm</td></tr>
-      </tbody>
-    </table>
+<div class="section-header">
 
+  <div class="section-kicker">
+    Encuentra tu talla
   </div>
+
+  <h2 class="section-title">
+    GUÍA DE TALLAS
+  </h2>
+
+  <p
+    class="section-subtitle"
+    style="color:#999"
+  >
+
+    Si tienes dudas, escríbenos por WhatsApp.
+
+  </p>
+
+</div>
+
+
+<table class="size-table">
+
+
+<thead>
+
+<tr>
+
+  <th>
+    Talla
+  </th>
+
+  <th>
+    CM aproximados
+  </th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+  <td>35</td>
+  <td>22.5 cm</td>
+</tr>
+
+<tr>
+  <td>36</td>
+  <td>23 cm</td>
+</tr>
+
+<tr>
+  <td>37</td>
+  <td>24 cm</td>
+</tr>
+
+<tr>
+  <td>38</td>
+  <td>24.5 cm</td>
+</tr>
+
+<tr>
+  <td>39</td>
+  <td>25.5 cm</td>
+</tr>
+
+<tr>
+  <td>40</td>
+  <td>26 cm</td>
+</tr>
+
+<tr>
+  <td>41</td>
+  <td>27 cm</td>
+</tr>
+
+<tr>
+  <td>42</td>
+  <td>27.5 cm</td>
+</tr>
+
+<tr>
+  <td>43</td>
+  <td>28 cm</td>
+</tr>
+
+
+</tbody>
+
+</table>
+
+
+</div>
+
 </section>
 
 
 <!-- REVIEWS -->
 
-<section class="section reviews" id="reviews">
+<section
+  class="section reviews"
+  id="reviews"
+>
 
-  <div class="section-header">
-    <div class="section-kicker">Opiniones</div>
-    <h2 class="section-title">RESEÑAS</h2>
-    <p class="section-subtitle">
-      Cuéntanos cómo fue tu experiencia con SneakersCol.
-    </p>
+
+<div class="section-header">
+
+  <div class="section-kicker">
+    Opiniones
   </div>
 
-  <div class="review-form">
+  <h2 class="section-title">
+    RESEÑAS
+  </h2>
 
-    <div class="form-grid">
+  <p class="section-subtitle">
 
-      <input
-        class="input"
-        id="reviewName"
-        type="text"
-        placeholder="Tu nombre"
-      >
+    Cuéntanos cómo fue tu experiencia con SneakersCol.
 
-      <select class="select" id="reviewProduct">
-        <option value="">Selecciona el producto</option>
-        <option>New Balance</option>
-        <option>Adidas Samba OG</option>
-        <option>Nike Vomero 18 – Dama</option>
-        <option>On Cloudrunner JAMAICA</option>
-        <option>Nike V2K Run</option>
-        <option>Adidas Bounce</option>
-      </select>
+  </p>
 
-    </div>
+</div>
 
-    <div class="stars" id="stars">
-      <button class="star" onclick="seleccionarEstrellas(1)">★</button>
-      <button class="star" onclick="seleccionarEstrellas(2)">★</button>
-      <button class="star" onclick="seleccionarEstrellas(3)">★</button>
-      <button class="star" onclick="seleccionarEstrellas(4)">★</button>
-      <button class="star" onclick="seleccionarEstrellas(5)">★</button>
-    </div>
 
-    <textarea
-      class="textarea"
-      id="reviewText"
-      placeholder="Escribe tu experiencia..."
-    ></textarea>
+<div class="review-form">
 
-    <button
-      class="btn btn-green"
-      style="margin-top:12px"
-      onclick="guardarReview()">
-      PUBLICAR RESEÑA
-    </button>
 
-  </div>
+<div class="form-grid">
 
-  <div class="review-list" id="reviewList"></div>
+
+<input
+  class="input"
+  id="reviewName"
+  type="text"
+  placeholder="Tu nombre"
+>
+
+
+<select
+  class="select"
+  id="reviewProduct"
+>
+
+<option value="">
+  Selecciona el producto
+</option>
+
+<option>
+  New Balance
+</option>
+
+<option>
+  Adidas Samba OG
+</option>
+
+<option>
+  Nike Vomero 18 – Dama
+</option>
+
+<option>
+  On Cloudrunner JAMAICA
+</option>
+
+<option>
+  Nike V2K Run
+</option>
+
+<option>
+  Adidas Bounce
+</option>
+
+
+</select>
+
+
+</div>
+
+
+<div
+  class="stars"
+  id="stars"
+>
+
+
+<button
+  class="star"
+  onclick="seleccionarEstrellas(1)"
+>
+  ★
+</button>
+
+
+<button
+  class="star"
+  onclick="seleccionarEstrellas(2)"
+>
+  ★
+</button>
+
+
+<button
+  class="star"
+  onclick="seleccionarEstrellas(3)"
+>
+  ★
+</button>
+
+
+<button
+  class="star"
+  onclick="seleccionarEstrellas(4)"
+>
+  ★
+</button>
+
+
+<button
+  class="star"
+  onclick="seleccionarEstrellas(5)"
+>
+  ★
+</button>
+
+
+</div>
+
+
+<textarea
+  class="textarea"
+  id="reviewText"
+  placeholder="Escribe tu experiencia..."
+></textarea>
+
+
+<button
+  class="btn btn-green"
+  style="margin-top:12px"
+  onclick="guardarReview()"
+>
+
+  PUBLICAR RESEÑA
+
+</button>
+
+
+</div>
+
+
+<div
+  class="review-list"
+  id="reviewList"
+></div>
+
 
 </section>
 
 
 <!-- SOCIAL -->
 
-<section class="section social" id="contacto">
+<section
+  class="section social"
+  id="contacto"
+>
 
-  <div class="section-header">
-    <div class="section-kicker">Síguenos</div>
-    <h2 class="section-title">SNEAKERSCOL</h2>
-    <p class="section-subtitle" style="color:#888">
-      Mira nuestros nuevos modelos y promociones.
-    </p>
-  </div>
 
-  <div class="social-grid">
+<div class="section-header">
 
-    <a
-      class="social-btn"
-      href="https://www.tiktok.com/@sneakerscol1"
-      target="_blank">
-      🎵 TIKTOK · @SNEAKERSCOL1
-    </a>
 
-    <a
-      class="social-btn"
-      href="https://www.instagram.com/SneakersCol.1/"
-      target="_blank">
-      📸 INSTAGRAM · @SNEAKERSCOL.1
-    </a>
+<div class="section-kicker">
+  Síguenos
+</div>
 
-    <div class="social-btn" style="opacity:.45;cursor:not-allowed">
-      📘 FACEBOOK · PRÓXIMAMENTE
-    </div>
 
-  </div>
+<h2 class="section-title">
+  SNEAKERSCOL
+</h2>
+
+
+<p
+  class="section-subtitle"
+  style="color:#888"
+>
+
+  Mira nuestros nuevos modelos y promociones.
+
+</p>
+
+
+</div>
+
+
+<div class="social-grid">
+
+
+<a
+  class="social-btn"
+  href="https://www.tiktok.com/@sneakerscol1"
+  target="_blank"
+>
+
+  🎵 TIKTOK · @SNEAKERSCOL1
+
+</a>
+
+
+<a
+  class="social-btn"
+  href="https://www.instagram.com/SneakersCol.1/"
+  target="_blank"
+>
+
+  📸 INSTAGRAM · @SNEAKERSCOL.1
+
+</a>
+
+
+<div
+  class="social-btn"
+  style="opacity:.45;cursor:not-allowed"
+>
+
+  📘 FACEBOOK · PRÓXIMAMENTE
+
+</div>
+
+
+</div>
+
 </section>
 
 
 <footer>
 
-  <div class="footer-logo">
-    SNEAKERS<span>COL</span>
-  </div>
 
-  <p>
-    Sneakers que hablan por ti. 🇨🇴
-  </p>
+<div class="footer-logo">
 
-  <p style="margin-top:10px">
-    © 2026 SneakersCol · Todos los derechos reservados
-  </p>
+  SNEAKERS<span>COL</span>
+
+</div>
+
+
+<p>
+
+  Sneakers que hablan por ti. 🇨🇴
+
+</p>
+
+
+<p style="margin-top:10px">
+
+  ©️ 2026 SneakersCol · Todos los derechos reservados
+
+</p>
+
 
 </footer>
 
@@ -1625,197 +3359,459 @@ footer{
   class="whatsapp-float"
   href="https://wa.me/573209925066"
   target="_blank"
-  aria-label="WhatsApp">
+  aria-label="WhatsApp"
+>
+
   💬
+
 </a>
 
 
 <!-- CART -->
 
-<div class="overlay" id="overlay" onclick="cerrarCarrito()"></div>
+<div
+  class="overlay"
+  id="overlay"
+  onclick="cerrarCarrito()"
+></div>
 
-<aside class="cart" id="cart">
 
-  <div class="cart-header">
+<aside
+  class="cart"
+  id="cart"
+>
 
-    <h2>MI CARRITO</h2>
 
-    <button class="close-cart" onclick="cerrarCarrito()">
-      ×
-    </button>
+<div class="cart-header">
 
-  </div>
 
-  <div class="cart-items" id="cartItems"></div>
+<h2>
+  MI CARRITO
+</h2>
 
-  <div class="cart-footer">
 
-    <div class="cart-total">
-      <span>Total</span>
-      <span id="cartTotal">$0</span>
-    </div>
+<button
+  class="close-cart"
+  onclick="cerrarCarrito()"
+>
 
-    <button
-      class="full-btn"
-      onclick="finalizarCarrito()">
-      FINALIZAR POR WHATSAPP
-    </button>
+  ×
 
-  </div>
+</button>
+
+
+</div>
+
+
+<div
+  class="cart-items"
+  id="cartItems"
+></div>
+
+
+<div class="cart-footer">
+
+
+<div class="cart-total">
+
+  <span>
+    Total
+  </span>
+
+  <span id="cartTotal">
+    $0
+  </span>
+
+</div>
+
+
+<button
+  class="full-btn"
+  onclick="finalizarCarrito()"
+>
+
+  FINALIZAR POR WHATSAPP
+
+</button>
+
+
+</div>
+
 
 </aside>
 
 
-<div class="toast" id="toast"></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
-const SUPABASE_URL = "https://mqkghtubwpsjvoivynhr.supabase.co";
-const SUPABASE_KEY = "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
 
-async function probarConexionSupabase() {
-  const { data, error } = await supabaseClient
-    .from("productos")
-    .select("nombre")
-    .limit(1);
+/* ================= SUPABASE ================= */
 
-  if (error) {
-    alert("Error conectando con Supabase");
-    console.error(error);
-    return;
-  }
+const SUPABASE_URL =
+  "https://mqkghtubwpsjvoivynhr.supabase.co";
 
-  if (data && data.length > 0) {
-    alert("Supabase conectado: " + data[0].nombre);
-  }
-}
 
-probarConexionSupabase();
-const WHATSAPP = "573209925066";
+const SUPABASE_KEY =
+  "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
 
-let carrito = JSON.parse(localStorage.getItem("sneakerscol_carrito")) || [];
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* ================= CONFIGURACIÓN ================= */
+
+const WHATSAPP =
+  "573209925066";
+
+
+let carrito =
+  JSON.parse(
+    localStorage.getItem(
+      "sneakerscol_carrito"
+    )
+  ) || [];
+
 
 let tallas = {
+
   nb:"",
+
   samba:"",
+
   vomero:"",
+
   cloudrunner:"",
+
   v2k:"",
+
   bounce:""
+
 };
+
 
 let colores = {
+
   nb:"Clásico",
+
   samba:"Blanco",
+
   vomero:"Beige/Rosa",
+
   cloudrunner:"Jamaica",
+
   v2k:"Beige",
+
   bounce:"Negro/Blanco"
+
 };
 
-let nbImagenActual = "imagenes/newbalance-1.webp";
-let sambaImagenActual = "imagenes/samba-blanco.webp";
-let vomeroImagenActual = "imagenes/vomero-beigerosa.webp";
 
-let estrellasSeleccionadas = 0;
+let nbImagenActual =
+  "imagenes/newbalance-1.webp";
+
+
+let sambaImagenActual =
+  "imagenes/samba-blanco.webp";
+
+
+let vomeroImagenActual =
+  "imagenes/vomero-beigerosa.webp";
+
+
+let estrellasSeleccionadas =
+  0;
+
+
+/* ================= PRODUCTOS ESTÁTICOS ================= */
+
+/*
+  Estos productos ya están escritos
+  manualmente arriba.
+
+  Si alguno también existe en Supabase,
+  evitamos mostrarlo dos veces.
+*/
+
+const productosEstaticos = [
+
+  "new balance",
+
+  "new balance 530",
+
+  "adidas samba og",
+
+  "nike vomero 18 – dama",
+
+  "nike vomero 18 - dama",
+
+  "on cloudrunner jamaica",
+
+  "nike v2k run",
+
+  "adidas bounce"
+
+];
 
 
 /* ================= CATEGORÍAS ================= */
-function filtrarCategoria(categoria,boton){
-  document.querySelectorAll('.category-filter').forEach(b=>b.classList.remove('active'));
-  boton.classList.add('active');
-  document.querySelectorAll('.product-card[data-category]').forEach(card=>{
-    const categorias=(card.dataset.category||'').split(' ');
-    card.classList.toggle('category-hidden', categoria !== 'todos' && !categorias.includes(categoria));
-  });
+
+function filtrarCategoria(
+  categoria,
+  boton
+){
+
+  document
+    .querySelectorAll(
+      ".category-filter"
+    )
+    .forEach(
+      elemento =>
+        elemento.classList.remove(
+          "active"
+        )
+    );
+
+
+  boton.classList.add(
+    "active"
+  );
+
+
+  document
+    .querySelectorAll(
+      ".product-card[data-category]"
+    )
+    .forEach(
+      function(card){
+
+        const categorias =
+          (card.dataset.category || "")
+            .split(" ");
+
+
+        card.classList.toggle(
+          "category-hidden",
+
+          categoria !== "todos" &&
+          !categorias.includes(
+            categoria
+          )
+        );
+
+      }
+    );
+
 }
+
 
 /* ================= UTILIDADES ================= */
 
 function dinero(numero){
-  return "$" + Number(numero).toLocaleString("es-CO");
+
+  return "$" +
+    Number(numero)
+      .toLocaleString(
+        "es-CO"
+      );
+
 }
+
 
 function mostrarToast(texto){
 
-  const toast = document.getElementById("toast");
+  const toast =
+    document.getElementById(
+      "toast"
+    );
 
-  toast.textContent = texto;
-  toast.classList.add("show");
 
-  setTimeout(()=>{
-    toast.classList.remove("show");
-  },2500);
+  toast.textContent =
+    texto;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    function(){
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },
+    2500
+  );
+
 }
 
 
 /* ================= TALLAS ================= */
 
-function seleccionarTalla(producto,talla,boton){
+function seleccionarTalla(
+  producto,
+  talla,
+  boton
+){
 
-  tallas[producto] = talla;
+  tallas[producto] =
+    talla;
 
-  const botones = boton.parentElement.querySelectorAll(".option");
 
-  botones.forEach(b => b.classList.remove("active"));
+  const botones =
+    boton
+      .parentElement
+      .querySelectorAll(
+        ".option"
+      );
 
-  boton.classList.add("active");
+
+  botones.forEach(
+    b =>
+      b.classList.remove(
+        "active"
+      )
+  );
+
+
+  boton.classList.add(
+    "active"
+  );
+
 }
 
 
 /* ================= GALERÍA NEW BALANCE ================= */
 
-function cambiarImagenNB(imagen,boton){
+function cambiarImagenNB(
+  imagen,
+  boton
+){
 
-  nbImagenActual = imagen;
-  document.getElementById("nbImagen").src = imagen;
+  nbImagenActual =
+    imagen;
 
-  document.querySelectorAll(".product-gallery .gallery-thumb")
-    .forEach(b => b.classList.remove("active"));
 
-  boton.classList.add("active");
+  document
+    .getElementById(
+      "nbImagen"
+    )
+    .src =
+      imagen;
+
+
+  document
+    .querySelectorAll(
+      ".product-gallery .gallery-thumb"
+    )
+    .forEach(
+      b =>
+        b.classList.remove(
+          "active"
+        )
+    );
+
+
+  boton.classList.add(
+    "active"
+  );
+
 }
 
 
 /* ================= COLORES ================= */
 
-function seleccionarColor(producto,color,imagen,boton){
+function seleccionarColor(
+  producto,
+  color,
+  imagen,
+  boton
+){
 
-  colores[producto] = color;
+  colores[producto] =
+    color;
 
-  if(producto === "samba"){
 
-    sambaImagenActual = imagen;
+  if(
+    producto === "samba"
+  ){
 
-    document.getElementById("sambaImagen").src = imagen;
+    sambaImagenActual =
+      imagen;
+
+
+    document
+      .getElementById(
+        "sambaImagen"
+      )
+      .src =
+        imagen;
 
   }
 
-  if(producto === "vomero"){
 
-    vomeroImagenActual = imagen;
+  if(
+    producto === "vomero"
+  ){
 
-    document.getElementById("vomeroImagen").src = imagen;
+    vomeroImagenActual =
+      imagen;
+
+
+    document
+      .getElementById(
+        "vomeroImagen"
+      )
+      .src =
+        imagen;
 
   }
 
-  const botones = boton.parentElement.querySelectorAll(".option");
 
-  botones.forEach(b => b.classList.remove("active"));
+  const botones =
+    boton
+      .parentElement
+      .querySelectorAll(
+        ".option"
+      );
 
-  boton.classList.add("active");
+
+  botones.forEach(
+    b =>
+      b.classList.remove(
+        "active"
+      )
+  );
+
+
+  boton.classList.add(
+    "active"
+  );
+
 }
 
 
 /* ================= WHATSAPP ================= */
 
-function comprarWhatsApp(producto,precio,tipo){
+function comprarWhatsApp(
+  producto,
+  precio,
+  tipo
+){
 
   let mensaje =
 `👟 QUIERO COMPRAR EN SNEAKERSCOL
@@ -1823,13 +3819,26 @@ function comprarWhatsApp(producto,precio,tipo){
 Producto: ${producto}
 Precio: ${dinero(precio)}`;
 
-  if(colores[tipo]){
-    mensaje += `\nColor: ${colores[tipo]}`;
+
+  if(
+    colores[tipo]
+  ){
+
+    mensaje +=
+      `\nColor: ${colores[tipo]}`;
+
   }
 
-  if(tallas[tipo]){
-    mensaje += `\nTalla: ${tallas[tipo]}`;
+
+  if(
+    tallas[tipo]
+  ){
+
+    mensaje +=
+      `\nTalla: ${tallas[tipo]}`;
+
   }
+
 
   mensaje += `
 
@@ -1838,131 +3847,307 @@ Precio: ${dinero(precio)}`;
 
 Quiero recibir información para realizar mi pedido.`;
 
+
   window.open(
+
     `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`,
+
     "_blank"
+
   );
+
 }
 
 
 /* ================= CARRITO ================= */
 
-function agregarCarrito(nombre,precio,imagen,tipo){
+function agregarCarrito(
+  nombre,
+  precio,
+  imagen,
+  tipo
+){
 
-  let talla = tallas[tipo] || "";
+  const talla =
+    tallas[tipo] || "";
 
-  let color = colores[tipo] || "";
+
+  const color =
+    colores[tipo] || "";
+
 
   carrito.push({
-    id:Date.now() + Math.random(),
+
+    id:
+      Date.now() +
+      Math.random(),
+
     nombre,
+
     precio,
+
     imagen,
+
     talla,
+
     color
+
   });
+
 
   guardarCarrito();
 
+
   actualizarCarrito();
 
-  mostrarToast("👟 ¡Producto agregado al carrito!");
+
+  mostrarToast(
+    "👟 ¡Producto agregado al carrito!"
+  );
+
 
   abrirCarrito();
+
 }
 
 
 function guardarCarrito(){
 
   localStorage.setItem(
+
     "sneakerscol_carrito",
-    JSON.stringify(carrito)
+
+    JSON.stringify(
+      carrito
+    )
+
   );
+
 }
 
 
 function actualizarCarrito(){
 
-  const contenedor = document.getElementById("cartItems");
-  const contador = document.getElementById("cartCount");
-  const total = document.getElementById("cartTotal");
+  const contenedor =
+    document.getElementById(
+      "cartItems"
+    );
 
-  contador.textContent = carrito.length;
 
-  if(carrito.length === 0){
+  const contador =
+    document.getElementById(
+      "cartCount"
+    );
+
+
+  const total =
+    document.getElementById(
+      "cartTotal"
+    );
+
+
+  contador.textContent =
+    carrito.length;
+
+
+  if(
+    carrito.length === 0
+  ){
+
     contenedor.innerHTML = `
+
       <div class="empty-cart">
-        🛒<br><br>
-        Tu carrito está vacío.
+
+        🛒
+
         <br><br>
+
+        Tu carrito está vacío.
+
+        <br><br>
+
         Agrega tus sneakers favoritos.
+
       </div>
+
     `;
-    total.textContent = "$0";
+
+
+    total.textContent =
+      "$0";
+
+
     return;
+
   }
 
-  contenedor.innerHTML = carrito.map(item => {
-    const colorHtml = item.color
-      ? `<div class="cart-item-detail">Color: ${item.color}</div>`
-      : "";
 
-    const tallaHtml = item.talla
-      ? `<div class="cart-item-detail">Talla: ${item.talla}</div>`
-      : `<div class="cart-item-detail">Talla: Por definir</div>`;
+  contenedor.innerHTML =
+    carrito
+      .map(
+        function(item){
 
-    return `
-      <div class="cart-item">
-        <img src="${item.imagen}" alt="${item.nombre}">
-        <div class="cart-item-info">
-          <div class="cart-item-name">${item.nombre}</div>
-          ${colorHtml}
-          ${tallaHtml}
-          <div class="cart-item-price">${dinero(item.precio)}</div>
-        </div>
-        <button class="remove-item" onclick="eliminarCarrito('${item.id}')">✕</button>
-      </div>
-    `;
-  }).join("");
 
-  const suma = carrito.reduce(
-    (acumulado,item)=>acumulado + Number(item.precio),
-    0
-  );
+          const colorHtml =
+            item.color
+              ? `
+                <div class="cart-item-detail">
+                  Color: ${escapeHTML(item.color)}
+                </div>
+              `
+              : "";
 
-  total.textContent = dinero(suma);
+
+          const tallaHtml =
+            item.talla
+              ? `
+                <div class="cart-item-detail">
+                  Talla: ${escapeHTML(item.talla)}
+                </div>
+              `
+              : `
+                <div class="cart-item-detail">
+                  Talla: Por definir
+                </div>
+              `;
+
+
+          return `
+
+            <div class="cart-item">
+
+              <img
+                src="${escapeHTML(item.imagen || "")}"
+                alt="${escapeHTML(item.nombre)}"
+              >
+
+              <div class="cart-item-info">
+
+                <div class="cart-item-name">
+                  ${escapeHTML(item.nombre)}
+                </div>
+
+                ${colorHtml}
+
+                ${tallaHtml}
+
+                <div class="cart-item-price">
+                  ${dinero(item.precio)}
+                </div>
+
+              </div>
+
+              <button
+                class="remove-item"
+                onclick="eliminarCarrito('${item.id}')"
+              >
+                ✕
+              </button>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  const suma =
+    carrito.reduce(
+
+      function(
+        acumulado,
+        item
+      ){
+
+        return acumulado +
+          Number(
+            item.precio
+          );
+
+      },
+
+      0
+
+    );
+
+
+  total.textContent =
+    dinero(
+      suma
+    );
+
 }
 
 
 function eliminarCarrito(id){
 
-  carrito = carrito.filter(
-    item => String(item.id) !== String(id)
-  );
+  carrito =
+    carrito.filter(
+      item =>
+        String(item.id) !==
+        String(id)
+    );
+
 
   guardarCarrito();
 
+
   actualizarCarrito();
 
-  mostrarToast("Producto eliminado");
+
+  mostrarToast(
+    "Producto eliminado"
+  );
+
 }
 
 
 function abrirCarrito(){
 
-  document.getElementById("cart").classList.add("show");
+  document
+    .getElementById(
+      "cart"
+    )
+    .classList.add(
+      "show"
+    );
 
-  document.getElementById("overlay").classList.add("show");
+
+  document
+    .getElementById(
+      "overlay"
+    )
+    .classList.add(
+      "show"
+    );
+
 
   actualizarCarrito();
+
 }
 
 
 function cerrarCarrito(){
 
-  document.getElementById("cart").classList.remove("show");
+  document
+    .getElementById(
+      "cart"
+    )
+    .classList.remove(
+      "show"
+    );
 
-  document.getElementById("overlay").classList.remove("show");
+
+  document
+    .getElementById(
+      "overlay"
+    )
+    .classList.remove(
+      "show"
+    );
+
 }
 
 
@@ -1970,46 +4155,94 @@ function cerrarCarrito(){
 
 function finalizarCarrito(){
 
-  if(carrito.length === 0){
+  if(
+    carrito.length === 0
+  ){
 
-    mostrarToast("🛒 Tu carrito está vacío.");
+    mostrarToast(
+      "🛒 Tu carrito está vacío."
+    );
+
 
     return;
+
   }
+
 
   let mensaje =
 `👟 PEDIDO SNEAKERSCOL
 
 `;
 
-  carrito.forEach((item,index)=>{
 
-    mensaje +=
+  carrito.forEach(
+    function(
+      item,
+      index
+    ){
+
+      mensaje +=
 `${index + 1}. ${item.nombre}
 Precio: ${dinero(item.precio)}
 `;
 
-    if(item.color){
-      mensaje += `Color: ${item.color}
+
+      if(
+        item.color
+      ){
+
+        mensaje +=
+`Color: ${item.color}
 `;
+
+      }
+
+
+      if(
+        item.talla
+      ){
+
+        mensaje +=
+`Talla: ${item.talla}
+`;
+
+      }
+
+      else{
+
+        mensaje +=
+`Talla: Por definir
+`;
+
+      }
+
+
+      mensaje += `
+`;
+
     }
-
-    if(item.talla){
-      mensaje += `Talla: ${item.talla}
-`;
-    }else{
-      mensaje += `Talla: Por definir
-`;
-    }
-
-    mensaje += `
-`;
-  });
-
-  const total = carrito.reduce(
-    (suma,item)=>suma + Number(item.precio),
-    0
   );
+
+
+  const total =
+    carrito.reduce(
+
+      function(
+        suma,
+        item
+      ){
+
+        return suma +
+          Number(
+            item.precio
+          );
+
+      },
+
+      0
+
+    );
+
 
   mensaje +=
 `💰 TOTAL: ${dinero(total)}
@@ -2019,147 +4252,1275 @@ Precio: ${dinero(item.precio)}
 
 Quiero realizar este pedido.`;
 
+
   window.open(
+
     `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`,
+
     "_blank"
+
   );
+
 }
 
 
-/* ================= REVIEWS ================= */
+/* ================= PRODUCTOS DESDE SUPABASE ================= */
 
-function seleccionarEstrellas(numero){
+function convertirImagenesProducto(
+  valor
+){
 
-  estrellasSeleccionadas = numero;
+  if(
+    !valor
+  ){
 
-  const botones =
-    document.querySelectorAll("#stars .star");
+    return [];
 
-  botones.forEach((boton,index)=>{
+  }
 
-    boton.classList.toggle(
-      "selected",
-      index < numero
+
+  if(
+    Array.isArray(
+      valor
+    )
+  ){
+
+    return valor
+      .map(
+        function(imagen){
+
+          return String(
+            imagen
+          ).trim();
+
+        }
+      )
+      .filter(
+        Boolean
+      );
+
+  }
+
+
+  return String(
+    valor
+  )
+    .split(",")
+    .map(
+      function(imagen){
+
+        return imagen.trim();
+
+      }
+    )
+    .filter(
+      Boolean
     );
 
-  });
 }
 
+
+/* ================= CLAVE PRODUCTO ================= */
+
+function crearClaveProducto(
+  id
+){
+
+  return "db_" +
+    String(id)
+      .replace(
+        /[^a-zA-Z0-9]/g,
+        ""
+      )
+      .substring(
+        0,
+        30
+      );
+
+}
+
+
+/* ================= CATEGORÍA DINÁMICA ================= */
+
+function generarCategoriaProducto(
+  categoria
+){
+
+  const texto =
+    String(
+      categoria || ""
+    )
+      .toLowerCase()
+      .trim();
+
+
+  const categorias = [];
+
+
+  if(
+    texto.includes(
+      "hombre"
+    )
+  ){
+
+    categorias.push(
+      "hombre"
+    );
+
+  }
+
+
+  if(
+    texto.includes(
+      "mujer"
+    ) ||
+    texto.includes(
+      "dama"
+    )
+  ){
+
+    categorias.push(
+      "mujer"
+    );
+
+  }
+
+
+  if(
+    texto.includes(
+      "kids"
+    ) ||
+    texto.includes(
+      "niño"
+    ) ||
+    texto.includes(
+      "niña"
+    )
+  ){
+
+    categorias.push(
+      "kids"
+    );
+
+  }
+
+
+  /*
+    Si en el panel escribimos simplemente
+    "Sneakers", aparece en Hombre y Mujer.
+  */
+
+  if(
+    categorias.length === 0
+  ){
+
+    return "hombre mujer";
+
+  }
+
+
+  return categorias.join(
+    " "
+  );
+
+}
+
+
+/* ================= CREAR TARJETA DINÁMICA ================= */
+
+function crearTarjetaProducto(
+  producto
+){
+
+  const clave =
+    crearClaveProducto(
+      producto.id
+    );
+
+
+  const nombre =
+    String(
+      producto.nombre ||
+      "Producto"
+    );
+
+
+  const precio =
+    Number(
+      producto.precio || 0
+    );
+
+
+  const categoria =
+    generarCategoriaProducto(
+      producto.categoria
+    );
+
+
+  const listaTallas =
+    String(
+      producto.tallas || ""
+    )
+      .split(",")
+      .map(
+        function(talla){
+
+          return talla.trim();
+
+        }
+      )
+      .filter(
+        Boolean
+      );
+
+
+  const listaImagenes =
+    convertirImagenesProducto(
+      producto.imagenes
+    );
+
+
+  const imagenPrincipal =
+    listaImagenes.length > 0
+      ? listaImagenes[0]
+      : "";
+
+
+  tallas[clave] =
+    "";
+
+
+  colores[clave] =
+    "";
+
+
+  const tarjeta =
+    document.createElement(
+      "article"
+    );
+
+
+  tarjeta.className =
+    "product-card producto-supabase";
+
+
+  tarjeta.dataset.category =
+    categoria;
+
+
+  /*
+    IMAGEN PRINCIPAL
+  */
+
+  const contenedorImagen =
+    document.createElement(
+      "div"
+    );
+
+
+  contenedorImagen.className =
+    "product-image";
+
+
+  if(
+    imagenPrincipal
+  ){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+
+    img.id =
+      "imagen-" +
+      clave;
+
+
+    img.src =
+      imagenPrincipal;
+
+
+    img.alt =
+      nombre;
+
+
+    img.loading =
+      "lazy";
+
+
+    contenedorImagen.appendChild(
+      img
+    );
+
+  }
+
+  else{
+
+    const sinFoto =
+      document.createElement(
+        "div"
+      );
+
+
+    sinFoto.style.width =
+      "100%";
+
+
+    sinFoto.style.height =
+      "100%";
+
+
+    sinFoto.style.display =
+      "flex";
+
+
+    sinFoto.style.alignItems =
+      "center";
+
+
+    sinFoto.style.justifyContent =
+      "center";
+
+
+    sinFoto.style.color =
+      "#999";
+
+
+    sinFoto.style.fontWeight =
+      "800";
+
+
+    sinFoto.style.textAlign =
+      "center";
+
+
+    sinFoto.style.padding =
+      "20px";
+
+
+    sinFoto.textContent =
+      "FOTO NO DISPONIBLE";
+
+
+    contenedorImagen.appendChild(
+      sinFoto
+    );
+
+  }
+
+
+  tarjeta.appendChild(
+    contenedorImagen
+  );
+
+
+  /*
+    INFORMACIÓN
+  */
+
+  const informacion =
+    document.createElement(
+      "div"
+    );
+
+
+  informacion.className =
+    "product-info";
+
+
+  /*
+    GALERÍA DE FOTOS
+  */
+
+  if(
+    listaImagenes.length > 1
+  ){
+
+    const galeria =
+      document.createElement(
+        "div"
+      );
+
+
+    galeria.className =
+      "product-gallery";
+
+
+    listaImagenes.forEach(
+      function(
+        url,
+        indice
+      ){
+
+        const boton =
+          document.createElement(
+            "button"
+          );
+
+
+        boton.className =
+          indice === 0
+            ? "gallery-thumb active"
+            : "gallery-thumb";
+
+
+        boton.type =
+          "button";
+
+
+        boton.setAttribute(
+          "aria-label",
+          "Ver foto " +
+          (indice + 1) +
+          " de " +
+          nombre
+        );
+
+
+        const miniatura =
+          document.createElement(
+            "img"
+          );
+
+
+        miniatura.src =
+          url;
+
+
+        miniatura.alt =
+          nombre +
+          " foto " +
+          (indice + 1);
+
+
+        miniatura.loading =
+          "lazy";
+
+
+        boton.appendChild(
+          miniatura
+        );
+
+
+        boton.addEventListener(
+          "click",
+          function(){
+
+            const imagenGrande =
+              document.getElementById(
+                "imagen-" +
+                clave
+              );
+
+
+            if(
+              imagenGrande
+            ){
+
+              imagenGrande.src =
+                url;
+
+            }
+
+
+            galeria
+              .querySelectorAll(
+                ".gallery-thumb"
+              )
+              .forEach(
+                function(elemento){
+
+                  elemento
+                    .classList
+                    .remove(
+                      "active"
+                    );
+
+                }
+              );
+
+
+            boton.classList.add(
+              "active"
+            );
+
+          }
+        );
+
+
+        galeria.appendChild(
+          boton
+        );
+
+      }
+    );
+
+
+    informacion.appendChild(
+      galeria
+    );
+
+  }
+
+
+  /*
+    NOMBRE
+  */
+
+  const nombreElemento =
+    document.createElement(
+      "div"
+    );
+
+
+  nombreElemento.className =
+    "product-name";
+
+
+  nombreElemento.textContent =
+    nombre;
+
+
+  informacion.appendChild(
+    nombreElemento
+  );
+
+
+  /*
+    PRECIO
+  */
+
+  const precioElemento =
+    document.createElement(
+      "div"
+    );
+
+
+  precioElemento.className =
+    "product-price";
+
+
+  precioElemento.textContent =
+    dinero(
+      precio
+    );
+
+
+  informacion.appendChild(
+    precioElemento
+  );
+
+
+  /*
+    CONTRAENTREGA
+  */
+
+  const entrega =
+    document.createElement(
+      "div"
+    );
+
+
+  entrega.className =
+    "product-delivery";
+
+
+  entrega.textContent =
+    "✓ CONTRAENTREGA";
+
+
+  informacion.appendChild(
+    entrega
+  );
+
+
+  /*
+    TALLAS
+  */
+
+  if(
+    listaTallas.length > 0
+  ){
+
+    const tituloTalla =
+      document.createElement(
+        "div"
+      );
+
+
+    tituloTalla.className =
+      "option-title";
+
+
+    tituloTalla.textContent =
+      "Talla (opcional)";
+
+
+    informacion.appendChild(
+      tituloTalla
+    );
+
+
+    const opciones =
+      document.createElement(
+        "div"
+      );
+
+
+    opciones.className =
+      "options";
+
+
+    listaTallas.forEach(
+      function(talla){
+
+        const boton =
+          document.createElement(
+            "button"
+          );
+
+
+        boton.className =
+          "option";
+
+
+        boton.type =
+          "button";
+
+
+        boton.textContent =
+          talla;
+
+
+        boton.addEventListener(
+          "click",
+          function(){
+
+            seleccionarTalla(
+              clave,
+              talla,
+              boton
+            );
+
+          }
+        );
+
+
+        opciones.appendChild(
+          boton
+        );
+
+      }
+    );
+
+
+    informacion.appendChild(
+      opciones
+    );
+
+  }
+
+
+  /*
+    BOTONES
+  */
+
+  const acciones =
+    document.createElement(
+      "div"
+    );
+
+
+  acciones.className =
+    "product-actions";
+
+
+  const botonCarrito =
+    document.createElement(
+      "button"
+    );
+
+
+  botonCarrito.className =
+    "action action-cart";
+
+
+  botonCarrito.type =
+    "button";
+
+
+  botonCarrito.textContent =
+    "🛒 AGREGAR";
+
+
+  botonCarrito.addEventListener(
+    "click",
+    function(){
+
+      let imagenActual =
+        imagenPrincipal;
+
+
+      const imagenElemento =
+        document.getElementById(
+          "imagen-" +
+          clave
+        );
+
+
+      if(
+        imagenElemento
+      ){
+
+        imagenActual =
+          imagenElemento.src;
+
+      }
+
+
+      agregarCarrito(
+
+        nombre,
+
+        precio,
+
+        imagenActual,
+
+        clave
+
+      );
+
+    }
+  );
+
+
+  const botonWhatsApp =
+    document.createElement(
+      "button"
+    );
+
+
+  botonWhatsApp.className =
+    "action action-whatsapp";
+
+
+  botonWhatsApp.type =
+    "button";
+
+
+  botonWhatsApp.textContent =
+    "💬 WHATSAPP";
+
+
+  botonWhatsApp.addEventListener(
+    "click",
+    function(){
+
+      comprarWhatsApp(
+
+        nombre,
+
+        precio,
+
+        clave
+
+      );
+
+    }
+  );
+
+
+  acciones.appendChild(
+    botonCarrito
+  );
+
+
+  acciones.appendChild(
+    botonWhatsApp
+  );
+
+
+  informacion.appendChild(
+    acciones
+  );
+
+
+  tarjeta.appendChild(
+    informacion
+  );
+
+
+  return tarjeta;
+
+}
+
+
+/* ================= CARGAR PRODUCTOS SUPABASE ================= */
+
+async function cargarProductosSupabase(){
+
+  const contenedor =
+    document.getElementById(
+      "productosTienda"
+    );
+
+
+  if(
+    !contenedor
+  ){
+
+    console.error(
+      "No se encontró el contenedor de productos."
+    );
+
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(
+        "productos"
+      )
+      .select(
+        "id,nombre,precio,categoria,tallas,disponible,imagenes,created_at"
+      )
+      .eq(
+        "disponible",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+
+  if(
+    error
+  ){
+
+    console.error(
+      "Error cargando productos desde Supabase:",
+      error
+    );
+
+
+    return;
+
+  }
+
+
+  if(
+    !data ||
+    data.length === 0
+  ){
+
+    return;
+
+  }
+
+
+  data.forEach(
+    function(producto){
+
+      /*
+        Evitamos duplicar los productos
+        que ya existen manualmente.
+      */
+
+      const nombreNormalizado =
+        String(
+          producto.nombre || ""
+        )
+          .toLowerCase()
+          .trim();
+
+
+      if(
+        productosEstaticos.includes(
+          nombreNormalizado
+        )
+      ){
+
+        return;
+
+      }
+
+
+      const tarjeta =
+        crearTarjetaProducto(
+          producto
+        );
+
+
+      contenedor.appendChild(
+        tarjeta
+      );
+
+    }
+  );
+
+
+  actualizarProductosReview();
+
+}
+
+
+/* ================= RESEÑAS ================= */
+
+function seleccionarEstrellas(
+  numero
+){
+
+  estrellasSeleccionadas =
+    numero;
+
+
+  const botones =
+    document.querySelectorAll(
+      "#stars .star"
+    );
+
+
+  botones.forEach(
+    function(
+      boton,
+      index
+    ){
+
+      boton.classList.toggle(
+
+        "selected",
+
+        index < numero
+
+      );
+
+    }
+  );
+
+}
+
+
+/* ================= ACTUALIZAR PRODUCTOS EN RESEÑAS ================= */
+
+function actualizarProductosReview(){
+
+  const select =
+    document.getElementById(
+      "reviewProduct"
+    );
+
+
+  if(
+    !select
+  ){
+
+    return;
+
+  }
+
+
+  const existentes =
+    Array.from(
+      select.options
+    )
+      .map(
+        option =>
+          option.textContent
+            .trim()
+            .toLowerCase()
+      );
+
+
+  document
+    .querySelectorAll(
+      "#productosTienda .product-name"
+    )
+    .forEach(
+      function(elemento){
+
+        const nombre =
+          elemento
+            .textContent
+            .trim();
+
+
+        if(
+          !existentes.includes(
+            nombre.toLowerCase()
+          )
+        ){
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+
+          option.textContent =
+            nombre;
+
+
+          select.appendChild(
+            option
+          );
+
+
+          existentes.push(
+            nombre.toLowerCase()
+          );
+
+        }
+
+      }
+    );
+
+}
+
+
+/* ================= GUARDAR RESEÑA ================= */
 
 function guardarReview(){
 
   const nombre =
-    document.getElementById("reviewName").value.trim();
+    document
+      .getElementById(
+        "reviewName"
+      )
+      .value
+      .trim();
+
 
   const producto =
-    document.getElementById("reviewProduct").value;
+    document
+      .getElementById(
+        "reviewProduct"
+      )
+      .value;
+
 
   const texto =
-    document.getElementById("reviewText").value.trim();
+    document
+      .getElementById(
+        "reviewText"
+      )
+      .value
+      .trim();
 
-  if(!nombre || !producto || !texto || estrellasSeleccionadas === 0){
 
-    alert("⭐ Completa tu nombre, producto, reseña y estrellas.");
+  if(
+    !nombre ||
+    !producto ||
+    !texto ||
+    estrellasSeleccionadas === 0
+  ){
+
+    alert(
+      "⭐ Completa tu nombre, producto, reseña y estrellas."
+    );
+
 
     return;
+
   }
+
 
   const reviews =
     JSON.parse(
-      localStorage.getItem("sneakerscol_reviews")
+      localStorage.getItem(
+        "sneakerscol_reviews"
+      )
     ) || [];
+
 
   reviews.unshift({
 
     nombre,
+
     producto,
+
     texto,
-    estrellas:estrellasSeleccionadas,
-    fecha:new Date().toLocaleDateString("es-CO")
+
+    estrellas:
+      estrellasSeleccionadas,
+
+    fecha:
+      new Date()
+        .toLocaleDateString(
+          "es-CO"
+        )
 
   });
 
+
   localStorage.setItem(
+
     "sneakerscol_reviews",
-    JSON.stringify(reviews)
+
+    JSON.stringify(
+      reviews
+    )
+
   );
 
-  document.getElementById("reviewName").value = "";
 
-  document.getElementById("reviewProduct").value = "";
+  document
+    .getElementById(
+      "reviewName"
+    )
+    .value =
+      "";
 
-  document.getElementById("reviewText").value = "";
 
-  seleccionarEstrellas(0);
+  document
+    .getElementById(
+      "reviewProduct"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "reviewText"
+    )
+    .value =
+      "";
+
+
+  seleccionarEstrellas(
+    0
+  );
+
 
   cargarReviews();
 
-  mostrarToast("⭐ ¡Gracias por tu reseña!");
+
+  mostrarToast(
+    "⭐ ¡Gracias por tu reseña!"
+  );
 
 }
 
+
+/* ================= CARGAR RESEÑAS ================= */
 
 function cargarReviews(){
 
   const contenedor =
-    document.getElementById("reviewList");
+    document.getElementById(
+      "reviewList"
+    );
+
 
   const reviews =
     JSON.parse(
-      localStorage.getItem("sneakerscol_reviews")
+      localStorage.getItem(
+        "sneakerscol_reviews"
+      )
     ) || [];
 
-  if(reviews.length === 0){
+
+  if(
+    reviews.length === 0
+  ){
 
     contenedor.innerHTML = `
-      <div class="review" style="grid-column:1/-1;text-align:center">
-        <div class="review-stars">★★★★★</div>
+
+      <div
+        class="review"
+        style="grid-column:1/-1;text-align:center"
+      >
+
+        <div class="review-stars">
+          ★★★★★
+        </div>
+
         <div class="review-name">
           Sé el primero en dejar una reseña.
         </div>
+
         <div class="review-text">
           Tu opinión ayudará a otros clientes.
         </div>
+
       </div>
+
     `;
 
+
     return;
+
   }
 
-  contenedor.innerHTML = reviews.map(review=>`
 
-    <div class="review">
+  contenedor.innerHTML =
+    reviews
+      .map(
+        function(review){
 
-      <div class="review-stars">
-        ${"★".repeat(review.estrellas)}
-        ${"☆".repeat(5-review.estrellas)}
-      </div>
+          return `
 
-      <div class="review-name">
-        ${escapeHTML(review.nombre)}
-      </div>
+            <div class="review">
 
-      <div class="review-product">
-        ${escapeHTML(review.producto)}
-      </div>
+              <div class="review-stars">
 
-      <div class="review-text">
-        ${escapeHTML(review.texto)}
-      </div>
+                ${"★".repeat(review.estrellas)}
 
-    </div>
+                ${"☆".repeat(5-review.estrellas)}
 
-  `).join("");
+              </div>
+
+              <div class="review-name">
+                ${escapeHTML(review.nombre)}
+              </div>
+
+              <div class="review-product">
+                ${escapeHTML(review.producto)}
+              </div>
+
+              <div class="review-text">
+                ${escapeHTML(review.texto)}
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
 }
 
 
+/* ================= SEGURIDAD TEXTO ================= */
+
 function escapeHTML(text){
 
-  const div = document.createElement("div");
+  const div =
+    document.createElement(
+      "div"
+    );
 
-  div.textContent = text;
+
+  div.textContent =
+    String(
+      text ?? ""
+    );
+
 
   return div.innerHTML;
+
 }
 
 
@@ -2167,9 +5528,19 @@ function escapeHTML(text){
 
 actualizarCarrito();
 
+
 cargarReviews();
+
+
+actualizarProductosReview();
+
+
+cargarProductosSupabase();
+
 
 </script>
 
+
 </body>
+
 </html>
