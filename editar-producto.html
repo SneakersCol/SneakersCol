@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Editar producto | SneakersCol</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #111827;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px 30px;
+      border-bottom: 2px solid #7CFF00;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #7CFF00;
+    }
+
+    .volver {
+      background: #7CFF00;
+      color: #111;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    main {
+      width: min(700px, 92%);
+      margin: 40px auto;
+    }
+
+    .caja {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .subtitulo {
+      color: #bbb;
+      margin-bottom: 28px;
+    }
+
+    .campo {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 7px;
+      border: 1px solid #4b5563;
+      background: #1f2937;
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #7CFF00;
+    }
+
+    .ayuda {
+      display: block;
+      color: #999;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .disponibilidad {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1f2937;
+      padding: 14px;
+      border-radius: 7px;
+    }
+
+    .disponibilidad input {
+      width: auto;
+      transform: scale(1.3);
+    }
+
+    .acciones {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      border-radius: 7px;
+      padding: 13px 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .guardar {
+      background: #7CFF00;
+      color: #111;
+      flex: 1;
+    }
+
+    .cancelar {
+      background: #374151;
+      color: white;
+    }
+
+    #mensaje {
+      margin-top: 20px;
+      min-height: 20px;
+      font-weight: bold;
+    }
+
+    .correcto {
+      color: #7CFF00;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px;
+      }
+
+      .caja {
+        padding: 20px;
+      }
+
+      .acciones {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    SNEAKERS <span>COL</span>
+  </div>
+
+  <a class="volver" href="productos.html">
+    VOLVER A PRODUCTOS
+  </a>
+
+</header>
+
+
+<main>
+
+  <div class="caja">
+
+    <h1 id="tituloPagina">
+      Producto
+    </h1>
+
+    <div class="subtitulo" id="subtituloPagina">
+      Cargando información...
+    </div>
+
+
+    <form id="formProducto">
+
+      <div class="campo">
+        <label for="nombre">
+          Nombre del producto
+        </label>
+
+        <input
+          id="nombre"
+          type="text"
+          required
+          placeholder="Ejemplo: New Balance 530"
+        >
+      </div>
+
+
+      <div class="campo">
+        <label for="precio">
+          Precio
+        </label>
+
+        <input
+          id="precio"
+          type="number"
+          min="0"
+          step="1"
+          required
+          placeholder="130000"
+        >
+
+        <span class="ayuda">
+          Escribe solamente números, por ejemplo: 130000
+        </span>
+      </div>
+
+
+      <div class="campo">
+        <label for="categoria">
+          Categoría
+        </label>
+
+        <input
+          id="categoria"
+          type="text"
+          placeholder="Sneakers"
+        >
+      </div>
+
+
+      <div class="campo">
+        <label for="tallas">
+          Tallas disponibles
+        </label>
+
+        <input
+          id="tallas"
+          type="text"
+          placeholder="35,36,37,38,39,40"
+        >
+
+        <span class="ayuda">
+          Separa las tallas con comas.
+        </span>
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Disponibilidad
+        </label>
+
+        <div class="disponibilidad">
+
+          <input
+            id="disponible"
+            type="checkbox"
+            checked
+          >
+
+          <span>
+            Producto disponible para la venta
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="acciones">
+
+        <button
+          class="cancelar"
+          type="button"
+          onclick="window.location.href='productos.html'"
+        >
+          CANCELAR
+        </button>
+
+        <button
+          class="guardar"
+          id="btnGuardar"
+          type="submit"
+        >
+          GUARDAR PRODUCTO
+        </button>
+
+      </div>
+
+    </form>
+
+
+    <div id="mensaje"></div>
+
+  </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mqkghtubwpsjvoivynhr.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
+
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =====================================
+   ELEMENTOS
+===================================== */
+
+const formulario =
+  document.getElementById("formProducto");
+
+const inputNombre =
+  document.getElementById("nombre");
+
+const inputPrecio =
+  document.getElementById("precio");
+
+const inputCategoria =
+  document.getElementById("categoria");
+
+const inputTallas =
+  document.getElementById("tallas");
+
+const inputDisponible =
+  document.getElementById("disponible");
+
+const mensaje =
+  document.getElementById("mensaje");
+
+const tituloPagina =
+  document.getElementById("tituloPagina");
+
+const subtituloPagina =
+  document.getElementById("subtituloPagina");
+
+const btnGuardar =
+  document.getElementById("btnGuardar");
+
+
+/* =====================================
+   OBTENER ID DE LA URL
+===================================== */
+
+const parametros =
+  new URLSearchParams(window.location.search);
+
+const productoId =
+  parametros.get("id");
+
+
+/* =====================================
+   MENSAJES
+===================================== */
+
+function mostrarMensaje(texto, tipo) {
+
+  mensaje.textContent = texto;
+
+  mensaje.className =
+    tipo === "error"
+      ? "error"
+      : "correcto";
+}
+
+
+/* =====================================
+   VERIFICAR SESIÓN
+===================================== */
+
+async function verificarSesion() {
+
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+
+    console.error(
+      "Error verificando sesión:",
+      error
+    );
+
+    return false;
+  }
+
+  if (!data || !data.session) {
+
+    window.location.href =
+      "admin.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+/* =====================================
+   CARGAR PRODUCTO EXISTENTE
+===================================== */
+
+async function cargarProducto() {
+
+  const sesionCorrecta =
+    await verificarSesion();
+
+  if (!sesionCorrecta) {
+    return;
+  }
+
+
+  /*
+    Si NO hay ID estamos creando
+    un producto nuevo.
+  */
+
+  if (!productoId) {
+
+    tituloPagina.textContent =
+      "Agregar producto";
+
+    subtituloPagina.textContent =
+      "Registra un nuevo producto en SneakersCol.";
+
+    inputCategoria.value =
+      "Sneakers";
+
+    return;
+  }
+
+
+  /*
+    Si hay ID estamos editando.
+  */
+
+  tituloPagina.textContent =
+    "Editar producto";
+
+  subtituloPagina.textContent =
+    "Cargando información del producto...";
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("productos")
+      .select(
+        "id,nombre,precio,categoria,tallas,disponible"
+      )
+      .eq("id", productoId)
+      .maybeSingle();
+
+
+  if (error) {
+
+    console.error(
+      "Error cargando producto:",
+      error
+    );
+
+    mostrarMensaje(
+      "No fue posible cargar el producto.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!data) {
+
+    mostrarMensaje(
+      "El producto no existe.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  inputNombre.value =
+    data.nombre || "";
+
+  inputPrecio.value =
+    data.precio || "";
+
+  inputCategoria.value =
+    data.categoria || "";
+
+  inputTallas.value =
+    data.tallas || "";
+
+  inputDisponible.checked =
+    data.disponible !== false;
+
+
+  subtituloPagina.textContent =
+    "Modifica la información y guarda los cambios.";
+}
+
+
+/* =====================================
+   GUARDAR
+===================================== */
+
+formulario.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+
+    const nombre =
+      inputNombre.value.trim();
+
+    const precio =
+      Number(inputPrecio.value);
+
+    const categoria =
+      inputCategoria.value.trim();
+
+    const tallas =
+      inputTallas.value.trim();
+
+    const disponible =
+      inputDisponible.checked;
+
+
+    if (!nombre) {
+
+      mostrarMensaje(
+        "Debes escribir el nombre del producto.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      !Number.isFinite(precio) ||
+      precio < 0
+    ) {
+
+      mostrarMensaje(
+        "Escribe un precio válido.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const datosProducto = {
+      nombre: nombre,
+      precio: precio,
+      categoria: categoria,
+      tallas: tallas,
+      disponible: disponible
+    };
+
+
+    btnGuardar.disabled = true;
+
+    btnGuardar.textContent =
+      "GUARDANDO...";
+
+    mostrarMensaje(
+      "Guardando información...",
+      "correcto"
+    );
+
+
+    let resultado;
+
+
+    /*
+      EDITAR PRODUCTO EXISTENTE
+    */
+
+    if (productoId) {
+
+      resultado =
+        await supabaseClient
+          .from("productos")
+          .update(datosProducto)
+          .eq("id", productoId)
+          .select();
+
+    }
+
+
+    /*
+      CREAR PRODUCTO NUEVO
+    */
+
+    else {
+
+      resultado =
+        await supabaseClient
+          .from("productos")
+          .insert(datosProducto)
+          .select();
+
+    }
+
+
+    if (resultado.error) {
+
+      console.error(
+        "Error guardando producto:",
+        resultado.error
+      );
+
+      mostrarMensaje(
+        "No fue posible guardar. Revisa la configuración de Supabase.",
+        "error"
+      );
+
+      btnGuardar.disabled = false;
+
+      btnGuardar.textContent =
+        "GUARDAR PRODUCTO";
+
+      return;
+    }
+
+
+    mostrarMensaje(
+      productoId
+        ? "Producto actualizado correctamente."
+        : "Producto agregado correctamente.",
+      "correcto"
+    );
+
+
+    setTimeout(function() {
+
+      window.location.href =
+        "productos.html";
+
+    }, 900);
+
+  }
+);
+
+
+/* =====================================
+   INICIO
+===================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  cargarProducto
+);
+
+</script>
+
+</body>
+</html>
