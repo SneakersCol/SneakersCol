@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de administración | SneakersCol</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #181818;
+      color: white;
+    }
+
+    header {
+      background: #111;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #39ff14;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .verde {
+      color: #39ff14;
+    }
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .salir {
+      background: #39ff14;
+      color: #111;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .bienvenida {
+      background: #222;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .tarjetas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .tarjeta {
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 25px;
+    }
+
+    .tarjeta h2 {
+      margin-top: 0;
+    }
+
+    .estado {
+      color: #39ff14;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>SNEAKERS <span class="verde">COL</span></h1>
+  <button class="salir" onclick="cerrarSesion()">CERRAR SESIÓN</button>
+</header>
+
+<main>
+
+  <div class="bienvenida">
+    <h2>Panel de administración</h2>
+    <p id="usuario">Verificando sesión...</p>
+    <p class="estado">● Sistema conectado</p>
+  </div>
+
+  <div class="tarjetas">
+
+    <div class="tarjeta">
+      <h2>Productos</h2>
+      <p>Administra el catálogo de SneakersCol.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Inventario</h2>
+      <p>Control de tallas y disponibilidad.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Precios</h2>
+      <p>Actualiza precios y promociones.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Imágenes</h2>
+      <p>Gestiona las fotografías de los productos.</p>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://mqkghtubwpsjvoivynhr.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_GwPXab6AhFFXVKn-mfobAw_98C6wFIW";
+
+  const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  async function verificarSesion() {
+    const { data } = await supabaseClient.auth.getSession();
+
+    if (!data.session) {
+      window.location.href = "admin.html";
+      return;
+    }
+
+    document.getElementById("usuario").textContent =
+      "Sesión iniciada como: " + data.session.user.email;
+  }
+
+  async function cerrarSesion() {
+    await supabaseClient.auth.signOut();
+    window.location.href = "admin.html";
+  }
+
+  verificarSesion();
+</script>
+
+</body>
+</html>
