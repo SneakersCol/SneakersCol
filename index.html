@@ -355,6 +355,8 @@ header{
   margin-top:5px;
 }
 
+.category-filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:-18px 0 32px}.category-filter{border:1px solid #181818;background:#fff;color:#181818;padding:11px 24px;border-radius:999px;font-weight:900;cursor:pointer;transition:.2s}.category-filter:hover,.category-filter.active{background:#181818;color:#fff}.product-card.category-hidden{display:none}
+
 .products{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -1121,11 +1123,18 @@ footer{
     </p>
   </div>
 
+  <div class="category-filters" aria-label="Filtrar colección">
+    <button class="category-filter active" type="button" onclick="filtrarCategoria('todos',this)">Todos</button>
+    <button class="category-filter" type="button" onclick="filtrarCategoria('hombre',this)">Hombre</button>
+    <button class="category-filter" type="button" onclick="filtrarCategoria('mujer',this)">Mujer</button>
+    <button class="category-filter" type="button" onclick="filtrarCategoria('kids',this)">Kids</button>
+  </div>
+
   <div class="products">
 
     <!-- NEW BALANCE -->
 
-    <article class="product-card">
+    <article class="product-card" data-category="hombre mujer">
 
       <div class="discount">-13%</div>
 
@@ -1211,7 +1220,7 @@ footer{
 
     <!-- SAMBA -->
 
-    <article class="product-card">
+    <article class="product-card" data-category="hombre mujer">
 
       <div class="discount">-14%</div>
 
@@ -1297,7 +1306,7 @@ footer{
 
     <!-- VOMERO -->
 
-    <article class="product-card">
+    <article class="product-card" data-category="mujer">
 
       <div class="discount">-14%</div>
 
@@ -1382,6 +1391,75 @@ footer{
       </div>
     </article>
 
+
+    <!-- ON CLOUDRUNNER JAMAICA -->
+    <article class="product-card" data-category="hombre mujer">
+      <div class="product-image"><img id="cloudrunnerImagen" src="imagenes/on-cloudrunner-jamaica.webp" alt="On Cloudrunner JAMAICA" loading="lazy"></div>
+      <div class="product-info">
+        <div class="product-name">On Cloudrunner JAMAICA</div>
+        <div class="product-price">$180.000</div>
+        <div class="product-delivery">✓ CONTRAENTREGA</div>
+        <div class="option-title">Talla (opcional)</div>
+        <div class="options">
+          <button class="option" onclick="seleccionarTalla('cloudrunner','36',this)">36</button>
+          <button class="option" onclick="seleccionarTalla('cloudrunner','37',this)">37</button>
+          <button class="option" onclick="seleccionarTalla('cloudrunner','38',this)">38</button>
+          <button class="option" onclick="seleccionarTalla('cloudrunner','39',this)">39</button>
+        </div>
+        <div class="option-title">Color</div>
+        <div class="options"><button class="option active">Jamaica</button></div>
+        <div class="product-actions">
+          <button class="action action-cart" onclick="agregarCarrito('On Cloudrunner JAMAICA',180000,'imagenes/on-cloudrunner-jamaica.webp','cloudrunner')">🛒 AGREGAR</button>
+          <button class="action action-whatsapp" onclick="comprarWhatsApp('On Cloudrunner JAMAICA',180000,'cloudrunner')">💬 WHATSAPP</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- NIKE V2K RUN -->
+    <article class="product-card" data-category="mujer">
+      <div class="product-image"><img id="v2kImagen" src="imagenes/nike-v2k-run-beige.webp" alt="Nike V2K Run" loading="lazy"></div>
+      <div class="product-info">
+        <div class="product-name">Nike V2K Run</div>
+        <div class="product-price">$170.000</div>
+        <div class="product-delivery">✓ CONTRAENTREGA</div>
+        <div class="option-title">Talla (opcional)</div>
+        <div class="options">
+          <button class="option" onclick="seleccionarTalla('v2k','36',this)">36</button>
+          <button class="option" onclick="seleccionarTalla('v2k','37',this)">37</button>
+          <button class="option" onclick="seleccionarTalla('v2k','38',this)">38</button>
+          <button class="option" onclick="seleccionarTalla('v2k','39',this)">39</button>
+        </div>
+        <div class="option-title">Color</div>
+        <div class="options"><button class="option active">Beige</button></div>
+        <div class="product-actions">
+          <button class="action action-cart" onclick="agregarCarrito('Nike V2K Run',170000,'imagenes/nike-v2k-run-beige.webp','v2k')">🛒 AGREGAR</button>
+          <button class="action action-whatsapp" onclick="comprarWhatsApp('Nike V2K Run',170000,'v2k')">💬 WHATSAPP</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ADIDAS BOUNCE -->
+    <article class="product-card" data-category="hombre mujer">
+      <div class="product-image"><img id="bounceImagen" src="imagenes/adidas-bounce.webp" alt="Adidas Bounce" loading="lazy"></div>
+      <div class="product-info">
+        <div class="product-name">Adidas Bounce</div>
+        <div class="product-price">$170.000</div>
+        <div class="product-delivery">✓ CONTRAENTREGA</div>
+        <div class="option-title">Talla (opcional)</div>
+        <div class="options">
+          <button class="option" onclick="seleccionarTalla('bounce','36',this)">36</button>
+          <button class="option" onclick="seleccionarTalla('bounce','37',this)">37</button>
+          <button class="option" onclick="seleccionarTalla('bounce','38',this)">38</button>
+          <button class="option" onclick="seleccionarTalla('bounce','39',this)">39</button>
+        </div>
+        <div class="option-title">Color</div>
+        <div class="options"><button class="option active">Negro/Blanco</button></div>
+        <div class="product-actions">
+          <button class="action action-cart" onclick="agregarCarrito('Adidas Bounce',170000,'imagenes/adidas-bounce.webp','bounce')">🛒 AGREGAR</button>
+          <button class="action action-whatsapp" onclick="comprarWhatsApp('Adidas Bounce',170000,'bounce')">💬 WHATSAPP</button>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -1453,6 +1531,9 @@ footer{
         <option>New Balance</option>
         <option>Adidas Samba OG</option>
         <option>Nike Vomero 18 – Dama</option>
+        <option>On Cloudrunner JAMAICA</option>
+        <option>Nike V2K Run</option>
+        <option>Adidas Bounce</option>
       </select>
 
     </div>
@@ -1597,13 +1678,19 @@ let carrito = JSON.parse(localStorage.getItem("sneakerscol_carrito")) || [];
 let tallas = {
   nb:"",
   samba:"",
-  vomero:""
+  vomero:"",
+  cloudrunner:"",
+  v2k:"",
+  bounce:""
 };
 
 let colores = {
   nb:"Clásico",
   samba:"Blanco",
-  vomero:"Beige/Rosa"
+  vomero:"Beige/Rosa",
+  cloudrunner:"Jamaica",
+  v2k:"Beige",
+  bounce:"Negro/Blanco"
 };
 
 let nbImagenActual = "imagenes/newbalance-1.webp";
@@ -1612,6 +1699,16 @@ let vomeroImagenActual = "imagenes/vomero-beigerosa.webp";
 
 let estrellasSeleccionadas = 0;
 
+
+/* ================= CATEGORÍAS ================= */
+function filtrarCategoria(categoria,boton){
+  document.querySelectorAll('.category-filter').forEach(b=>b.classList.remove('active'));
+  boton.classList.add('active');
+  document.querySelectorAll('.product-card[data-category]').forEach(card=>{
+    const categorias=(card.dataset.category||'').split(' ');
+    card.classList.toggle('category-hidden', categoria !== 'todos' && !categorias.includes(categoria));
+  });
+}
 
 /* ================= UTILIDADES ================= */
 
