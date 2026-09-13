@@ -157,6 +157,119 @@
   </div>
 
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://mqkghtubwpsjvoivynhr.supabase.co";
+const SUPABASE_KEY = "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+function dinero(valor) {
+  return "$" + Number(valor || 0).toLocaleString("es-CO");
+}
+
+function limpiarTexto(texto) {
+  const div = document.createElement("div");
+  div.textContent = texto ?? "";
+  return div.innerHTML;
+}
+
+async function verificarSesion() {
+  const { data } = await supabaseClient.auth.getSession();
+
+  if (!data.session) {
+    window.location.href = "admin.html";
+    return false;
+  }
+
+  return true;
+}
+
+async function cargarProductos() {
+
+  const sesionCorrecta = await verificarSesion();
+
+  if (!sesionCorrecta) return;
+
+  const lista = document.getElementById("listaProductos");
+
+  lista.innerHTML = `
+    <tr>
+      <td colspan="4" class="vacio">
+        Cargando productos...
+      </td>
+    </tr>
+  `;
+
+  const { data, error } = await supabaseClient
+    .from("productos")
+    .select("id,nombre,precio,tallas,disponible")
+    .order("id", { ascending: true });
+
+  if (error) {
+    console.error(error);
+
+    lista.innerHTML = `
+      <tr>
+        <td colspan="4" class="vacio">
+          Error cargando los productos.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  if (!data || data.length === 0) {
+
+    lista.innerHTML = `
+      <tr>
+        <td colspan="4" class="vacio">
+          No hay productos registrados todavía.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  lista.innerHTML = data.map(producto => {
+
+    const estado =
+      producto.disponible === false
+        ? "No disponible"
+        : "Disponible";
+
+    return `
+      <tr>
+        <td>${limpiarTexto(producto.nombre)}</td>
+
+        <td>${dinero(producto.precio)}</td>
+
+        <td>
+          ${limpiarTexto(producto.tallas || "Sin tallas")}
+          <br>
+          <small>${estado}</small>
+        </td>
+
+        <td>
+          <button type="button">
+            EDITAR
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  cargarProductos
+);
+</script>
 </body>
 </html>
