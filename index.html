@@ -409,6 +409,34 @@ header{
   transform:scale(1.05);
 }
 
+.product-gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  padding:10px 0 0;
+}
+
+.gallery-thumb{
+  border:2px solid transparent;
+  background:#f3f3f3;
+  padding:0;
+  border-radius:6px;
+  overflow:hidden;
+  cursor:pointer;
+  aspect-ratio:1/1;
+}
+
+.gallery-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.gallery-thumb.active{
+  border-color:var(--green);
+}
+
 .product-info{
   padding:20px;
 }
@@ -1103,6 +1131,7 @@ footer{
 
       <div class="product-image">
         <img
+          id="nbImagen"
           src="imagenes/newbalance-1.webp"
           alt="New Balance"
           loading="lazy"
@@ -1110,6 +1139,21 @@ footer{
       </div>
 
       <div class="product-info">
+
+        <div class="product-gallery" aria-label="Galería New Balance">
+          <button class="gallery-thumb active" type="button" onclick="cambiarImagenNB('imagenes/newbalance-1.webp',this)" aria-label="Ver foto 1 de New Balance">
+            <img src="imagenes/newbalance-1.webp" alt="New Balance foto 1">
+          </button>
+          <button class="gallery-thumb" type="button" onclick="cambiarImagenNB('imagenes/newbalance-2.webp',this)" aria-label="Ver foto 2 de New Balance">
+            <img src="imagenes/newbalance-2.webp" alt="New Balance foto 2">
+          </button>
+          <button class="gallery-thumb" type="button" onclick="cambiarImagenNB('imagenes/newbalance-3.webp',this)" aria-label="Ver foto 3 de New Balance">
+            <img src="imagenes/newbalance-3.webp" alt="New Balance foto 3">
+          </button>
+          <button class="gallery-thumb" type="button" onclick="cambiarImagenNB('imagenes/newbalance-4.webp',this)" aria-label="Ver foto 4 de New Balance">
+            <img src="imagenes/newbalance-4.webp" alt="New Balance foto 4">
+          </button>
+        </div>
 
         <div class="product-name">New Balance</div>
 
@@ -1145,7 +1189,7 @@ footer{
             onclick="agregarCarrito(
               'New Balance',
               130000,
-              'imagenes/newbalance-1.webp',
+              nbImagenActual,
               'nb'
             )">
             🛒 AGREGAR
@@ -1557,10 +1601,12 @@ let tallas = {
 };
 
 let colores = {
+  nb:"Clásico",
   samba:"Blanco",
   vomero:"Beige/Rosa"
 };
 
+let nbImagenActual = "imagenes/newbalance-1.webp";
 let sambaImagenActual = "imagenes/samba-blanco.webp";
 let vomeroImagenActual = "imagenes/vomero-beigerosa.webp";
 
@@ -1595,6 +1641,20 @@ function seleccionarTalla(producto,talla,boton){
   const botones = boton.parentElement.querySelectorAll(".option");
 
   botones.forEach(b => b.classList.remove("active"));
+
+  boton.classList.add("active");
+}
+
+
+/* ================= GALERÍA NEW BALANCE ================= */
+
+function cambiarImagenNB(imagen,boton){
+
+  nbImagenActual = imagen;
+  document.getElementById("nbImagen").src = imagen;
+
+  document.querySelectorAll(".product-gallery .gallery-thumb")
+    .forEach(b => b.classList.remove("active"));
 
   boton.classList.add("active");
 }
@@ -1640,16 +1700,12 @@ function comprarWhatsApp(producto,precio,tipo){
 Producto: ${producto}
 Precio: ${dinero(precio)}`;
 
-  if(tipo === "samba"){
-    mensaje += \nColor: ${colores.samba};
-  }
-
-  if(tipo === "vomero"){
-    mensaje += \nColor: ${colores.vomero};
+  if(colores[tipo]){
+    mensaje += `\nColor: ${colores[tipo]}`;
   }
 
   if(tallas[tipo]){
-    mensaje += \nTalla: ${tallas[tipo]};
+    mensaje += `\nTalla: ${tallas[tipo]}`;
   }
 
   mensaje += `
@@ -1660,7 +1716,7 @@ Precio: ${dinero(precio)}`;
 Quiero recibir información para realizar mi pedido.`;
 
   window.open(
-    https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)},
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`,
     "_blank"
   );
 }
@@ -1672,15 +1728,7 @@ function agregarCarrito(nombre,precio,imagen,tipo){
 
   let talla = tallas[tipo] || "";
 
-  let color = "";
-
-  if(tipo === "samba"){
-    color = colores.samba;
-  }
-
-  if(tipo === "vomero"){
-    color = colores.vomero;
-  }
+  let color = colores[tipo] || "";
 
   carrito.push({
     id:Date.now() + Math.random(),
@@ -1713,15 +1761,12 @@ function guardarCarrito(){
 function actualizarCarrito(){
 
   const contenedor = document.getElementById("cartItems");
-
   const contador = document.getElementById("cartCount");
-
   const total = document.getElementById("cartTotal");
 
   contador.textContent = carrito.length;
 
   if(carrito.length === 0){
-
     contenedor.innerHTML = `
       <div class="empty-cart">
         🛒<br><br>
@@ -1730,56 +1775,35 @@ function actualizarCarrito(){
         Agrega tus sneakers favoritos.
       </div>
     `;
-
     total.textContent = "$0";
-
     return;
   }
 
-  contenedor.innerHTML = carrito.map(item => `
+  contenedor.innerHTML = carrito.map(item => {
+    const colorHtml = item.color
+      ? `<div class="cart-item-detail">Color: ${item.color}</div>`
+      : "";
 
-    <div class="cart-item">
+    const tallaHtml = item.talla
+      ? `<div class="cart-item-detail">Talla: ${item.talla}</div>`
+      : `<div class="cart-item-detail">Talla: Por definir</div>`;
 
-      <img
-        src="${item.imagen}"
-        alt="${item.nombre}">
-
-      <div class="cart-item-info">
-
-        <div class="cart-item-name">
-          ${item.nombre}
+    return `
+      <div class="cart-item">
+        <img src="${item.imagen}" alt="${item.nombre}">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.nombre}</div>
+          ${colorHtml}
+          ${tallaHtml}
+          <div class="cart-item-price">${dinero(item.precio)}</div>
         </div>
-
-        ${
-          item.color
-          ? <div class="cart-item-detail">Color: ${item.color}</div>
-          : ""
-        }
-
-        ${
-          item.talla
-          ? <div class="cart-item-detail">Talla: ${item.talla}</div>
-          : <div class="cart-item-detail">Talla: Por definir</div>
-        }
-
-        <div class="cart-item-price">
-          ${dinero(item.precio)}
-        </div>
-
+        <button class="remove-item" onclick="eliminarCarrito('${item.id}')">✕</button>
       </div>
-
-      <button
-        class="remove-item"
-        onclick="eliminarCarrito('${item.id}')">
-        ✕
-      </button>
-
-    </div>
-
-  `).join("");
+    `;
+  }).join("");
 
   const suma = carrito.reduce(
-    (total,item)=>total + Number(item.precio),
+    (acumulado,item)=>acumulado + Number(item.precio),
     0
   );
 
@@ -1873,7 +1897,7 @@ Precio: ${dinero(item.precio)}
 Quiero realizar este pedido.`;
 
   window.open(
-    https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)},
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`,
     "_blank"
   );
 }
