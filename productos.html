@@ -78,16 +78,23 @@
       color: #111;
     }
 
+    .editar {
+      background: white;
+      color: #111;
+    }
+
     .contenedor {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 12px;
       padding: 20px;
+      overflow-x: auto;
     }
 
     .estado {
       color: #7CFF00;
       margin-bottom: 15px;
+      font-weight: bold;
     }
 
     table {
@@ -95,7 +102,8 @@
       border-collapse: collapse;
     }
 
-    th, td {
+    th,
+    td {
       padding: 13px;
       text-align: left;
       border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -105,10 +113,40 @@
       color: #7CFF00;
     }
 
+    td small {
+      color: #ddd;
+    }
+
     .vacio {
       color: #bbb;
       text-align: center;
       padding: 30px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .volver {
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      main {
+        width: 94%;
+        margin: 25px auto;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -116,8 +154,13 @@
 <body>
 
 <header>
-  <div class="logo">SNEAKERS <span>COL</span></div>
-  <a class="volver" href="panel.html">VOLVER AL PANEL</a>
+  <div class="logo">
+    SNEAKERS <span>COL</span>
+  </div>
+
+  <a class="volver" href="panel.html">
+    VOLVER AL PANEL
+  </a>
 </header>
 
 <main>
@@ -128,15 +171,23 @@
   </div>
 
   <div class="acciones">
-    <button class="nuevo" type="button">
+    <button
+      class="nuevo"
+      type="button"
+      onclick="nuevoProducto()"
+    >
       + AGREGAR PRODUCTO
     </button>
   </div>
 
   <div class="contenedor">
-    <div class="estado">● Sistema conectado</div>
+
+    <div class="estado">
+      ● Sistema conectado
+    </div>
 
     <table>
+
       <thead>
         <tr>
           <th>Producto</th>
@@ -153,24 +204,39 @@
           </td>
         </tr>
       </tbody>
+
     </table>
+
   </div>
 
 </main>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = "https://mqkghtubwpsjvoivynhr.supabase.co";
-const SUPABASE_KEY = "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
+
+const SUPABASE_URL =
+  "https://mqkghtubwpsjvoivynhr.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
+
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
+
+/* =========================
+   UTILIDADES
+========================= */
+
 function dinero(valor) {
   return "$" + Number(valor || 0).toLocaleString("es-CO");
 }
+
 
 function limpiarTexto(texto) {
   const div = document.createElement("div");
@@ -178,10 +244,24 @@ function limpiarTexto(texto) {
   return div.innerHTML;
 }
 
-async function verificarSesion() {
-  const { data } = await supabaseClient.auth.getSession();
 
-  if (!data.session) {
+/* =========================
+   VERIFICAR SESIÓN
+========================= */
+
+async function verificarSesion() {
+
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+    console.error(
+      "Error verificando la sesión:",
+      error
+    );
+  }
+
+  if (!data || !data.session) {
     window.location.href = "admin.html";
     return false;
   }
@@ -189,13 +269,24 @@ async function verificarSesion() {
   return true;
 }
 
+
+/* =========================
+   CARGAR PRODUCTOS
+========================= */
+
 async function cargarProductos() {
 
-  const sesionCorrecta = await verificarSesion();
+  const sesionCorrecta =
+    await verificarSesion();
 
-  if (!sesionCorrecta) return;
+  if (!sesionCorrecta) {
+    return;
+  }
 
-  const lista = document.getElementById("listaProductos");
+
+  const lista =
+    document.getElementById("listaProductos");
+
 
   lista.innerHTML = `
     <tr>
@@ -205,13 +296,20 @@ async function cargarProductos() {
     </tr>
   `;
 
-  const { data, error } = await supabaseClient
-    .from("productos")
-    .select("id,nombre,precio,tallas,disponible")
-    .order("id", { ascending: true });
+
+  const { data, error } =
+    await supabaseClient
+      .from("productos")
+      .select("id,nombre,precio,tallas,disponible")
+      .order("id", { ascending: true });
+
 
   if (error) {
-    console.error(error);
+
+    console.error(
+      "Error cargando productos:",
+      error
+    );
 
     lista.innerHTML = `
       <tr>
@@ -223,6 +321,7 @@ async function cargarProductos() {
 
     return;
   }
+
 
   if (!data || data.length === 0) {
 
@@ -237,39 +336,88 @@ async function cargarProductos() {
     return;
   }
 
-  lista.innerHTML = data.map(producto => {
 
-    const estado =
-      producto.disponible === false
-        ? "No disponible"
-        : "Disponible";
+  lista.innerHTML =
+    data.map(producto => {
 
-    return `
-      <tr>
-        <td>${limpiarTexto(producto.nombre)}</td>
+      const estado =
+        producto.disponible === false
+          ? "No disponible"
+          : "Disponible";
 
-        <td>${dinero(producto.precio)}</td>
 
-        <td>
-          ${limpiarTexto(producto.tallas || "Sin tallas")}
-          <br>
-          <small>${estado}</small>
-        </td>
+      return `
+        <tr>
 
-        <td>
-          <button type="button">
-            EDITAR
-          </button>
-        </td>
-      </tr>
-    `;
-  }).join("");
+          <td>
+            ${limpiarTexto(producto.nombre)}
+          </td>
+
+          <td>
+            ${dinero(producto.precio)}
+          </td>
+
+          <td>
+            ${limpiarTexto(
+              producto.tallas || "Sin tallas"
+            )}
+
+            <br>
+
+            <small>
+              ${estado}
+            </small>
+          </td>
+
+          <td>
+            <button
+              class="editar"
+              type="button"
+              onclick="editarProducto('${producto.id}')"
+            >
+              EDITAR
+            </button>
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
 }
+
+
+/* =========================
+   EDITAR PRODUCTO
+========================= */
+
+function editarProducto(id) {
+
+  window.location.href =
+    editar-producto.html?id=${encodeURIComponent(id)};
+}
+
+
+/* =========================
+   NUEVO PRODUCTO
+========================= */
+
+function nuevoProducto() {
+
+  window.location.href =
+    "editar-producto.html";
+}
+
+
+/* =========================
+   INICIAR
+========================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   cargarProductos
 );
+
 </script>
+
 </body>
 </html>
