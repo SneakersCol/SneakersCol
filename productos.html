@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos | SneakersCol</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #111827;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px 30px;
+      border-bottom: 2px solid #7CFF00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #7CFF00;
+    }
+
+    .volver {
+      background: #7CFF00;
+      color: #111;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    main {
+      width: min(1100px, 92%);
+      margin: 35px auto;
+    }
+
+    .titulo {
+      margin-bottom: 25px;
+    }
+
+    .titulo h1 {
+      margin-bottom: 8px;
+    }
+
+    .titulo p {
+      color: #bbb;
+    }
+
+    .acciones {
+      margin-bottom: 25px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nuevo {
+      background: #7CFF00;
+      color: #111;
+    }
+
+    .contenedor {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .estado {
+      color: #7CFF00;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 13px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    th {
+      color: #7CFF00;
+    }
+
+    .vacio {
+      color: #bbb;
+      text-align: center;
+      padding: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SNEAKERS <span>COL</span></div>
+  <a class="volver" href="panel.html">VOLVER AL PANEL</a>
+</header>
+
+<main>
+
+  <div class="titulo">
+    <h1>Productos</h1>
+    <p>Administra el catálogo de SneakersCol.</p>
+  </div>
+
+  <div class="acciones">
+    <button class="nuevo" type="button">
+      + AGREGAR PRODUCTO
+    </button>
+  </div>
+
+  <div class="contenedor">
+    <div class="estado">● Sistema conectado</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Inventario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody id="listaProductos">
+        <tr>
+          <td colspan="4" class="vacio">
+            Preparando catálogo de productos...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+</body>
+</html>
