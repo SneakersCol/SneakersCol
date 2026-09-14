@@ -230,7 +230,6 @@
 
 </header>
 
-
 <main>
 
   <div class="caja">
@@ -242,7 +241,6 @@
     <div class="subtitulo" id="subtituloPagina">
       Cargando información...
     </div>
-
 
     <form id="formProducto">
 
@@ -260,7 +258,6 @@
         >
 
       </div>
-
 
       <div class="campo">
 
@@ -282,7 +279,6 @@
         </span>
 
       </div>
-
 
       <div class="campo">
 
@@ -323,6 +319,24 @@
 
       </div>
 
+      <div class="campo">
+
+        <label for="color">
+          Colores disponibles
+        </label>
+
+        <input
+          id="color"
+          type="text"
+          placeholder="Ejemplo: Blanco, Negro, Beige"
+        >
+
+        <span class="ayuda">
+          Si el modelo tiene varios colores, sepáralos con comas.
+          Ejemplo: Blanco, Negro, Beige.
+        </span>
+
+      </div>
 
       <div class="campo">
 
@@ -341,7 +355,6 @@
         </span>
 
       </div>
-
 
       <div class="campo">
 
@@ -378,7 +391,6 @@
 
         </div>
 
-
         <div
           id="contenedorPreview"
           style="display:none;"
@@ -396,7 +408,6 @@
         </div>
 
       </div>
-
 
       <div class="campo">
 
@@ -420,7 +431,6 @@
 
       </div>
 
-
       <div class="acciones">
 
         <button
@@ -443,13 +453,11 @@
 
     </form>
 
-
     <div id="mensaje"></div>
 
   </div>
 
 </main>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -483,6 +491,9 @@ const inputPrecio =
 
 const inputCategoria =
   document.getElementById("categoria");
+
+const inputColor =
+  document.getElementById("color");
 
 const inputTallas =
   document.getElementById("tallas");
@@ -530,7 +541,7 @@ let imagenesGuardadas = [];
 
 
 /* =====================================
-   OBTENER ID DE LA URL
+   OBTENER ID
 ===================================== */
 
 const parametros =
@@ -556,8 +567,7 @@ function mostrarMensaje(texto, tipo) {
 
 
 /* =====================================
-   CONVERTIR TEXTO DE IMÁGENES
-   EN LISTA
+   CONVERTIR IMÁGENES EN LISTA
 ===================================== */
 
 function convertirImagenesEnLista(valor) {
@@ -601,10 +611,8 @@ function mostrarImagenesActuales(lista) {
     return;
   }
 
-
   contenedorImagenesActuales.style.display =
     "block";
-
 
   lista.forEach(function(url) {
 
@@ -613,7 +621,6 @@ function mostrarImagenesActuales(lista) {
 
     item.className =
       "imagen-item";
-
 
     const img =
       document.createElement("img");
@@ -626,7 +633,6 @@ function mostrarImagenesActuales(lista) {
     img.loading =
       "lazy";
 
-
     item.appendChild(img);
 
     imagenesActuales.appendChild(item);
@@ -636,7 +642,7 @@ function mostrarImagenesActuales(lista) {
 
 
 /* =====================================
-   VISTA PREVIA DE FOTOS NUEVAS
+   VISTA PREVIA
 ===================================== */
 
 inputImagenes.addEventListener(
@@ -648,7 +654,6 @@ inputImagenes.addEventListener(
     const archivos =
       Array.from(inputImagenes.files || []);
 
-
     if (archivos.length === 0) {
 
       contenedorPreview.style.display =
@@ -657,10 +662,8 @@ inputImagenes.addEventListener(
       return;
     }
 
-
     contenedorPreview.style.display =
       "block";
-
 
     archivos.forEach(function(archivo) {
 
@@ -670,21 +673,17 @@ inputImagenes.addEventListener(
       item.className =
         "imagen-item";
 
-
       const img =
         document.createElement("img");
 
-
       const urlTemporal =
         URL.createObjectURL(archivo);
-
 
       img.src =
         urlTemporal;
 
       img.alt =
         archivo.name;
-
 
       img.onload =
         function() {
@@ -694,7 +693,6 @@ inputImagenes.addEventListener(
           );
 
         };
-
 
       item.appendChild(img);
 
@@ -715,7 +713,6 @@ async function verificarSesion() {
   const { data, error } =
     await supabaseClient.auth.getSession();
 
-
   if (error) {
 
     console.error(
@@ -725,7 +722,6 @@ async function verificarSesion() {
 
     return false;
   }
-
 
   if (
     !data ||
@@ -738,13 +734,12 @@ async function verificarSesion() {
     return false;
   }
 
-
   return true;
 }
 
 
 /* =====================================
-   CARGAR PRODUCTO EXISTENTE
+   CARGAR PRODUCTO
 ===================================== */
 
 async function cargarProducto() {
@@ -752,11 +747,9 @@ async function cargarProducto() {
   const sesionCorrecta =
     await verificarSesion();
 
-
   if (!sesionCorrecta) {
     return;
   }
-
 
   /*
     PRODUCTO NUEVO
@@ -770,18 +763,14 @@ async function cargarProducto() {
     subtituloPagina.textContent =
       "Registra un nuevo producto en SneakersCol.";
 
-    /*
-      Dejamos la categoría sin seleccionar
-      para obligarnos a elegir correctamente
-      Hombre, Mujer, Hombre y Mujer o Kids.
-    */
-
     inputCategoria.value =
+      "";
+
+    inputColor.value =
       "";
 
     return;
   }
-
 
   /*
     EDITAR PRODUCTO
@@ -798,7 +787,7 @@ async function cargarProducto() {
     await supabaseClient
       .from("productos")
       .select(
-        "id,nombre,precio,categoria,tallas,disponible,imagenes"
+        "id,nombre,precio,categoria,color,tallas,disponible,imagenes"
       )
       .eq("id", productoId)
       .maybeSingle();
@@ -818,7 +807,6 @@ async function cargarProducto() {
 
     return;
   }
-
 
   if (!data) {
 
@@ -846,7 +834,6 @@ async function cargarProducto() {
     String(
       data.categoria || ""
     ).trim();
-
 
   const categoriaNormalizada =
     categoriaGuardada.toLowerCase();
@@ -899,12 +886,6 @@ async function cargarProducto() {
     categoriaNormalizada === "sneakers"
   ) {
 
-    /*
-      Los productos antiguos que tenían
-      categoría "Sneakers" se mostrarán
-      como Hombre y Mujer.
-    */
-
     inputCategoria.value =
       "Hombre y Mujer";
 
@@ -918,18 +899,38 @@ async function cargarProducto() {
   }
 
 
+  /*
+    COLORES
+  */
+
+  inputColor.value =
+    data.color || "";
+
+
+  /*
+    TALLAS
+  */
+
   inputTallas.value =
     data.tallas || "";
+
+
+  /*
+    DISPONIBILIDAD
+  */
 
   inputDisponible.checked =
     data.disponible !== false;
 
 
+  /*
+    IMÁGENES
+  */
+
   imagenesGuardadas =
     convertirImagenesEnLista(
       data.imagenes
     );
-
 
   mostrarImagenesActuales(
     imagenesGuardadas
@@ -942,7 +943,7 @@ async function cargarProducto() {
 
 
 /* =====================================
-   LIMPIAR NOMBRE DE ARCHIVO
+   LIMPIAR NOMBRE ARCHIVO
 ===================================== */
 
 function limpiarNombreArchivo(nombre) {
@@ -962,7 +963,7 @@ function limpiarNombreArchivo(nombre) {
 
 
 /* =====================================
-   SUBIR IMÁGENES A SUPABASE STORAGE
+   SUBIR IMÁGENES
 ===================================== */
 
 async function subirImagenes() {
@@ -972,15 +973,12 @@ async function subirImagenes() {
       inputImagenes.files || []
     );
 
-
   if (archivos.length === 0) {
 
     return [];
   }
 
-
   const urlsNuevas = [];
-
 
   for (
     let i = 0;
@@ -991,7 +989,6 @@ async function subirImagenes() {
     const archivo =
       archivos[i];
 
-
     mostrarMensaje(
       "Subiendo foto " +
       (i + 1) +
@@ -1001,12 +998,10 @@ async function subirImagenes() {
       "correcto"
     );
 
-
     const nombreSeguro =
       limpiarNombreArchivo(
         archivo.name
       );
-
 
     const nombreArchivo =
       Date.now() +
@@ -1017,11 +1012,9 @@ async function subirImagenes() {
       "-" +
       nombreSeguro;
 
-
     const ruta =
       "catalogo/" +
       nombreArchivo;
-
 
     const {
       error: errorSubida
@@ -1037,7 +1030,6 @@ async function subirImagenes() {
           }
         );
 
-
     if (errorSubida) {
 
       console.error(
@@ -1051,14 +1043,12 @@ async function subirImagenes() {
       );
     }
 
-
     const {
       data: datosPublicos
     } =
       supabaseClient.storage
         .from("productos")
         .getPublicUrl(ruta);
-
 
     if (
       datosPublicos &&
@@ -1072,7 +1062,6 @@ async function subirImagenes() {
     }
 
   }
-
 
   return urlsNuevas;
 }
@@ -1097,6 +1086,9 @@ formulario.addEventListener(
 
     const categoria =
       inputCategoria.value.trim();
+
+    const color =
+      inputColor.value.trim();
 
     const tallas =
       inputTallas.value.trim();
@@ -1141,7 +1133,6 @@ formulario.addEventListener(
       "Kids"
     ];
 
-
     if (
       !categoriasPermitidas.includes(
         categoria
@@ -1167,7 +1158,7 @@ formulario.addEventListener(
     try {
 
       /*
-        SUBIR FOTOS NUEVAS
+        SUBIR FOTOS
       */
 
       const imagenesNuevas =
@@ -1175,8 +1166,7 @@ formulario.addEventListener(
 
 
       /*
-        CONSERVAR LAS ANTERIORES
-        Y AGREGAR LAS NUEVAS
+        CONSERVAR FOTOS EXISTENTES
       */
 
       const todasLasImagenes = [
@@ -1184,19 +1174,13 @@ formulario.addEventListener(
         ...imagenesNuevas
       ];
 
-
-      /*
-        La columna "imagenes" de Supabase
-        actualmente es TEXT.
-
-        Guardamos todas las URL separadas
-        por comas para mantener compatibilidad
-        con la estructura existente.
-      */
-
       const textoImagenes =
         todasLasImagenes.join(",");
 
+
+      /*
+        DATOS A GUARDAR
+      */
 
       const datosProducto = {
 
@@ -1205,6 +1189,9 @@ formulario.addEventListener(
         precio: precio,
 
         categoria: categoria,
+
+        color:
+          color || null,
 
         tallas: tallas,
 
@@ -1220,7 +1207,7 @@ formulario.addEventListener(
 
 
       /*
-        EDITAR PRODUCTO EXISTENTE
+        EDITAR
       */
 
       if (productoId) {
@@ -1236,7 +1223,7 @@ formulario.addEventListener(
 
 
       /*
-        CREAR PRODUCTO NUEVO
+        CREAR NUEVO
       */
 
       else {
@@ -1276,7 +1263,6 @@ formulario.addEventListener(
 
     }
 
-
     catch (error) {
 
       console.error(
@@ -1284,12 +1270,10 @@ formulario.addEventListener(
         error
       );
 
-
       mostrarMensaje(
         "No fue posible guardar el producto o subir las fotografías.",
         "error"
       );
-
 
       btnGuardar.disabled =
         false;
