@@ -47,7 +47,7 @@
     }
 
     main {
-      width: min(700px, 92%);
+      width: min(760px, 92%);
       margin: 40px auto;
     }
 
@@ -69,7 +69,7 @@
     }
 
     .campo {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     label {
@@ -124,16 +124,16 @@
     .imagenes-actuales,
     .preview-imagenes {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 12px;
-      margin-top: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
     }
 
     .imagen-item {
       background: #1f2937;
       border: 1px solid #374151;
       border-radius: 10px;
-      padding: 8px;
+      padding: 7px;
       overflow: hidden;
     }
 
@@ -152,6 +152,51 @@
       color: #7CFF00;
       font-size: 13px;
       font-weight: bold;
+    }
+
+    .separador {
+      height: 1px;
+      background: rgba(255,255,255,.12);
+      margin: 30px 0;
+    }
+
+    .titulo-seccion {
+      margin: 0 0 8px 0;
+      color: #7CFF00;
+      font-size: 20px;
+    }
+
+    .color-card {
+      background: #172033;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .color-cabecera {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .color-cabecera input {
+      flex: 1;
+    }
+
+    .btn-eliminar-color {
+      background: #7f1d1d;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .btn-agregar-color {
+      width: 100%;
+      margin-top: 15px;
+      background: #2563eb;
+      color: white;
+      padding: 13px;
     }
 
     .acciones {
@@ -209,8 +254,13 @@
         padding: 20px;
       }
 
-      .acciones {
+      .acciones,
+      .color-cabecera {
         flex-direction: column;
+      }
+
+      .btn-eliminar-color {
+        width: 100%;
       }
     }
   </style>
@@ -234,11 +284,12 @@
 
   <div class="caja">
 
-    <h1 id="tituloPagina">
-      Producto
-    </h1>
+    <h1 id="tituloPagina">Producto</h1>
 
-    <div class="subtitulo" id="subtituloPagina">
+    <div
+      class="subtitulo"
+      id="subtituloPagina"
+    >
       Cargando información...
     </div>
 
@@ -275,7 +326,7 @@
         >
 
         <span class="ayuda">
-          Escribe solamente números, por ejemplo: 130000
+          Escribe solamente números, por ejemplo: 130000.
         </span>
 
       </div>
@@ -313,29 +364,6 @@
 
         </select>
 
-        <span class="ayuda">
-          Esta opción determina en qué sección aparecerá el producto en la tienda.
-        </span>
-
-      </div>
-
-      <div class="campo">
-
-        <label for="color">
-          Colores disponibles
-        </label>
-
-        <input
-          id="color"
-          type="text"
-          placeholder="Ejemplo: Blanco, Negro, Beige"
-        >
-
-        <span class="ayuda">
-          Si el modelo tiene varios colores, sepáralos con comas.
-          Ejemplo: Blanco, Negro, Beige.
-        </span>
-
       </div>
 
       <div class="campo">
@@ -356,10 +384,32 @@
 
       </div>
 
+      <div class="separador"></div>
+
+      <h2 class="titulo-seccion">
+        Colores y fotografías
+      </h2>
+
+      <span class="ayuda">
+        Crea un bloque para cada color del modelo y selecciona las fotografías correspondientes.
+      </span>
+
+      <div id="contenedorColores"></div>
+
+      <button
+        class="btn-agregar-color"
+        type="button"
+        id="btnAgregarColor"
+      >
+        + AGREGAR OTRO COLOR
+      </button>
+
+      <div class="separador"></div>
+
       <div class="campo">
 
         <label for="imagenes">
-          Fotos del producto
+          Fotografías generales
         </label>
 
         <input
@@ -370,9 +420,8 @@
         >
 
         <span class="ayuda">
-          Puedes seleccionar varias fotos al mismo tiempo.
-          Si estás editando un producto y no seleccionas fotos nuevas,
-          se conservarán las que ya tiene.
+          Este campo se mantiene para conservar compatibilidad con los productos actuales.
+          Para productos nuevos, usa preferiblemente las fotografías de cada color.
         </span>
 
         <div
@@ -381,7 +430,7 @@
         >
 
           <div class="titulo-imagenes">
-            FOTOS ACTUALES
+            FOTOS GENERALES ACTUALES
           </div>
 
           <div
@@ -397,7 +446,7 @@
         >
 
           <div class="titulo-imagenes">
-            FOTOS NUEVAS SELECCIONADAS
+            FOTOS GENERALES NUEVAS
           </div>
 
           <div
@@ -469,11 +518,11 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_GwPXab6AhFFXVKr-mfobAw_98C6wFIW";
 
-
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
 /* =====================================
@@ -492,9 +541,6 @@ const inputPrecio =
 const inputCategoria =
   document.getElementById("categoria");
 
-const inputColor =
-  document.getElementById("color");
-
 const inputTallas =
   document.getElementById("tallas");
 
@@ -503,6 +549,12 @@ const inputImagenes =
 
 const inputDisponible =
   document.getElementById("disponible");
+
+const contenedorColores =
+  document.getElementById("contenedorColores");
+
+const btnAgregarColor =
+  document.getElementById("btnAgregarColor");
 
 const imagenesActuales =
   document.getElementById("imagenesActuales");
@@ -539,9 +591,11 @@ const btnGuardar =
 
 let imagenesGuardadas = [];
 
+let contadorColores = 0;
+
 
 /* =====================================
-   OBTENER ID
+   ID DEL PRODUCTO
 ===================================== */
 
 const parametros =
@@ -567,7 +621,7 @@ function mostrarMensaje(texto, tipo) {
 
 
 /* =====================================
-   CONVERTIR IMÁGENES EN LISTA
+   LISTA DE IMÁGENES
 ===================================== */
 
 function convertirImagenesEnLista(valor) {
@@ -596,7 +650,56 @@ function convertirImagenesEnLista(valor) {
 
 
 /* =====================================
-   MOSTRAR IMÁGENES ACTUALES
+   ESCAPAR TEXTO
+===================================== */
+
+function escaparHTML(texto) {
+
+  return String(texto || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+/* =====================================
+   MOSTRAR IMÁGENES
+===================================== */
+
+function mostrarImagenesEnContenedor(
+  contenedor,
+  lista
+) {
+
+  contenedor.innerHTML = "";
+
+  lista.forEach(function(url) {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "imagen-item";
+
+    const img =
+      document.createElement("img");
+
+    img.src = url;
+    img.alt = "Foto del producto";
+    img.loading = "lazy";
+
+    item.appendChild(img);
+
+    contenedor.appendChild(item);
+
+  });
+}
+
+
+/* =====================================
+   FOTOS GENERALES ACTUALES
 ===================================== */
 
 function mostrarImagenesActuales(lista) {
@@ -614,35 +717,15 @@ function mostrarImagenesActuales(lista) {
   contenedorImagenesActuales.style.display =
     "block";
 
-  lista.forEach(function(url) {
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "imagen-item";
-
-    const img =
-      document.createElement("img");
-
-    img.src = url;
-
-    img.alt =
-      "Foto del producto";
-
-    img.loading =
-      "lazy";
-
-    item.appendChild(img);
-
-    imagenesActuales.appendChild(item);
-
-  });
+  mostrarImagenesEnContenedor(
+    imagenesActuales,
+    lista
+  );
 }
 
 
 /* =====================================
-   VISTA PREVIA
+   PREVIEW FOTOS GENERALES
 ===================================== */
 
 inputImagenes.addEventListener(
@@ -652,7 +735,9 @@ inputImagenes.addEventListener(
     previewImagenes.innerHTML = "";
 
     const archivos =
-      Array.from(inputImagenes.files || []);
+      Array.from(
+        inputImagenes.files || []
+      );
 
     if (archivos.length === 0) {
 
@@ -679,20 +764,11 @@ inputImagenes.addEventListener(
       const urlTemporal =
         URL.createObjectURL(archivo);
 
-      img.src =
-        urlTemporal;
+      img.src = urlTemporal;
 
-      img.alt =
-        archivo.name;
-
-      img.onload =
-        function() {
-
-          URL.revokeObjectURL(
-            urlTemporal
-          );
-
-        };
+      img.onload = function() {
+        URL.revokeObjectURL(urlTemporal);
+      };
 
       item.appendChild(img);
 
@@ -705,7 +781,239 @@ inputImagenes.addEventListener(
 
 
 /* =====================================
-   VERIFICAR SESIÓN
+   CREAR BLOQUE DE COLOR
+===================================== */
+
+function agregarBloqueColor(
+  nombreColor = "",
+  imagenesColor = []
+) {
+
+  contadorColores++;
+
+  const idColor =
+    "color_" + contadorColores;
+
+  const tarjeta =
+    document.createElement("div");
+
+  tarjeta.className =
+    "color-card";
+
+  tarjeta.dataset.id =
+    idColor;
+
+  tarjeta.dataset.imagenesActuales =
+    JSON.stringify(
+      Array.isArray(imagenesColor)
+        ? imagenesColor
+        : []
+    );
+
+  tarjeta.innerHTML = `
+
+    <div class="color-cabecera">
+
+      <input
+        class="nombre-color"
+        type="text"
+        placeholder="Ejemplo: Blanco"
+        value="${escaparHTML(nombreColor)}"
+      >
+
+      <button
+        class="btn-eliminar-color"
+        type="button"
+      >
+        ELIMINAR COLOR
+      </button>
+
+    </div>
+
+    <label>
+      Fotografías de este color
+    </label>
+
+    <input
+      class="imagenes-color"
+      type="file"
+      accept="image/*"
+      multiple
+    >
+
+    <span class="ayuda">
+      Puedes seleccionar varias fotografías de este color.
+    </span>
+
+    <div
+      class="contenedor-actuales-color"
+      style="display:none;"
+    >
+
+      <div class="titulo-imagenes">
+        FOTOS ACTUALES DE ESTE COLOR
+      </div>
+
+      <div
+        class="imagenes-actuales-color imagenes-actuales"
+      ></div>
+
+    </div>
+
+    <div
+      class="contenedor-preview-color"
+      style="display:none;"
+    >
+
+      <div class="titulo-imagenes">
+        FOTOS NUEVAS DE ESTE COLOR
+      </div>
+
+      <div
+        class="preview-color preview-imagenes"
+      ></div>
+
+    </div>
+
+  `;
+
+
+  const btnEliminar =
+    tarjeta.querySelector(
+      ".btn-eliminar-color"
+    );
+
+  const inputFotos =
+    tarjeta.querySelector(
+      ".imagenes-color"
+    );
+
+  const contenedorActuales =
+    tarjeta.querySelector(
+      ".contenedor-actuales-color"
+    );
+
+  const listaActuales =
+    tarjeta.querySelector(
+      ".imagenes-actuales-color"
+    );
+
+  const contenedorPreviewColor =
+    tarjeta.querySelector(
+      ".contenedor-preview-color"
+    );
+
+  const previewColor =
+    tarjeta.querySelector(
+      ".preview-color"
+    );
+
+
+  if (
+    imagenesColor &&
+    imagenesColor.length > 0
+  ) {
+
+    contenedorActuales.style.display =
+      "block";
+
+    mostrarImagenesEnContenedor(
+      listaActuales,
+      imagenesColor
+    );
+  }
+
+
+  btnEliminar.addEventListener(
+    "click",
+    function() {
+
+      tarjeta.remove();
+
+    }
+  );
+
+
+  inputFotos.addEventListener(
+    "change",
+    function() {
+
+      previewColor.innerHTML = "";
+
+      const archivos =
+        Array.from(
+          inputFotos.files || []
+        );
+
+      if (archivos.length === 0) {
+
+        contenedorPreviewColor.style.display =
+          "none";
+
+        return;
+      }
+
+      contenedorPreviewColor.style.display =
+        "block";
+
+      archivos.forEach(function(archivo) {
+
+        const item =
+          document.createElement("div");
+
+        item.className =
+          "imagen-item";
+
+        const img =
+          document.createElement("img");
+
+        const urlTemporal =
+          URL.createObjectURL(archivo);
+
+        img.src =
+          urlTemporal;
+
+        img.onload =
+          function() {
+
+            URL.revokeObjectURL(
+              urlTemporal
+            );
+
+          };
+
+        item.appendChild(img);
+
+        previewColor.appendChild(item);
+
+      });
+
+    }
+  );
+
+
+  contenedorColores.appendChild(
+    tarjeta
+  );
+}
+
+
+/* =====================================
+   BOTÓN AGREGAR COLOR
+===================================== */
+
+btnAgregarColor.addEventListener(
+  "click",
+  function() {
+
+    agregarBloqueColor();
+
+  }
+);
+
+
+/* =====================================
+   SESIÓN
 ===================================== */
 
 async function verificarSesion() {
@@ -739,6 +1047,78 @@ async function verificarSesion() {
 
 
 /* =====================================
+   CATEGORÍA
+===================================== */
+
+function seleccionarCategoria(
+  categoria
+) {
+
+  const texto =
+    String(categoria || "")
+      .trim()
+      .toLowerCase();
+
+  if (texto === "hombre") {
+
+    inputCategoria.value =
+      "Hombre";
+
+  }
+
+  else if (
+    texto === "mujer" ||
+    texto === "dama"
+  ) {
+
+    inputCategoria.value =
+      "Mujer";
+
+  }
+
+  else if (
+    texto === "kids" ||
+    texto === "niño" ||
+    texto === "niña"
+  ) {
+
+    inputCategoria.value =
+      "Kids";
+
+  }
+
+  else if (
+    texto.includes("hombre") &&
+    (
+      texto.includes("mujer") ||
+      texto.includes("dama")
+    )
+  ) {
+
+    inputCategoria.value =
+      "Hombre y Mujer";
+
+  }
+
+  else if (
+    texto === "sneakers"
+  ) {
+
+    inputCategoria.value =
+      "Hombre y Mujer";
+
+  }
+
+  else {
+
+    inputCategoria.value =
+      "";
+
+  }
+}
+
+
+/* =====================================
    CARGAR PRODUCTO
 ===================================== */
 
@@ -750,6 +1130,7 @@ async function cargarProducto() {
   if (!sesionCorrecta) {
     return;
   }
+
 
   /*
     PRODUCTO NUEVO
@@ -766,14 +1147,14 @@ async function cargarProducto() {
     inputCategoria.value =
       "";
 
-    inputColor.value =
-      "";
+    agregarBloqueColor();
 
     return;
   }
 
+
   /*
-    EDITAR PRODUCTO
+    EDITAR
   */
 
   tituloPagina.textContent =
@@ -787,7 +1168,7 @@ async function cargarProducto() {
     await supabaseClient
       .from("productos")
       .select(
-        "id,nombre,precio,categoria,color,tallas,disponible,imagenes"
+        "id,nombre,precio,categoria,color,tallas,disponible,imagenes,imagenes_color"
       )
       .eq("id", productoId)
       .maybeSingle();
@@ -808,6 +1189,7 @@ async function cargarProducto() {
     return;
   }
 
+
   if (!data) {
 
     mostrarMensaje(
@@ -825,106 +1207,19 @@ async function cargarProducto() {
   inputPrecio.value =
     data.precio || "";
 
-
-  /*
-    CATEGORÍA
-  */
-
-  const categoriaGuardada =
-    String(
-      data.categoria || ""
-    ).trim();
-
-  const categoriaNormalizada =
-    categoriaGuardada.toLowerCase();
-
-
-  if (
-    categoriaNormalizada === "hombre"
-  ) {
-
-    inputCategoria.value =
-      "Hombre";
-
-  }
-
-  else if (
-    categoriaNormalizada === "mujer" ||
-    categoriaNormalizada === "dama"
-  ) {
-
-    inputCategoria.value =
-      "Mujer";
-
-  }
-
-  else if (
-    categoriaNormalizada === "kids" ||
-    categoriaNormalizada === "niño" ||
-    categoriaNormalizada === "niña"
-  ) {
-
-    inputCategoria.value =
-      "Kids";
-
-  }
-
-  else if (
-    categoriaNormalizada.includes("hombre") &&
-    (
-      categoriaNormalizada.includes("mujer") ||
-      categoriaNormalizada.includes("dama")
-    )
-  ) {
-
-    inputCategoria.value =
-      "Hombre y Mujer";
-
-  }
-
-  else if (
-    categoriaNormalizada === "sneakers"
-  ) {
-
-    inputCategoria.value =
-      "Hombre y Mujer";
-
-  }
-
-  else {
-
-    inputCategoria.value =
-      "";
-
-  }
-
-
-  /*
-    COLORES
-  */
-
-  inputColor.value =
-    data.color || "";
-
-
-  /*
-    TALLAS
-  */
+  seleccionarCategoria(
+    data.categoria
+  );
 
   inputTallas.value =
     data.tallas || "";
-
-
-  /*
-    DISPONIBILIDAD
-  */
 
   inputDisponible.checked =
     data.disponible !== false;
 
 
   /*
-    IMÁGENES
+    FOTOS GENERALES
   */
 
   imagenesGuardadas =
@@ -937,13 +1232,87 @@ async function cargarProducto() {
   );
 
 
+  /*
+    COLORES CON FOTOS
+  */
+
+  let tieneVariantes = false;
+
+  if (
+    data.imagenes_color &&
+    typeof data.imagenes_color === "object" &&
+    !Array.isArray(data.imagenes_color)
+  ) {
+
+    const entradas =
+      Object.entries(
+        data.imagenes_color
+      );
+
+    entradas.forEach(
+      function([color, fotos]) {
+
+        agregarBloqueColor(
+          color,
+          Array.isArray(fotos)
+            ? fotos
+            : []
+        );
+
+        tieneVariantes = true;
+      }
+    );
+  }
+
+
+  /*
+    PRODUCTOS ANTIGUOS:
+    SI TIENEN COLORES PERO TODAVÍA
+    NO TIENEN FOTOS ASOCIADAS
+  */
+
+  if (!tieneVariantes) {
+
+    const coloresAntiguos =
+      String(data.color || "")
+        .split(",")
+        .map(function(color) {
+          return color.trim();
+        })
+        .filter(Boolean);
+
+    if (
+      coloresAntiguos.length > 0
+    ) {
+
+      coloresAntiguos.forEach(
+        function(color) {
+
+          agregarBloqueColor(
+            color,
+            []
+          );
+
+        }
+      );
+
+    }
+
+    else {
+
+      agregarBloqueColor();
+
+    }
+  }
+
+
   subtituloPagina.textContent =
     "Modifica la información y guarda los cambios.";
 }
 
 
 /* =====================================
-   LIMPIAR NOMBRE ARCHIVO
+   NOMBRE SEGURO
 ===================================== */
 
 function limpiarNombreArchivo(nombre) {
@@ -963,22 +1332,15 @@ function limpiarNombreArchivo(nombre) {
 
 
 /* =====================================
-   SUBIR IMÁGENES
+   SUBIR ARCHIVOS
 ===================================== */
 
-async function subirImagenes() {
+async function subirArchivos(
+  archivos,
+  carpeta
+) {
 
-  const archivos =
-    Array.from(
-      inputImagenes.files || []
-    );
-
-  if (archivos.length === 0) {
-
-    return [];
-  }
-
-  const urlsNuevas = [];
+  const urls = [];
 
   for (
     let i = 0;
@@ -990,7 +1352,7 @@ async function subirImagenes() {
       archivos[i];
 
     mostrarMensaje(
-      "Subiendo foto " +
+      "Subiendo fotografía " +
       (i + 1) +
       " de " +
       archivos.length +
@@ -1013,8 +1375,10 @@ async function subirImagenes() {
       nombreSeguro;
 
     const ruta =
-      "catalogo/" +
+      carpeta +
+      "/" +
       nombreArchivo;
+
 
     const {
       error: errorSubida
@@ -1030,18 +1394,19 @@ async function subirImagenes() {
           }
         );
 
+
     if (errorSubida) {
 
       console.error(
-        "Error subiendo imagen:",
         errorSubida
       );
 
       throw new Error(
-        "No fue posible subir la imagen " +
+        "No fue posible subir " +
         archivo.name
       );
     }
+
 
     const {
       data: datosPublicos
@@ -1050,25 +1415,182 @@ async function subirImagenes() {
         .from("productos")
         .getPublicUrl(ruta);
 
+
     if (
       datosPublicos &&
       datosPublicos.publicUrl
     ) {
 
-      urlsNuevas.push(
+      urls.push(
         datosPublicos.publicUrl
       );
 
     }
-
   }
 
-  return urlsNuevas;
+  return urls;
 }
 
 
 /* =====================================
-   GUARDAR PRODUCTO
+   SUBIR FOTOS GENERALES
+===================================== */
+
+async function subirImagenesGenerales() {
+
+  const archivos =
+    Array.from(
+      inputImagenes.files || []
+    );
+
+  if (archivos.length === 0) {
+    return [];
+  }
+
+  return await subirArchivos(
+    archivos,
+    "catalogo"
+  );
+}
+
+
+/* =====================================
+   OBTENER Y SUBIR COLORES
+===================================== */
+
+async function procesarColores() {
+
+  const tarjetas =
+    Array.from(
+      contenedorColores.querySelectorAll(
+        ".color-card"
+      )
+    );
+
+  const resultado = {};
+
+  const nombresUsados = [];
+
+  for (
+    let i = 0;
+    i < tarjetas.length;
+    i++
+  ) {
+
+    const tarjeta =
+      tarjetas[i];
+
+    const inputNombreColor =
+      tarjeta.querySelector(
+        ".nombre-color"
+      );
+
+    const inputFotos =
+      tarjeta.querySelector(
+        ".imagenes-color"
+      );
+
+    const nombreColor =
+      inputNombreColor.value.trim();
+
+
+    /*
+      BLOQUE VACÍO
+  */
+
+    if (!nombreColor) {
+
+      const tieneFotos =
+        inputFotos.files &&
+        inputFotos.files.length > 0;
+
+      if (tieneFotos) {
+
+        throw new Error(
+          "Hay fotografías en un color sin nombre."
+        );
+
+      }
+
+      continue;
+    }
+
+
+    const nombreNormalizado =
+      nombreColor.toLowerCase();
+
+
+    if (
+      nombresUsados.includes(
+        nombreNormalizado
+      )
+    ) {
+
+      throw new Error(
+        "No puedes repetir el mismo color."
+      );
+    }
+
+
+    nombresUsados.push(
+      nombreNormalizado
+    );
+
+
+    let fotosActuales = [];
+
+    try {
+
+      fotosActuales =
+        JSON.parse(
+          tarjeta.dataset.imagenesActuales ||
+          "[]"
+        );
+
+    }
+
+    catch {
+
+      fotosActuales = [];
+
+    }
+
+
+    const archivosNuevos =
+      Array.from(
+        inputFotos.files || []
+      );
+
+
+    const nombreCarpeta =
+      limpiarNombreArchivo(
+        nombreColor
+      ) || "color";
+
+
+    const fotosNuevas =
+      archivosNuevos.length > 0
+        ? await subirArchivos(
+            archivosNuevos,
+            "catalogo/colores/" +
+            nombreCarpeta
+          )
+        : [];
+
+
+    resultado[nombreColor] = [
+      ...fotosActuales,
+      ...fotosNuevas
+    ];
+  }
+
+
+  return resultado;
+}
+
+
+/* =====================================
+   GUARDAR
 ===================================== */
 
 formulario.addEventListener(
@@ -1086,9 +1608,6 @@ formulario.addEventListener(
 
     const categoria =
       inputCategoria.value.trim();
-
-    const color =
-      inputColor.value.trim();
 
     const tallas =
       inputTallas.value.trim();
@@ -1122,16 +1641,13 @@ formulario.addEventListener(
     }
 
 
-    /*
-      VALIDAR CATEGORÍA
-    */
-
     const categoriasPermitidas = [
       "Hombre",
       "Mujer",
       "Hombre y Mujer",
       "Kids"
     ];
+
 
     if (
       !categoriasPermitidas.includes(
@@ -1158,29 +1674,56 @@ formulario.addEventListener(
     try {
 
       /*
-        SUBIR FOTOS
+        COLORES Y FOTOS
       */
 
-      const imagenesNuevas =
-        await subirImagenes();
+      const imagenesColor =
+        await procesarColores();
+
+
+      const colores =
+        Object.keys(
+          imagenesColor
+        );
 
 
       /*
-        CONSERVAR FOTOS EXISTENTES
+        FOTOS GENERALES NUEVAS
       */
 
-      const todasLasImagenes = [
-        ...imagenesGuardadas,
-        ...imagenesNuevas
-      ];
+      const fotosGeneralesNuevas =
+        await subirImagenesGenerales();
+
+
+      /*
+        TODAS LAS FOTOS DE COLORES
+      */
+
+      const fotosDeColores =
+        Object.values(
+          imagenesColor
+        ).flat();
+
+
+      /*
+        MANTENEMOS "imagenes"
+        PARA COMPATIBILIDAD CON
+        LA TIENDA ACTUAL
+      */
+
+      const todasLasImagenes =
+        Array.from(
+          new Set([
+            ...imagenesGuardadas,
+            ...fotosGeneralesNuevas,
+            ...fotosDeColores
+          ])
+        );
+
 
       const textoImagenes =
         todasLasImagenes.join(",");
 
-
-      /*
-        DATOS A GUARDAR
-      */
 
       const datosProducto = {
 
@@ -1191,24 +1734,27 @@ formulario.addEventListener(
         categoria: categoria,
 
         color:
-          color || null,
+          colores.length > 0
+            ? colores.join(", ")
+            : null,
 
         tallas: tallas,
 
         disponible: disponible,
 
         imagenes:
-          textoImagenes || null
+          textoImagenes || null,
+
+        imagenes_color:
+          colores.length > 0
+            ? imagenesColor
+            : null
 
       };
 
 
       let resultado;
 
-
-      /*
-        EDITAR
-      */
 
       if (productoId) {
 
@@ -1220,11 +1766,6 @@ formulario.addEventListener(
             .select();
 
       }
-
-
-      /*
-        CREAR NUEVO
-      */
 
       else {
 
@@ -1270,10 +1811,13 @@ formulario.addEventListener(
         error
       );
 
+
       mostrarMensaje(
-        "No fue posible guardar el producto o subir las fotografías.",
+        error.message ||
+        "No fue posible guardar el producto.",
         "error"
       );
+
 
       btnGuardar.disabled =
         false;
