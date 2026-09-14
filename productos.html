@@ -81,6 +81,16 @@
     .editar {
       background: white;
       color: #111;
+      margin-right: 8px;
+    }
+
+    .eliminar {
+      background: #dc2626;
+      color: white;
+    }
+
+    .eliminar:hover {
+      background: #b91c1c;
     }
 
     .contenedor {
@@ -146,6 +156,13 @@
       td {
         padding: 10px;
         font-size: 13px;
+      }
+
+      .editar,
+      .eliminar {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
       }
     }
   </style>
@@ -370,6 +387,7 @@ async function cargarProductos() {
           </td>
 
           <td>
+
             <button
               class="editar"
               type="button"
@@ -377,6 +395,18 @@ async function cargarProductos() {
             >
               EDITAR
             </button>
+
+            <button
+              class="eliminar"
+              type="button"
+              onclick="eliminarProducto(
+                '${producto.id}',
+                '${limpiarTexto(producto.nombre).replace(/'/g, "\\'")}'
+              )"
+            >
+              ELIMINAR
+            </button>
+
           </td>
 
         </tr>
@@ -391,7 +421,70 @@ async function cargarProductos() {
 ========================= */
 
 function editarProducto(id) {
-  window.location.href = "editar-producto.html?id=" + encodeURIComponent(id);
+  window.location.href =
+    "editar-producto.html?id=" +
+    encodeURIComponent(id);
+}
+
+
+/* =========================
+   ELIMINAR PRODUCTO
+========================= */
+
+async function eliminarProducto(
+  id,
+  nombre
+) {
+
+  const confirmar =
+    window.confirm(
+      "¿Seguro que deseas eliminar el producto \"" +
+      nombre +
+      "\"?\n\nEsta acción no se puede deshacer."
+    );
+
+
+  if (!confirmar) {
+    return;
+  }
+
+
+  const sesionCorrecta =
+    await verificarSesion();
+
+  if (!sesionCorrecta) {
+    return;
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("productos")
+      .delete()
+      .eq("id", id);
+
+
+  if (error) {
+
+    console.error(
+      "Error eliminando producto:",
+      error
+    );
+
+    alert(
+      "No fue posible eliminar el producto."
+    );
+
+    return;
+  }
+
+
+  alert(
+    "Producto eliminado correctamente."
+  );
+
+
+  await cargarProductos();
 }
 
 
