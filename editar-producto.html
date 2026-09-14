@@ -287,14 +287,39 @@
       <div class="campo">
 
         <label for="categoria">
-          Categoría
+          Categoría del producto
         </label>
 
-        <input
+        <select
           id="categoria"
-          type="text"
-          placeholder="Sneakers"
+          required
         >
+
+          <option value="">
+            Selecciona una categoría
+          </option>
+
+          <option value="Hombre">
+            Hombre
+          </option>
+
+          <option value="Mujer">
+            Mujer
+          </option>
+
+          <option value="Hombre y Mujer">
+            Hombre y Mujer
+          </option>
+
+          <option value="Kids">
+            Kids
+          </option>
+
+        </select>
+
+        <span class="ayuda">
+          Esta opción determina en qué sección aparecerá el producto en la tienda.
+        </span>
 
       </div>
 
@@ -745,8 +770,14 @@ async function cargarProducto() {
     subtituloPagina.textContent =
       "Registra un nuevo producto en SneakersCol.";
 
+    /*
+      Dejamos la categoría sin seleccionar
+      para obligarnos a elegir correctamente
+      Hombre, Mujer, Hombre y Mujer o Kids.
+    */
+
     inputCategoria.value =
-      "Sneakers";
+      "";
 
     return;
   }
@@ -806,8 +837,86 @@ async function cargarProducto() {
   inputPrecio.value =
     data.precio || "";
 
-  inputCategoria.value =
-    data.categoria || "";
+
+  /*
+    CATEGORÍA
+  */
+
+  const categoriaGuardada =
+    String(
+      data.categoria || ""
+    ).trim();
+
+
+  const categoriaNormalizada =
+    categoriaGuardada.toLowerCase();
+
+
+  if (
+    categoriaNormalizada === "hombre"
+  ) {
+
+    inputCategoria.value =
+      "Hombre";
+
+  }
+
+  else if (
+    categoriaNormalizada === "mujer" ||
+    categoriaNormalizada === "dama"
+  ) {
+
+    inputCategoria.value =
+      "Mujer";
+
+  }
+
+  else if (
+    categoriaNormalizada === "kids" ||
+    categoriaNormalizada === "niño" ||
+    categoriaNormalizada === "niña"
+  ) {
+
+    inputCategoria.value =
+      "Kids";
+
+  }
+
+  else if (
+    categoriaNormalizada.includes("hombre") &&
+    (
+      categoriaNormalizada.includes("mujer") ||
+      categoriaNormalizada.includes("dama")
+    )
+  ) {
+
+    inputCategoria.value =
+      "Hombre y Mujer";
+
+  }
+
+  else if (
+    categoriaNormalizada === "sneakers"
+  ) {
+
+    /*
+      Los productos antiguos que tenían
+      categoría "Sneakers" se mostrarán
+      como Hombre y Mujer.
+    */
+
+    inputCategoria.value =
+      "Hombre y Mujer";
+
+  }
+
+  else {
+
+    inputCategoria.value =
+      "";
+
+  }
+
 
   inputTallas.value =
     data.tallas || "";
@@ -1014,6 +1123,33 @@ formulario.addEventListener(
 
       mostrarMensaje(
         "Escribe un precio válido.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    /*
+      VALIDAR CATEGORÍA
+    */
+
+    const categoriasPermitidas = [
+      "Hombre",
+      "Mujer",
+      "Hombre y Mujer",
+      "Kids"
+    ];
+
+
+    if (
+      !categoriasPermitidas.includes(
+        categoria
+      )
+    ) {
+
+      mostrarMensaje(
+        "Debes seleccionar una categoría.",
         "error"
       );
 
