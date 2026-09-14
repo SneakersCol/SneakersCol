@@ -4464,34 +4464,132 @@ function crearTarjetaProducto(
       .split(",")
       .map(
         function(talla){
-
           return talla.trim();
-
         }
       )
-      .filter(
-        Boolean
-      );
+      .filter(Boolean);
 
 
-  const listaImagenes =
+  const imagenesGenerales =
     convertirImagenesProducto(
       producto.imagenes
     );
 
 
-  const imagenPrincipal =
-    listaImagenes.length > 0
-      ? listaImagenes[0]
+  /*
+    FOTOS ORGANIZADAS POR COLOR
+    guardadas en imagenes_color (JSONB)
+  */
+
+  let mapaImagenesColor = {};
+
+  if(
+    producto.imagenes_color &&
+    typeof producto.imagenes_color === "object" &&
+    !Array.isArray(producto.imagenes_color)
+  ){
+
+    Object.entries(
+      producto.imagenes_color
+    ).forEach(
+      function([color, fotos]){
+
+        const nombreColor =
+          String(color || "").trim();
+
+        const listaFotos =
+          convertirImagenesProducto(
+            fotos
+          );
+
+        if(nombreColor){
+          mapaImagenesColor[nombreColor] =
+            listaFotos;
+        }
+
+      }
+    );
+
+  }
+
+
+  /*
+    Tomamos los colores del campo color.
+    Si imagenes_color tiene colores adicionales,
+    también los incluimos.
+  */
+
+  const listaColores = [];
+
+  String(producto.color || "")
+    .split(",")
+    .map(
+      function(color){
+        return color.trim();
+      }
+    )
+    .filter(Boolean)
+    .forEach(
+      function(color){
+        if(!listaColores.includes(color)){
+          listaColores.push(color);
+        }
+      }
+    );
+
+
+  Object.keys(
+    mapaImagenesColor
+  ).forEach(
+    function(color){
+      if(!listaColores.includes(color)){
+        listaColores.push(color);
+      }
+    }
+  );
+
+
+  /*
+    Seleccionamos automáticamente el primer color
+    para que carrito y WhatsApp sepan cuál eligió
+    el cliente desde el inicio.
+  */
+
+  tallas[clave] = "";
+
+  colores[clave] =
+    listaColores.length > 0
+      ? listaColores[0]
       : "";
 
 
-  tallas[clave] =
-    "";
+  function imagenesDelColor(color){
+
+    if(
+      color &&
+      Array.isArray(
+        mapaImagenesColor[color]
+      ) &&
+      mapaImagenesColor[color].length > 0
+    ){
+      return mapaImagenesColor[color];
+    }
+
+    return imagenesGenerales;
+
+  }
 
 
-  colores[clave] =
-    "";
+  let listaImagenes =
+    imagenesDelColor(
+      colores[clave]
+    );
+
+
+  let imagenPrincipal =
+    listaImagenes.length > 0
+      ? listaImagenes[0]
+      : "";
 
 
   const tarjeta =
@@ -4508,9 +4606,7 @@ function crearTarjetaProducto(
     categoria;
 
 
-  /*
-    IMAGEN PRINCIPAL
-  */
+  /* ================= IMAGEN PRINCIPAL ================= */
 
   const contenedorImagen =
     document.createElement(
@@ -4522,92 +4618,95 @@ function crearTarjetaProducto(
     "product-image";
 
 
-  if(
+  const img =
+    document.createElement(
+      "img"
+    );
+
+
+  img.id =
+    "imagen-" +
+    clave;
+
+
+  img.alt =
+    nombre;
+
+
+  img.loading =
+    "lazy";
+
+
+  const sinFoto =
+    document.createElement(
+      "div"
+    );
+
+
+  sinFoto.style.width =
+    "100%";
+
+  sinFoto.style.height =
+    "100%";
+
+  sinFoto.style.display =
+    "none";
+
+  sinFoto.style.alignItems =
+    "center";
+
+  sinFoto.style.justifyContent =
+    "center";
+
+  sinFoto.style.color =
+    "#999";
+
+  sinFoto.style.fontWeight =
+    "800";
+
+  sinFoto.style.textAlign =
+    "center";
+
+  sinFoto.style.padding =
+    "20px";
+
+  sinFoto.textContent =
+    "FOTO NO DISPONIBLE";
+
+
+  function actualizarImagenPrincipal(url){
+
+    if(url){
+
+      img.src = url;
+      img.style.display = "block";
+      sinFoto.style.display = "none";
+
+    }
+    else{
+
+      img.removeAttribute("src");
+      img.style.display = "none";
+      sinFoto.style.display = "flex";
+
+    }
+
+  }
+
+
+  actualizarImagenPrincipal(
     imagenPrincipal
-  ){
-
-    const img =
-      document.createElement(
-        "img"
-      );
+  );
 
 
-    img.id =
-      "imagen-" +
-      clave;
+  contenedorImagen.appendChild(
+    img
+  );
 
 
-    img.src =
-      imagenPrincipal;
-
-
-    img.alt =
-      nombre;
-
-
-    img.loading =
-      "lazy";
-
-
-    contenedorImagen.appendChild(
-      img
-    );
-
-  }
-
-  else{
-
-    const sinFoto =
-      document.createElement(
-        "div"
-      );
-
-
-    sinFoto.style.width =
-      "100%";
-
-
-    sinFoto.style.height =
-      "100%";
-
-
-    sinFoto.style.display =
-      "flex";
-
-
-    sinFoto.style.alignItems =
-      "center";
-
-
-    sinFoto.style.justifyContent =
-      "center";
-
-
-    sinFoto.style.color =
-      "#999";
-
-
-    sinFoto.style.fontWeight =
-      "800";
-
-
-    sinFoto.style.textAlign =
-      "center";
-
-
-    sinFoto.style.padding =
-      "20px";
-
-
-    sinFoto.textContent =
-      "FOTO NO DISPONIBLE";
-
-
-    contenedorImagen.appendChild(
-      sinFoto
-    );
-
-  }
+  contenedorImagen.appendChild(
+    sinFoto
+  );
 
 
   tarjeta.appendChild(
@@ -4615,9 +4714,7 @@ function crearTarjetaProducto(
   );
 
 
-  /*
-    INFORMACIÓN
-  */
+  /* ================= INFORMACIÓN ================= */
 
   const informacion =
     document.createElement(
@@ -4629,29 +4726,44 @@ function crearTarjetaProducto(
     "product-info";
 
 
-  /*
-    GALERÍA DE FOTOS
-  */
+  /* ================= GALERÍA ================= */
 
-  if(
-    listaImagenes.length > 1
+  const galeria =
+    document.createElement(
+      "div"
+    );
+
+
+  galeria.className =
+    "product-gallery";
+
+
+  function renderizarGaleria(
+    imagenes
   ){
 
-    const galeria =
-      document.createElement(
-        "div"
-      );
+    galeria.innerHTML = "";
 
 
-    galeria.className =
-      "product-gallery";
+    if(
+      !imagenes ||
+      imagenes.length <= 1
+    ){
+
+      galeria.style.display =
+        "none";
+
+      return;
+
+    }
 
 
-    listaImagenes.forEach(
-      function(
-        url,
-        indice
-      ){
+    galeria.style.display =
+      "flex";
+
+
+    imagenes.forEach(
+      function(url, indice){
 
         const boton =
           document.createElement(
@@ -4707,21 +4819,9 @@ function crearTarjetaProducto(
           "click",
           function(){
 
-            const imagenGrande =
-              document.getElementById(
-                "imagen-" +
-                clave
-              );
-
-
-            if(
-              imagenGrande
-            ){
-
-              imagenGrande.src =
-                url;
-
-            }
+            actualizarImagenPrincipal(
+              url
+            );
 
 
             galeria
@@ -4730,13 +4830,9 @@ function crearTarjetaProducto(
               )
               .forEach(
                 function(elemento){
-
                   elemento
                     .classList
-                    .remove(
-                      "active"
-                    );
-
+                    .remove("active");
                 }
               );
 
@@ -4756,17 +4852,20 @@ function crearTarjetaProducto(
       }
     );
 
-
-    informacion.appendChild(
-      galeria
-    );
-
   }
 
 
-  /*
-    NOMBRE
-  */
+  renderizarGaleria(
+    listaImagenes
+  );
+
+
+  informacion.appendChild(
+    galeria
+  );
+
+
+  /* ================= NOMBRE ================= */
 
   const nombreElemento =
     document.createElement(
@@ -4787,9 +4886,7 @@ function crearTarjetaProducto(
   );
 
 
-  /*
-    PRECIO
-  */
+  /* ================= PRECIO ================= */
 
   const precioElemento =
     document.createElement(
@@ -4812,9 +4909,7 @@ function crearTarjetaProducto(
   );
 
 
-  /*
-    CONTRAENTREGA
-  */
+  /* ================= CONTRAENTREGA ================= */
 
   const entrega =
     document.createElement(
@@ -4835,9 +4930,131 @@ function crearTarjetaProducto(
   );
 
 
-  /*
-    TALLAS
-  */
+  /* ================= COLORES ================= */
+
+  if(
+    listaColores.length > 0
+  ){
+
+    const tituloColor =
+      document.createElement(
+        "div"
+      );
+
+
+    tituloColor.className =
+      "option-title";
+
+
+    tituloColor.textContent =
+      "Color";
+
+
+    informacion.appendChild(
+      tituloColor
+    );
+
+
+    const opcionesColor =
+      document.createElement(
+        "div"
+      );
+
+
+    opcionesColor.className =
+      "options";
+
+
+    listaColores.forEach(
+      function(color, indice){
+
+        const boton =
+          document.createElement(
+            "button"
+          );
+
+
+        boton.className =
+          indice === 0
+            ? "option active"
+            : "option";
+
+
+        boton.type =
+          "button";
+
+
+        boton.textContent =
+          color;
+
+
+        boton.addEventListener(
+          "click",
+          function(){
+
+            colores[clave] =
+              color;
+
+
+            opcionesColor
+              .querySelectorAll(
+                ".option"
+              )
+              .forEach(
+                function(elemento){
+                  elemento
+                    .classList
+                    .remove("active");
+                }
+              );
+
+
+            boton.classList.add(
+              "active"
+            );
+
+
+            listaImagenes =
+              imagenesDelColor(
+                color
+              );
+
+
+            imagenPrincipal =
+              listaImagenes.length > 0
+                ? listaImagenes[0]
+                : "";
+
+
+            actualizarImagenPrincipal(
+              imagenPrincipal
+            );
+
+
+            renderizarGaleria(
+              listaImagenes
+            );
+
+          }
+        );
+
+
+        opcionesColor.appendChild(
+          boton
+        );
+
+      }
+    );
+
+
+    informacion.appendChild(
+      opcionesColor
+    );
+
+  }
+
+
+  /* ================= TALLAS ================= */
 
   if(
     listaTallas.length > 0
@@ -4922,9 +5139,7 @@ function crearTarjetaProducto(
   }
 
 
-  /*
-    BOTONES
-  */
+  /* ================= BOTONES ================= */
 
   const acciones =
     document.createElement(
@@ -4970,7 +5185,8 @@ function crearTarjetaProducto(
 
 
       if(
-        imagenElemento
+        imagenElemento &&
+        imagenElemento.src
       ){
 
         imagenActual =
@@ -4980,15 +5196,10 @@ function crearTarjetaProducto(
 
 
       agregarCarrito(
-
         nombre,
-
         precio,
-
         imagenActual,
-
         clave
-
       );
 
     }
@@ -5018,13 +5229,9 @@ function crearTarjetaProducto(
     function(){
 
       comprarWhatsApp(
-
         nombre,
-
         precio,
-
         clave
-
       );
 
     }
@@ -5054,7 +5261,6 @@ function crearTarjetaProducto(
   return tarjeta;
 
 }
-
 
 /* ================= CARGAR PRODUCTOS SUPABASE ================= */
 
@@ -5089,7 +5295,7 @@ async function cargarProductosSupabase(){
         "productos"
       )
       .select(
-        "id,nombre,precio,categoria,tallas,disponible,imagenes,created_at"
+        "id,nombre,precio,categoria,color,tallas,disponible,imagenes,imagenes_color,created_at"
       )
       .eq(
         "disponible",
