@@ -728,6 +728,29 @@ header{
 }
 
 
+.product-promo-row{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:10px;
+}
+
+.product-promo-row .product-old{
+  margin-top:0;
+}
+
+.product-discount{
+  display:inline-block;
+  background:#e8f8df;
+  color:#238000;
+  border-radius:5px;
+  padding:4px 7px;
+  font-size:11px;
+  font-weight:900;
+  line-height:1;
+}
+
+
 .product-delivery{
   display:inline-block;
 
@@ -3502,6 +3525,29 @@ function crearTarjetaProducto(
     );
 
 
+  const precioAnterior =
+    Number(
+      producto.precio_anterior || 0
+    );
+
+
+  const tieneDescuento =
+    Number.isFinite(precioAnterior) &&
+    precioAnterior > precio &&
+    precio > 0;
+
+
+  const porcentajeDescuento =
+    tieneDescuento
+      ? Math.round(
+          (
+            (precioAnterior - precio) /
+            precioAnterior
+          ) * 100
+        )
+      : 0;
+
+
   const categoria =
     generarCategoriaProducto(
       producto.categoria,
@@ -3951,7 +3997,61 @@ function crearTarjetaProducto(
   );
 
 
-  /* ================= PRECIO ================= */
+  /* ================= PRECIO Y DESCUENTO ================= */
+
+  if(tieneDescuento){
+
+    const filaPromocion =
+      document.createElement(
+        "div"
+      );
+
+    filaPromocion.className =
+      "product-promo-row";
+
+
+    const precioAnteriorElemento =
+      document.createElement(
+        "div"
+      );
+
+    precioAnteriorElemento.className =
+      "product-old";
+
+    precioAnteriorElemento.textContent =
+      dinero(
+        precioAnterior
+      );
+
+
+    const descuentoElemento =
+      document.createElement(
+        "span"
+      );
+
+    descuentoElemento.className =
+      "product-discount";
+
+    descuentoElemento.textContent =
+      "-" +
+      porcentajeDescuento +
+      "%";
+
+
+    filaPromocion.appendChild(
+      precioAnteriorElemento
+    );
+
+    filaPromocion.appendChild(
+      descuentoElemento
+    );
+
+    informacion.appendChild(
+      filaPromocion
+    );
+
+  }
+
 
   const precioElemento =
     document.createElement(
@@ -4360,7 +4460,7 @@ async function cargarProductosSupabase(){
         "productos"
       )
       .select(
-        "id,nombre,precio,categoria,tipo_producto,color,tallas,disponible,imagenes,imagenes_color,created_at"
+        "id,nombre,precio,precio_anterior,categoria,tipo_producto,color,tallas,disponible,imagenes,imagenes_color,created_at"
       )
       .eq(
         "disponible",
