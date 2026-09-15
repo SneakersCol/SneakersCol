@@ -1573,6 +1573,84 @@ footer{
 
 }
 
+
+/* ================= ZOOM DE PRODUCTOS ================= */
+
+.product-image img{
+  cursor:zoom-in;
+}
+
+.image-zoom{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:4000;
+  background:rgba(0,0,0,.92);
+  padding:24px;
+  align-items:center;
+  justify-content:center;
+}
+
+.image-zoom.show{
+  display:flex;
+}
+
+.image-zoom img{
+  max-width:min(1000px,94vw);
+  max-height:90vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:8px;
+  background:#fff;
+  box-shadow:0 18px 60px rgba(0,0,0,.45);
+}
+
+.image-zoom-close{
+  position:absolute;
+  top:18px;
+  right:22px;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.image-zoom-hint{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#ddd;
+  font-size:11px;
+  font-weight:700;
+  text-align:center;
+}
+
+@media(max-width:600px){
+  .image-zoom{
+    padding:12px;
+  }
+
+  .image-zoom img{
+    max-width:96vw;
+    max-height:84vh;
+  }
+
+  .image-zoom-close{
+    top:12px;
+    right:12px;
+  }
+}
+
 </style>
 
 </head>
@@ -1865,1125 +1943,10 @@ footer{
 >
 
 
-<!-- NEW BALANCE -->
-
-<article
-  class="product-card"
-  data-category="hombre mujer"
->
-
-
-<div class="discount">
-  -13%
-</div>
-
-
-<div class="product-image">
-
-  <img
-    id="nbImagen"
-    src="imagenes/newbalance-1.webp"
-    alt="New Balance"
-    loading="lazy"
-  >
-
-</div>
-
-
-<div class="product-info">
-
-
-<div
-  class="product-gallery"
-  aria-label="Galería New Balance"
->
-
-
-<button
-  class="gallery-thumb active"
-  type="button"
-  onclick="cambiarImagenNB('imagenes/newbalance-1.webp',this)"
->
-
-  <img
-    src="imagenes/newbalance-1.webp"
-    alt="New Balance foto 1"
-  >
-
-</button>
-
-
-<button
-  class="gallery-thumb"
-  type="button"
-  onclick="cambiarImagenNB('imagenes/newbalance-2.webp',this)"
->
-
-  <img
-    src="imagenes/newbalance-2.webp"
-    alt="New Balance foto 2"
-  >
-
-</button>
-
-
-<button
-  class="gallery-thumb"
-  type="button"
-  onclick="cambiarImagenNB('imagenes/newbalance-3.webp',this)"
->
-
-  <img
-    src="imagenes/newbalance-3.webp"
-    alt="New Balance foto 3"
-  >
-
-</button>
-
-
-<button
-  class="gallery-thumb"
-  type="button"
-  onclick="cambiarImagenNB('imagenes/newbalance-4.webp',this)"
->
-
-  <img
-    src="imagenes/newbalance-4.webp"
-    alt="New Balance foto 4"
-  >
-
-</button>
-
-
-</div>
-
-
-<div class="product-name">
-  New Balance
-</div>
-
-
-<div class="product-old">
-  $150.000
-</div>
-
-
-<div class="product-price">
-  $130.000
-</div>
-
-
-<div class="product-delivery">
-  ✓ CONTRAENTREGA
-</div>
-
-
-<div class="option-title">
-  Talla (opcional)
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','35',this)"
->
-  35
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','36',this)"
->
-  36
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','37',this)"
->
-  37
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','38',this)"
->
-  38
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','39',this)"
->
-  39
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','40',this)"
->
-  40
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','41',this)"
->
-  41
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','42',this)"
->
-  42
-</button>
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('nb','43',this)"
->
-  43
-</button>
-
-
-</div>
-
-
-<div class="option-title">
-  Color
-</div>
-
-
-<div class="options">
-
-  <button class="option active">
-    Clásico
-  </button>
-
-</div>
-
-
-<div class="product-actions">
-
-
-<button
-  class="action action-cart"
-  onclick="
-    agregarCarrito(
-      'New Balance',
-      130000,
-      nbImagenActual,
-      'nb'
-    )
-  "
->
-
-  🛒 AGREGAR
-
-</button>
-
-
-<button
-  class="action action-whatsapp"
-  onclick="
-    comprarWhatsApp(
-      'New Balance',
-      130000,
-      'nb'
-    )
-  "
->
-
-  💬 WHATSAPP
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</article>
-
-
-<!-- SAMBA -->
-
-<article
-  class="product-card"
-  data-category="hombre mujer"
->
-
-
-<div class="discount">
-  -14%
-</div>
-
-
-<div class="product-image">
-
-  <img
-    id="sambaImagen"
-    src="imagenes/samba-blanco.webp"
-    alt="Adidas Samba OG"
-    loading="lazy"
-  >
-
-</div>
-
-
-<div class="product-info">
-
-
-<div class="product-name">
-  Adidas Samba OG
-</div>
-
-
-<div class="product-old">
-  $150.000
-</div>
-
-
-<div class="product-price">
-  $129.000
-</div>
-
-
-<div class="product-delivery">
-  ✓ CONTRAENTREGA
-</div>
-
-
-<div class="option-title">
-  Talla (opcional)
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','35',this)"
->
-  35
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','36',this)"
->
-  36
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','37',this)"
->
-  37
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','38',this)"
->
-  38
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','39',this)"
->
-  39
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','40',this)"
->
-  40
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','41',this)"
->
-  41
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','42',this)"
->
-  42
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('samba','43',this)"
->
-  43
-</button>
-
-
-</div>
-
-
-<div class="option-title">
-  Color
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option active"
-  onclick="
-    seleccionarColor(
-      'samba',
-      'Blanco',
-      'imagenes/samba-blanco.webp',
-      this
-    )
-  "
->
-
-  Blanco
-
-</button>
-
-
-<button
-  class="option"
-  onclick="
-    seleccionarColor(
-      'samba',
-      'Negro',
-      'imagenes/samba-negro.webp',
-      this
-    )
-  "
->
-
-  Negro
-
-</button>
-
-
-<button
-  class="option"
-  onclick="
-    seleccionarColor(
-      'samba',
-      'Beige',
-      'imagenes/samba-beige.webp',
-      this
-    )
-  "
->
-
-  Beige
-
-</button>
-
-
-</div>
-
-
-<div class="product-actions">
-
-
-<button
-  class="action action-cart"
-  onclick="
-    agregarCarrito(
-      'Adidas Samba OG',
-      129000,
-      sambaImagenActual,
-      'samba'
-    )
-  "
->
-
-  🛒 AGREGAR
-
-</button>
-
-
-<button
-  class="action action-whatsapp"
-  onclick="
-    comprarWhatsApp(
-      'Adidas Samba OG',
-      129000,
-      'samba'
-    )
-  "
->
-
-  💬 WHATSAPP
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</article>
-
-
-<!-- VOMERO -->
-
-<article
-  class="product-card"
-  data-category="mujer"
->
-
-
-<div class="discount">
-  -14%
-</div>
-
-
-<div class="product-image">
-
-  <img
-    id="vomeroImagen"
-    src="imagenes/vomero-beigerosa.webp"
-    alt="Nike Vomero 18 Dama"
-    loading="lazy"
-  >
-
-</div>
-
-
-<div class="product-info">
-
-
-<div class="product-name">
-  Nike Vomero 18 – Dama
-</div>
-
-
-<div class="product-old">
-  $150.000
-</div>
-
-
-<div class="product-price">
-  $129.000
-</div>
-
-
-<div class="product-delivery">
-  ✓ CONTRAENTREGA
-</div>
-
-
-<div class="option-title">
-  Talla (opcional)
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','35',this)"
->
-  35
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','36',this)"
->
-  36
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','37',this)"
->
-  37
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','38',this)"
->
-  38
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','39',this)"
->
-  39
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','40',this)"
->
-  40
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','41',this)"
->
-  41
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','42',this)"
->
-  42
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('vomero','43',this)"
->
-  43
-</button>
-
-
-</div>
-
-
-<div class="option-title">
-  Color
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option active"
-  onclick="
-    seleccionarColor(
-      'vomero',
-      'Beige/Rosa',
-      'imagenes/vomero-beigerosa.webp',
-      this
-    )
-  "
->
-
-  Beige/Rosa
-
-</button>
-
-
-<button
-  class="option"
-  onclick="
-    seleccionarColor(
-      'vomero',
-      'Fucsia',
-      'imagenes/vomero-fucsia.webp',
-      this
-    )
-  "
->
-
-  Fucsia
-
-</button>
-
-
-<button
-  class="option"
-  onclick="
-    seleccionarColor(
-      'vomero',
-      'Naranja',
-      'imagenes/vomero-naranja.webp',
-      this
-    )
-  "
->
-
-  Naranja
-
-</button>
-
-
-</div>
-
-
-<div class="product-actions">
-
-
-<button
-  class="action action-cart"
-  onclick="
-    agregarCarrito(
-      'Nike Vomero 18 – Dama',
-      129000,
-      vomeroImagenActual,
-      'vomero'
-    )
-  "
->
-
-  🛒 AGREGAR
-
-</button>
-
-
-<button
-  class="action action-whatsapp"
-  onclick="
-    comprarWhatsApp(
-      'Nike Vomero 18 – Dama',
-      129000,
-      'vomero'
-    )
-  "
->
-
-  💬 WHATSAPP
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</article>
-
-
-<!-- ON CLOUDRUNNER JAMAICA -->
-
-<article
-  class="product-card"
-  data-category="hombre mujer"
->
-
-
-<div class="product-image">
-
-  <img
-    id="cloudrunnerImagen"
-    src="imagenes/on-cloudrunner-jamaica.webp"
-    alt="On Cloudrunner JAMAICA"
-    loading="lazy"
-  >
-
-</div>
-
-
-<div class="product-info">
-
-
-<div class="product-name">
-  On Cloudrunner JAMAICA
-</div>
-
-
-<div class="product-price">
-  $180.000
-</div>
-
-
-<div class="product-delivery">
-  ✓ CONTRAENTREGA
-</div>
-
-
-<div class="option-title">
-  Talla (opcional)
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('cloudrunner','36',this)"
->
-  36
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('cloudrunner','37',this)"
->
-  37
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('cloudrunner','38',this)"
->
-  38
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('cloudrunner','39',this)"
->
-  39
-</button>
-
-
-</div>
-
-
-<div class="option-title">
-  Color
-</div>
-
-
-<div class="options">
-
-  <button class="option active">
-    Jamaica
-  </button>
-
-</div>
-
-
-<div class="product-actions">
-
-
-<button
-  class="action action-cart"
-  onclick="
-    agregarCarrito(
-      'On Cloudrunner JAMAICA',
-      180000,
-      'imagenes/on-cloudrunner-jamaica.webp',
-      'cloudrunner'
-    )
-  "
->
-
-  🛒 AGREGAR
-
-</button>
-
-
-<button
-  class="action action-whatsapp"
-  onclick="
-    comprarWhatsApp(
-      'On Cloudrunner JAMAICA',
-      180000,
-      'cloudrunner'
-    )
-  "
->
-
-  💬 WHATSAPP
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</article>
-
-
-<!-- NIKE V2K RUN -->
-
-<article
-  class="product-card"
-  data-category="mujer"
->
-
-
-<div class="product-image">
-
-  <img
-    id="v2kImagen"
-    src="imagenes/nike-v2k-run-beige.webp"
-    alt="Nike V2K Run"
-    loading="lazy"
-  >
-
-</div>
-
-
-<div class="product-info">
-
-
-<div class="product-name">
-  Nike V2K Run
-</div>
-
-
-<div class="product-price">
-  $170.000
-</div>
-
-
-<div class="product-delivery">
-  ✓ CONTRAENTREGA
-</div>
-
-
-<div class="option-title">
-  Talla (opcional)
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('v2k','36',this)"
->
-  36
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('v2k','37',this)"
->
-  37
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('v2k','38',this)"
->
-  38
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('v2k','39',this)"
->
-  39
-</button>
-
-
-</div>
-
-
-<div class="option-title">
-  Color
-</div>
-
-
-<div class="options">
-
-  <button class="option active">
-    Beige
-  </button>
-
-</div>
-
-
-<div class="product-actions">
-
-
-<button
-  class="action action-cart"
-  onclick="
-    agregarCarrito(
-      'Nike V2K Run',
-      170000,
-      'imagenes/nike-v2k-run-beige.webp',
-      'v2k'
-    )
-  "
->
-
-  🛒 AGREGAR
-
-</button>
-
-
-<button
-  class="action action-whatsapp"
-  onclick="
-    comprarWhatsApp(
-      'Nike V2K Run',
-      170000,
-      'v2k'
-    )
-  "
->
-
-  💬 WHATSAPP
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</article>
-
-
-<!-- ADIDAS BOUNCE -->
-
-<article
-  class="product-card"
-  data-category="hombre mujer"
->
-
-
-<div class="product-image">
-
-  <img
-    id="bounceImagen"
-    src="imagenes/adidas-bounce.webp"
-    alt="Adidas Bounce"
-    loading="lazy"
-  >
-
-</div>
-
-
-<div class="product-info">
-
-
-<div class="product-name">
-  Adidas Bounce
-</div>
-
-
-<div class="product-price">
-  $170.000
-</div>
-
-
-<div class="product-delivery">
-  ✓ CONTRAENTREGA
-</div>
-
-
-<div class="option-title">
-  Talla (opcional)
-</div>
-
-
-<div class="options">
-
-
-<button
-  class="option"
-  onclick="seleccionarTalla('bounce','36',this)"
->
-  36
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('bounce','37',this)"
->
-  37
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('bounce','38',this)"
->
-  38
-</button>
-
-<button
-  class="option"
-  onclick="seleccionarTalla('bounce','39',this)"
->
-  39
-</button>
-
-
-</div>
-
-
-<div class="option-title">
-  Color
-</div>
-
-
-<div class="options">
-
-  <button class="option active">
-    Negro/Blanco
-  </button>
-
-</div>
-
-
-<div class="product-actions">
-
-
-<button
-  class="action action-cart"
-  onclick="
-    agregarCarrito(
-      'Adidas Bounce',
-      170000,
-      'imagenes/adidas-bounce.webp',
-      'bounce'
-    )
-  "
->
-
-  🛒 AGREGAR
-
-</button>
-
-
-<button
-  class="action action-whatsapp"
-  onclick="
-    comprarWhatsApp(
-      'Adidas Bounce',
-      170000,
-      'bounce'
-    )
-  "
->
-
-  💬 WHATSAPP
-
-</button>
-
-
-</div>
-
-
-</div>
-
-</article>
-
+<!--
+  CATÁLOGO ADMINISTRADO DESDE SUPABASE.
+  Los productos se cargan automáticamente desde el panel administrativo.
+-->
 
 </div>
 
@@ -3320,14 +2283,16 @@ footer{
 </a>
 
 
-<div
+<a
   class="social-btn"
-  style="opacity:.45;cursor:not-allowed"
+  href="https://www.facebook.com/share/1CX4UvsuXG/?mibextid=wwXIfr"
+  target="_blank"
+  rel="noopener noreferrer"
 >
 
-  📘 FACEBOOK · PRÓXIMAMENTE
+  📘 FACEBOOK · SNEAKERSCOL
 
-</div>
+</a>
 
 
 </div>
@@ -3374,6 +2339,38 @@ footer{
   💬
 
 </a>
+
+
+
+<!-- ZOOM DE FOTOGRAFÍAS -->
+
+<div
+  class="image-zoom"
+  id="imageZoom"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Fotografía ampliada del producto"
+  onclick="cerrarZoomImagen(event)"
+>
+  <button
+    class="image-zoom-close"
+    type="button"
+    aria-label="Cerrar fotografía"
+    onclick="cerrarZoomImagen()"
+  >
+    ×
+  </button>
+
+  <img
+    id="imageZoomPhoto"
+    src=""
+    alt="Fotografía ampliada del producto"
+  >
+
+  <div class="image-zoom-hint">
+    Toca fuera de la imagen o en × para cerrar
+  </div>
+</div>
 
 
 <!-- CART -->
@@ -3543,35 +2540,62 @@ let estrellasSeleccionadas =
   0;
 
 
-/* ================= PRODUCTOS ESTÁTICOS ================= */
 
-/*
-  Estos productos ya están escritos
-  manualmente arriba.
+/* ================= ZOOM DE FOTOGRAFÍAS ================= */
 
-  Si alguno también existe en Supabase,
-  evitamos mostrarlo dos veces.
-*/
+function abrirZoomImagen(imagen, altTexto){
 
-const productosEstaticos = [
+  if(!imagen){
+    return;
+  }
 
-  "new balance",
+  const visor =
+    document.getElementById("imageZoom");
 
-  "new balance 530",
+  const foto =
+    document.getElementById("imageZoomPhoto");
 
-  "adidas samba og",
+  foto.src = imagen;
+  foto.alt =
+    altTexto || "Fotografía ampliada del producto";
 
-  "nike vomero 18 – dama",
+  visor.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
 
-  "nike vomero 18 - dama",
 
-  "on cloudrunner jamaica",
+function cerrarZoomImagen(event){
 
-  "nike v2k run",
+  if(
+    event &&
+    event.target &&
+    event.target.id !== "imageZoom"
+  ){
+    return;
+  }
 
-  "adidas bounce"
+  const visor =
+    document.getElementById("imageZoom");
 
-];
+  const foto =
+    document.getElementById("imageZoomPhoto");
+
+  visor.classList.remove("show");
+  foto.src = "";
+  document.body.style.overflow = "";
+}
+
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+      cerrarZoomImagen();
+    }
+
+  }
+);
 
 
 /* ================= CATEGORÍAS ================= */
@@ -4665,6 +3689,19 @@ function crearTarjetaProducto(
     "lazy";
 
 
+  img.addEventListener(
+    "click",
+    function(){
+
+      abrirZoomImagen(
+        img.src,
+        nombre
+      );
+
+    }
+  );
+
+
   const sinFoto =
     document.createElement(
       "div"
@@ -5364,30 +4401,6 @@ async function cargarProductosSupabase(){
 
   data.forEach(
     function(producto){
-
-      /*
-        Evitamos duplicar los productos
-        que ya existen manualmente.
-      */
-
-      const nombreNormalizado =
-        String(
-          producto.nombre || ""
-        )
-          .toLowerCase()
-          .trim();
-
-
-      if(
-        productosEstaticos.includes(
-          nombreNormalizado
-        )
-      ){
-
-        return;
-
-      }
-
 
       const tarjeta =
         crearTarjetaProducto(
