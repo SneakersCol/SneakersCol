@@ -333,6 +333,37 @@
 
       <div class="campo">
 
+        <label for="tipoProducto">
+          Tipo de producto
+        </label>
+
+        <select
+          id="tipoProducto"
+          required
+        >
+
+          <option value="">
+            Selecciona un tipo de producto
+          </option>
+
+          <option value="Tenis">
+            Tenis
+          </option>
+
+          <option value="Ropa">
+            Ropa
+          </option>
+
+        </select>
+
+        <span class="ayuda">
+          Selecciona Tenis o Ropa. En la tienda, Ropa tendrá su propio filtro.
+        </span>
+
+      </div>
+
+      <div class="campo">
+
         <label for="categoria">
           Categoría del producto
         </label>
@@ -537,6 +568,9 @@ const inputNombre =
 
 const inputPrecio =
   document.getElementById("precio");
+
+const inputTipoProducto =
+  document.getElementById("tipoProducto");
 
 const inputCategoria =
   document.getElementById("categoria");
@@ -1144,6 +1178,9 @@ async function cargarProducto() {
     subtituloPagina.textContent =
       "Registra un nuevo producto en SneakersCol.";
 
+    inputTipoProducto.value =
+      "Tenis";
+
     inputCategoria.value =
       "";
 
@@ -1168,7 +1205,7 @@ async function cargarProducto() {
     await supabaseClient
       .from("productos")
       .select(
-        "id,nombre,precio,categoria,color,tallas,disponible,imagenes,imagenes_color"
+        "id,nombre,precio,categoria,tipo_producto,color,tallas,disponible,imagenes,imagenes_color"
       )
       .eq("id", productoId)
       .maybeSingle();
@@ -1206,6 +1243,11 @@ async function cargarProducto() {
 
   inputPrecio.value =
     data.precio || "";
+
+  inputTipoProducto.value =
+    data.tipo_producto === "Ropa"
+      ? "Ropa"
+      : "Tenis";
 
   seleccionarCategoria(
     data.categoria
@@ -1606,6 +1648,9 @@ formulario.addEventListener(
     const precio =
       Number(inputPrecio.value);
 
+    const tipoProducto =
+      inputTipoProducto.value.trim();
+
     const categoria =
       inputCategoria.value.trim();
 
@@ -1634,6 +1679,27 @@ formulario.addEventListener(
 
       mostrarMensaje(
         "Escribe un precio válido.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const tiposPermitidos = [
+      "Tenis",
+      "Ropa"
+    ];
+
+
+    if (
+      !tiposPermitidos.includes(
+        tipoProducto
+      )
+    ) {
+
+      mostrarMensaje(
+        "Debes seleccionar si el producto es Tenis o Ropa.",
         "error"
       );
 
@@ -1732,6 +1798,8 @@ formulario.addEventListener(
         precio: precio,
 
         categoria: categoria,
+
+        tipo_producto: tipoProducto,
 
         color:
           colores.length > 0
