@@ -1847,6 +1847,15 @@ footer{
     Kids
   </button>
 
+
+  <button
+    class="category-filter"
+    type="button"
+    onclick="filtrarCategoria('ropa',this)"
+  >
+    Ropa
+  </button>
+
 </div>
 
 
@@ -4343,8 +4352,26 @@ function crearClaveProducto(
 /* ================= CATEGORÍA DINÁMICA ================= */
 
 function generarCategoriaProducto(
-  categoria
+  categoria,
+  tipoProducto
 ){
+
+  const tipo =
+    String(
+      tipoProducto || ""
+    )
+      .toLowerCase()
+      .trim();
+
+
+  if(
+    tipo === "ropa"
+  ){
+
+    return "ropa";
+
+  }
+
 
   const texto =
     String(
@@ -4453,7 +4480,8 @@ function crearTarjetaProducto(
 
   const categoria =
     generarCategoriaProducto(
-      producto.categoria
+      producto.categoria,
+      producto.tipo_producto
     );
 
 
@@ -5295,7 +5323,7 @@ async function cargarProductosSupabase(){
         "productos"
       )
       .select(
-        "id,nombre,precio,categoria,color,tallas,disponible,imagenes,imagenes_color,created_at"
+        "id,nombre,precio,categoria,tipo_producto,color,tallas,disponible,imagenes,imagenes_color,created_at"
       )
       .eq(
         "disponible",
