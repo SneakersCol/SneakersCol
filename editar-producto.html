@@ -312,8 +312,28 @@
 
       <div class="campo">
 
+        <label for="precioAnterior">
+          Precio anterior (opcional)
+        </label>
+
+        <input
+          id="precioAnterior"
+          type="number"
+          min="0"
+          step="1"
+          placeholder="260000"
+        >
+
+        <span class="ayuda">
+          Úsalo solo si el producto tiene descuento. Ejemplo: 260000.
+        </span>
+
+      </div>
+
+      <div class="campo">
+
         <label for="precio">
-          Precio
+          Precio de venta
         </label>
 
         <input
@@ -565,6 +585,9 @@ const formulario =
 
 const inputNombre =
   document.getElementById("nombre");
+
+const inputPrecioAnterior =
+  document.getElementById("precioAnterior");
 
 const inputPrecio =
   document.getElementById("precio");
@@ -1205,7 +1228,7 @@ async function cargarProducto() {
     await supabaseClient
       .from("productos")
       .select(
-        "id,nombre,precio,categoria,tipo_producto,color,tallas,disponible,imagenes,imagenes_color"
+        "id,nombre,precio,precio_anterior,categoria,tipo_producto,color,tallas,disponible,imagenes,imagenes_color"
       )
       .eq("id", productoId)
       .maybeSingle();
@@ -1240,6 +1263,9 @@ async function cargarProducto() {
 
   inputNombre.value =
     data.nombre || "";
+
+  inputPrecioAnterior.value =
+    data.precio_anterior || "";
 
   inputPrecio.value =
     data.precio || "";
@@ -1645,6 +1671,14 @@ formulario.addEventListener(
     const nombre =
       inputNombre.value.trim();
 
+    const precioAnteriorTexto =
+      inputPrecioAnterior.value.trim();
+
+    const precioAnterior =
+      precioAnteriorTexto === ""
+        ? null
+        : Number(precioAnteriorTexto);
+
     const precio =
       Number(inputPrecio.value);
 
@@ -1679,6 +1713,23 @@ formulario.addEventListener(
 
       mostrarMensaje(
         "Escribe un precio válido.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (
+      precioAnterior !== null &&
+      (
+        !Number.isFinite(precioAnterior) ||
+        precioAnterior <= precio
+      )
+    ) {
+
+      mostrarMensaje(
+        "El precio anterior debe ser mayor que el precio de venta.",
         "error"
       );
 
@@ -1796,6 +1847,8 @@ formulario.addEventListener(
         nombre: nombre,
 
         precio: precio,
+
+        precio_anterior: precioAnterior,
 
         categoria: categoria,
 
